@@ -126,14 +126,14 @@ export const schema = {
     associations: {
       host: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'hostId',
         tables: ['hosts'],
         optional: false,
         requiredWhereClauses: null,
       },
       place: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'placeId',
         tables: ['places'],
         optional: false,
         requiredWhereClauses: null,
@@ -260,6 +260,108 @@ export const schema = {
       
     },
   },
+  stays: {
+    primaryKey: 'id',
+    createdAtField: 'createdAt',
+    updatedAtField: 'updatedAt',
+    deletedAtField: 'deletedAt',
+    serializerKeys: ['default', 'summary'],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    columns: {
+      adults: {
+        coercedType: {} as number,
+        enumType: null,
+        enumValues: null,
+        dbType: 'integer',
+        allowNull: false,
+        isArray: false,
+      },
+      checkinOn: {
+        coercedType: {} as CalendarDate,
+        enumType: null,
+        enumValues: null,
+        dbType: 'date',
+        allowNull: false,
+        isArray: false,
+      },
+      checkoutOn: {
+        coercedType: {} as CalendarDate,
+        enumType: null,
+        enumValues: null,
+        dbType: 'date',
+        allowNull: false,
+        isArray: false,
+      },
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      cubs: {
+        coercedType: {} as number,
+        enumType: null,
+        enumValues: null,
+        dbType: 'integer',
+        allowNull: false,
+        isArray: false,
+      },
+      guestId: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      placeId: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      guest: {
+        type: 'BelongsTo',
+        foreignKey: null,
+        tables: ['guests'],
+        optional: false,
+        requiredWhereClauses: null,
+      },
+      place: {
+        type: 'BelongsTo',
+        foreignKey: null,
+        tables: ['places'],
+        optional: false,
+        requiredWhereClauses: null,
+      },
+    },
+  },
   users: {
     primaryKey: 'id',
     createdAtField: 'createdAt',
@@ -336,6 +438,7 @@ export const globalSchema = {
       'Host': 'hosts',
       'HostPlace': 'host_places',
       'Place': 'places',
+      'Stay': 'stays',
       'User': 'users'
     },
     serializers: [
@@ -344,7 +447,9 @@ export const globalSchema = {
       'HostSerializer',
       'HostSummarySerializer',
       'PlaceSerializer',
-      'PlaceSummarySerializer'
+      'PlaceSummarySerializer',
+      'StaySerializer',
+      'StaySummarySerializer'
     ],
   },
 } as const

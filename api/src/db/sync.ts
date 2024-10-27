@@ -59,6 +59,18 @@ export interface Places {
   updatedAt: Timestamp;
 }
 
+export interface Stays {
+  adults: Generated<number>;
+  checkinOn: Timestamp;
+  checkoutOn: Timestamp;
+  createdAt: Timestamp;
+  cubs: Generated<number>;
+  guestId: Int8;
+  id: Generated<Int8>;
+  placeId: Int8;
+  updatedAt: Timestamp;
+}
+
 export interface Users {
   createdAt: Timestamp;
   email: string;
@@ -73,6 +85,7 @@ export interface DB {
   host_places: HostPlaces;
   hosts: Hosts;
   places: Places;
+  stays: Stays;
   users: Users;
 }
 
@@ -82,5 +95,6 @@ export class DBClass {
   host_places: HostPlaces
   hosts: Hosts
   places: Places
+  stays: Stays
   users: Users
 }

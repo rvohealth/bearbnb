@@ -111,6 +111,7 @@ describe('V1/Host/PlacesController', () => {
     it('updates the Place', async () => {
       const place = await createPlace()
       await createHostPlace({ host, place })
+
       await subject(place, {
         name: 'Modified name',
       })
@@ -119,26 +120,26 @@ describe('V1/Host/PlacesController', () => {
       expect(place.name).toEqual('Modified name')
     })
 
-    context('a Place created by another Host', () => {
+    context('a Place created by another User', () => {
       it('is not updated', async () => {
-        const place = await createPlace()
-        const originalName = place.name
-        await createHostPlace({ host: await createHost(), place })
+        const otherUserPlace = await createPlace()
+        const originalName = otherUserPlace.name
+        await createHostPlace({ host: await createHost(), place: otherUserPlace })
         await subject(
-          place,
+          otherUserPlace,
           {
             name: 'Modified name',
           },
           404,
         )
 
-        await place.reload()
-        expect(place.name).toEqual(originalName)
+        await otherUserPlace.reload()
+        expect(otherUserPlace.name).toEqual(originalName)
       })
     })
   })
 
-  describe.only('DELETE destroy', () => {
+  describe('DELETE destroy', () => {
     function subject(place: Place, expectedStatus: number = 204) {
       return request.delete(`/v1/host/places/${place.id}`, expectedStatus, {
         headers: addEndUserAuthHeader(request, user, {}),
@@ -148,18 +149,23 @@ describe('V1/Host/PlacesController', () => {
     it('deletes the Place', async () => {
       const place = await createPlace()
       await createHostPlace({ host, place })
+
       await subject(place)
 
       expect(await Place.find(place.id)).toBeNull()
+      expect(await Place.where({ id: place.id }).count()).toEqual(0)
+
       expect(await Place.removeAllDefaultScopes().find(place.id)).toMatchDreamModel(place)
+      expect(await Place.removeAllDefaultScopes().where({ id: place.id }).count()).toEqual(1)
     })
 
-    context('a Place created by another Host', () => {
+    context('a Place created by another User', () => {
       it('is not deleted', async () => {
-        const place = await createPlace()
-        await subject(place, 404)
+        const otherUserPlace = await createPlace()
+        await createHostPlace({ host: await createHost(), place: otherUserPlace })
+        await subject(otherUserPlace, 404)
 
-        expect(await Place.find(place.id)).toMatchDreamModel(place)
+        expect(await Place.find(otherUserPlace.id)).toMatchDreamModel(otherUserPlace)
       })
     })
   })

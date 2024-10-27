@@ -18,9 +18,9 @@ export default class Place extends ApplicationModel {
   public id: DreamColumn<Place, 'id'>
   public name: DreamColumn<Place, 'name'>
   public style: DreamColumn<Place, 'style'>
-  public deletedAt: DreamColumn<Place, 'deletedAt'>
   public createdAt: DreamColumn<Place, 'createdAt'>
   public updatedAt: DreamColumn<Place, 'updatedAt'>
+  public deletedAt: DreamColumn<Place, 'deletedAt'>
 
   @Place.HasMany('HostPlace', { dependent: 'destroy' })
   public hostPlaces: HostPlace[]

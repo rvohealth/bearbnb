@@ -13,18 +13,41 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 
 export type Int8 = ColumnType<string, bigint | number | string>;
 
-export type Timestamp = ColumnType<Date, Date | string>;
-export const TimestampValues = [
-  ColumnType<Date, Date,
-  string>
+export type PlaceStylesEnum = "cabin" | "cave" | "cottage" | "dump" | "lean_to" | "tent" | "treehouse";
+export const PlaceStylesEnumValues = [
+  "cabin",
+  "cave",
+  "cottage",
+  "dump",
+  "lean_to",
+  "tent",
+  "treehouse"
 ] as const
 
+export type IdType = string | number | bigint
+export type Timestamp = ColumnType<DateTime | CalendarDate>
 
 export interface Guests {
   createdAt: Timestamp;
   id: Generated<Int8>;
   updatedAt: Timestamp;
   userId: Int8;
+}
+
+export interface Hosts {
+  createdAt: Timestamp;
+  id: Generated<Int8>;
+  updatedAt: Timestamp;
+  userId: Int8;
+}
+
+export interface Places {
+  createdAt: Timestamp;
+  deletedAt: Timestamp | null;
+  id: Generated<Int8>;
+  name: string;
+  style: PlaceStylesEnum;
+  updatedAt: Timestamp;
 }
 
 export interface Users {
@@ -38,11 +61,15 @@ export interface Users {
 
 export interface DB {
   guests: Guests;
+  hosts: Hosts;
+  places: Places;
   users: Users;
 }
 
 
 export class DBClass {
   guests: Guests
+  hosts: Hosts
+  places: Places
   users: Users
 }

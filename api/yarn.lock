@@ -1136,9 +1136,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rvohealth/dream@npm:^0.13.15-beta.1":
-  version: 0.13.15-beta.1
-  resolution: "@rvohealth/dream@npm:0.13.15-beta.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40rvohealth%2Fdream%2F0.13.15-beta.1%2Fcd9d2e08266dbcf57d3772ac960c91d2caa23b2d"
+"@rvohealth/dream@npm:^0.13.15-beta.4":
+  version: 0.13.15-beta.4
+  resolution: "@rvohealth/dream@npm:0.13.15-beta.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40rvohealth%2Fdream%2F0.13.15-beta.4%2Ff6b15df6ab2f47ce8cc63b4b622239ebe135701c"
   dependencies:
     "@types/lodash.clonedeep": "npm:^4.5.9"
     "@types/lodash.clonedeepwith": "npm:^4.5.9"
@@ -1168,7 +1168,7 @@ __metadata:
     pg: "*"
   bin:
     dream: ./dist/src/global-cli/dream.js
-  checksum: 10c0/e88199b473d2fa728d274760f634d9f6c14b1c86d4f95575b27f8ffe1497b2a18fb14cc917cac7521538e0b8d043362df500e33c97873729fe494d56cbdff81f
+  checksum: 10c0/74ad755eff0ad4bc7d7395c05ce8a0efd7db3817ebf6ea8171ebe661bce6b876608484625f296c595e310f8395a9759596c143e771c17e0be93cb15844850b9a
   languageName: node
   linkType: hard
 
@@ -1190,9 +1190,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rvohealth/psychic@npm:^0.8.3-fgbeta-4":
-  version: 0.8.3-fgbeta-4
-  resolution: "@rvohealth/psychic@npm:0.8.3-fgbeta-4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40rvohealth%2Fpsychic%2F0.8.3-fgbeta-4%2Fe705dc8840824ff8af663a3441212b0cf43413dd"
+"@rvohealth/psychic@npm:0.8.3-beta.4":
+  version: 0.8.3-beta.4
+  resolution: "@rvohealth/psychic@npm:0.8.3-beta.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40rvohealth%2Fpsychic%2F0.8.3-beta.4%2Fb2bcf68561ce62b9579b2cae98e8509957b8c9f6"
   dependencies:
     "@types/cookie-parser": "npm:^1.4.7"
     "@types/cors": "npm:^2.8.17"
@@ -1220,7 +1220,7 @@ __metadata:
     redis: "*"
     socket.io: "*"
     socket.io-adapter: "*"
-  checksum: 10c0/ae096a243397de15a9977593de97fc447e22462f8826c24ff5bde27789d722de4ca75cbc58d4b2d1a092fe1139b5a05b5414427a7fd37901d696789e2ecc03cc
+  checksum: 10c0/c3f22f5a601ec215d0372e5786e56697bd9613cf7b38267a518e1574d6213b73fd937624a8ca130012f34fc0df63e3aa8d44fe954bf58ae9205272246b8f1530
   languageName: node
   linkType: hard
 
@@ -7388,9 +7388,9 @@ __metadata:
     "@eslint/js": "npm:^9.9.1"
     "@jest-mock/express": "npm:^2.1.0"
     "@playwright/test": "npm:^1.46.1"
-    "@rvohealth/dream": "npm:^0.13.15-beta.1"
+    "@rvohealth/dream": "npm:^0.13.15-beta.4"
     "@rvohealth/dream-spec-helpers": "npm:^0.0.8"
-    "@rvohealth/psychic": "npm:^0.8.3-fgbeta-4"
+    "@rvohealth/psychic": "npm:0.8.3-beta.4"
     "@rvohealth/psychic-spec-helpers": "npm:^0.0.3"
     "@socket.io/redis-adapter": "npm:^8.3.0"
     "@socket.io/redis-emitter": "npm:^5.1.0"

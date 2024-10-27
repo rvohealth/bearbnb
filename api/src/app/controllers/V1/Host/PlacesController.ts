@@ -1,4 +1,5 @@
 import { OpenAPI } from '@rvohealth/psychic'
+import ApplicationModel from '../../../models/ApplicationModel'
 import Place from '../../../models/Place'
 import V1HostBaseController from './BaseController'
 
@@ -11,8 +12,14 @@ export default class V1HostPlacesController extends V1HostBaseController {
     description: 'Create a Place',
   })
   public async create() {
-    //    const place = await this.currentUser.createAssociation('places', this.paramsFor(Place))
-    //    this.created(place)
+    let place: Place
+
+    await ApplicationModel.transaction(async txn => {
+      place = await Place.txn(txn).create(this.paramsFor(Place))
+      await this.currentHost.txn(txn).createAssociation('hostPlaces', { place })
+    })
+
+    this.created(place!)
   }
 
   @OpenAPI(Place, {
@@ -23,8 +30,8 @@ export default class V1HostPlacesController extends V1HostBaseController {
     serializerKey: 'summary',
   })
   public async index() {
-    //    const places = await this.currentUser.associationQuery('places').all()
-    //    this.ok(places)
+    const places = await this.currentHost.associationQuery('places').all()
+    this.ok(places)
   }
 
   @OpenAPI(Place, {
@@ -33,8 +40,8 @@ export default class V1HostPlacesController extends V1HostBaseController {
     description: 'Fetch a Place',
   })
   public async show() {
-    //    const place = await this.place()
-    //    this.ok(place)
+    const place = await this.place()
+    this.ok(place)
   }
 
   @OpenAPI(Place, {
@@ -43,9 +50,9 @@ export default class V1HostPlacesController extends V1HostBaseController {
     description: 'Update a Place',
   })
   public async update() {
-    //    const place = await this.place()
-    //    await place.update(this.paramsFor(Place))
-    //    this.noContent()
+    const place = await this.place()
+    await place.update(this.paramsFor(Place))
+    this.noContent()
   }
 
   @OpenAPI({
@@ -54,9 +61,9 @@ export default class V1HostPlacesController extends V1HostBaseController {
     description: 'Destroy a Place',
   })
   public async destroy() {
-    //    const place = await this.place()
-    //    await place.destroy()
-    //    this.noContent()
+    const place = await this.place()
+    await place.destroy()
+    this.noContent()
   }
 
   private async place() {

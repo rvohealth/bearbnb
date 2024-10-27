@@ -27,6 +27,6 @@ export default class Host extends ApplicationModel {
   @Host.HasMany('HostPlace')
   public hostPlaces: HostPlace[]
 
-  @Host.HasMany('Place')
+  @Host.HasMany('Place', { through: 'hostPlaces' })
   public places: Place[]
 }

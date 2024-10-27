@@ -223,7 +223,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -278,7 +278,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
-      
+      hostPlaces: {
+        type: 'HasMany',
+        foreignKey: 'placeId',
+        tables: ['host_places'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
     },
   },
   stays: {
@@ -465,7 +471,7 @@ export const schema = {
 
 export const globalSchema = {
   passthroughColumns: [],
-  allDefaultScopeNames: [],
+  allDefaultScopeNames: ['dream:SoftDelete'],
   globalNames: {
     models: {
       'Guest': 'guests',

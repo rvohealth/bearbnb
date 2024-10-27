@@ -1,6 +1,8 @@
-import { DreamColumn, DreamSerializers } from '@rvohealth/dream'
+import { DreamColumn, DreamSerializers, SoftDelete } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
+import HostPlace from './HostPlace'
 
+@SoftDelete()
 export default class Place extends ApplicationModel {
   public get table() {
     return 'places' as const
@@ -19,4 +21,7 @@ export default class Place extends ApplicationModel {
   public deletedAt: DreamColumn<Place, 'deletedAt'>
   public createdAt: DreamColumn<Place, 'createdAt'>
   public updatedAt: DreamColumn<Place, 'updatedAt'>
+
+  @Place.HasMany('HostPlace', { dependent: 'destroy' })
+  public hostPlaces: HostPlace[]
 }

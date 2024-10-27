@@ -60,11 +60,11 @@ describe('V1/Guest/StaysController', () => {
       })
       const results = (await subject(stay)).body
 
-      expect(results).toEqual([
+      expect(results).toEqual(
         expect.objectContaining({
           id: stay.id,
         }),
-      ])
+      )
     })
 
     context('Stay created by another User', () => {
@@ -87,11 +87,11 @@ describe('V1/Guest/StaysController', () => {
       const results = (await subject({})).body
       const stay = await Stay.findOrFailBy({ userId: user.id })
 
-      expect(results).toEqual([
+      expect(results).toEqual(
         expect.objectContaining({
           id: stay.id,
         }),
-      ])
+      )
     })
   })
 

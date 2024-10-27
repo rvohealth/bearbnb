@@ -1,6 +1,6 @@
 import { OpenAPI } from '@rvohealth/psychic'
-import V1HostBaseController from './BaseController'
 import Place from '../../../models/Place'
+import V1HostBaseController from './BaseController'
 
 const openApiTags = ['places']
 
@@ -60,8 +60,6 @@ export default class V1HostPlacesController extends V1HostBaseController {
   }
 
   private async place() {
-    return await this.currentUser.associationQuery('places').findOrFail(
-      this.castParam('id', 'string')
-    )
+    return await this.currentHost.associationQuery('places').findOrFail(this.castParam('id', 'string'))
   }
 }

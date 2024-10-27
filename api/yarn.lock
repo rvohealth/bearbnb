@@ -1190,9 +1190,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rvohealth/psychic@npm:0.8.3-beta.4":
-  version: 0.8.3-beta.4
-  resolution: "@rvohealth/psychic@npm:0.8.3-beta.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40rvohealth%2Fpsychic%2F0.8.3-beta.4%2Fb2bcf68561ce62b9579b2cae98e8509957b8c9f6"
+"@rvohealth/psychic@npm:0.8.3-beta.5":
+  version: 0.8.3-beta.5
+  resolution: "@rvohealth/psychic@npm:0.8.3-beta.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40rvohealth%2Fpsychic%2F0.8.3-beta.5%2F395c7a7f8b369fd790037cffafd826ca48feb35c"
   dependencies:
     "@types/cookie-parser": "npm:^1.4.7"
     "@types/cors": "npm:^2.8.17"
@@ -1220,7 +1220,7 @@ __metadata:
     redis: "*"
     socket.io: "*"
     socket.io-adapter: "*"
-  checksum: 10c0/c3f22f5a601ec215d0372e5786e56697bd9613cf7b38267a518e1574d6213b73fd937624a8ca130012f34fc0df63e3aa8d44fe954bf58ae9205272246b8f1530
+  checksum: 10c0/e56b0f885eb0abfae8f4de4c0c826292e456c70adea2df05167a58468d869f0ff485dad0d45c9405637e31c3b5804a803f981b527bd52921eab59a4f8c989eb8
   languageName: node
   linkType: hard
 
@@ -7390,7 +7390,7 @@ __metadata:
     "@playwright/test": "npm:^1.46.1"
     "@rvohealth/dream": "npm:^0.13.15-beta.4"
     "@rvohealth/dream-spec-helpers": "npm:^0.0.8"
-    "@rvohealth/psychic": "npm:0.8.3-beta.4"
+    "@rvohealth/psychic": "npm:0.8.3-beta.5"
     "@rvohealth/psychic-spec-helpers": "npm:^0.0.3"
     "@socket.io/redis-adapter": "npm:^8.3.0"
     "@socket.io/redis-emitter": "npm:^5.1.0"

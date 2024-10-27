@@ -19,14 +19,14 @@ describe('V1/Guest/StaysController', () => {
 
   describe('GET index', () => {
     function subject(expectedStatus: number = 200) {
-      return request.get('/v1/guest/stays-controller', expectedStatus, {
+      return request.get('/v1/guest/stays', expectedStatus, {
         headers: addEndUserAuthHeader(request, user, {}),
       })
     }
 
     it('returns the index of Stays', async () => {
       const stay = await createStay({
-        user
+        user,
       })
       const results = (await subject()).body
 
@@ -49,14 +49,14 @@ describe('V1/Guest/StaysController', () => {
 
   describe('GET show', () => {
     function subject(stay: Stay, expectedStatus: number = 200) {
-      return request.get(`/v1/guest/stays-controller/${stay.id}`, expectedStatus, {
+      return request.get(`/v1/guest/stays/${stay.id}`, expectedStatus, {
         headers: addEndUserAuthHeader(request, user, {}),
       })
     }
 
     it('returns the specified Stay', async () => {
       const stay = await createStay({
-        user
+        user,
       })
       const results = (await subject(stay)).body
 
@@ -77,16 +77,14 @@ describe('V1/Guest/StaysController', () => {
 
   describe('POST create', () => {
     function subject(data: UpdateableProperties<Stay>, expectedStatus: number = 201) {
-      return request.post('/v1/guest/stays-controller', expectedStatus, {
+      return request.post('/v1/guest/stays', expectedStatus, {
         data,
         headers: addEndUserAuthHeader(request, user, {}),
       })
     }
 
     it('creates a Stay for this User', async () => {
-      const results = (await subject({
-        
-      })).body
+      const results = (await subject({})).body
       const stay = await Stay.findOrFailBy({ userId: user.id })
 
       expect(results).toEqual([
@@ -99,7 +97,7 @@ describe('V1/Guest/StaysController', () => {
 
   describe('PATCH update', () => {
     function subject(stay: Stay, data: UpdateableProperties<Stay>, expectedStatus: number = 204) {
-      return request.patch(`/v1/guest/stays-controller/${stay.id}`, expectedStatus, {
+      return request.patch(`/v1/guest/stays/${stay.id}`, expectedStatus, {
         data,
         headers: addEndUserAuthHeader(request, user, {}),
       })
@@ -107,34 +105,26 @@ describe('V1/Guest/StaysController', () => {
 
     it('updates the Stay', async () => {
       const stay = await createStay({
-        user
+        user,
       })
-      await subject(stay, {
-        
-      })
+      await subject(stay, {})
 
       await stay.reload()
-      
     })
 
     context('a Stay created by another User', () => {
       it('is not updated', async () => {
-        const stay = await createStay({
-          
-        })
-        await subject(stay, {
-          
-        }, 404)
+        const stay = await createStay({})
+        await subject(stay, {}, 404)
 
         await stay.reload()
-        
       })
     })
   })
 
   describe('DELETE destroy', () => {
     function subject(stay: Stay, expectedStatus: number = 204) {
-      return request.delete(`/v1/guest/stays-controller/${stay.id}`, expectedStatus, {
+      return request.delete(`/v1/guest/stays/${stay.id}`, expectedStatus, {
         headers: addEndUserAuthHeader(request, user, {}),
       })
     }

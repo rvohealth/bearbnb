@@ -1,6 +1,6 @@
 import { OpenAPI } from '@rvohealth/psychic'
-import V1GuestBaseController from './BaseController'
 import Stay from '../../../models/Stay'
+import V1GuestBaseController from './BaseController'
 
 const openApiTags = ['stays']
 
@@ -60,8 +60,6 @@ export default class V1GuestStaysController extends V1GuestBaseController {
   }
 
   private async stay() {
-    return await this.currentUser.associationQuery('stays').findOrFail(
-      this.castParam('id', 'string')
-    )
+    return await this.currentGuest.associationQuery('stays').findOrFail(this.castParam('id', 'string'))
   }
 }

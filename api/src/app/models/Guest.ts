@@ -1,5 +1,6 @@
 import { DreamColumn, DreamSerializers } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
+import Stay from './Stay'
 import User from './User'
 
 export default class Guest extends ApplicationModel {
@@ -21,4 +22,7 @@ export default class Guest extends ApplicationModel {
   @Guest.BelongsTo('User')
   public user: User
   public userId: DreamColumn<Guest, 'userId'>
+
+  @Guest.HasMany('Stay')
+  public stays: Stay[]
 }

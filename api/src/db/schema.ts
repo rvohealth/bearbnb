@@ -53,6 +53,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      stays: {
+        type: 'HasMany',
+        foreignKey: 'guestId',
+        tables: ['stays'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
       user: {
         type: 'BelongsTo',
         foreignKey: 'userId',
@@ -186,6 +193,20 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      hostPlaces: {
+        type: 'HasMany',
+        foreignKey: 'hostId',
+        tables: ['host_places'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
+      places: {
+        type: 'HasMany',
+        foreignKey: null,
+        tables: ['places'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
       user: {
         type: 'BelongsTo',
         foreignKey: 'userId',
@@ -348,14 +369,14 @@ export const schema = {
     associations: {
       guest: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'guestId',
         tables: ['guests'],
         optional: false,
         requiredWhereClauses: null,
       },
       place: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'placeId',
         tables: ['places'],
         optional: false,
         requiredWhereClauses: null,
@@ -424,7 +445,20 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
-      
+      guest: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        tables: ['guests'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
+      host: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        tables: ['hosts'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
     },
   },
 } as const

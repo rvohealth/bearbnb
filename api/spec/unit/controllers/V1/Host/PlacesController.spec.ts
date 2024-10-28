@@ -4,6 +4,7 @@ import { UpdateableProperties } from '@rvohealth/dream'
 import { PsychicServer } from '@rvohealth/psychic'
 import { specRequest as request } from '@rvohealth/psychic-spec-helpers'
 import Host from '../../../../../src/app/models/Host'
+import LocalizedText from '../../../../../src/app/models/LocalizedText'
 import Place from '../../../../../src/app/models/Place'
 import User from '../../../../../src/app/models/User'
 import createHost from '../../../../factories/HostFactory'
@@ -153,14 +154,17 @@ describe('V1/Host/PlacesController', () => {
       await createHostPlace({ host, place })
 
       expect(await host.associationQuery('rooms').count()).toEqual(1)
+      expect(await LocalizedText.count()).toEqual(3)
       await subject(place)
 
       expect(await Place.find(place.id)).toBeNull()
       expect(await Place.where({ id: place.id }).count()).toEqual(0)
       expect(await host.associationQuery('rooms').count()).toEqual(0)
+      expect(await LocalizedText.count()).toEqual(1)
 
       expect(await Place.removeAllDefaultScopes().find(place.id)).toMatchDreamModel(place)
       expect(await Place.removeAllDefaultScopes().where({ id: place.id }).count()).toEqual(1)
+      expect(await LocalizedText.removeAllDefaultScopes().count()).toEqual(3)
     })
 
     context('a Place created by another User', () => {
@@ -187,11 +191,13 @@ describe('V1/Host/PlacesController', () => {
       await createHostPlace({ host, place })
       await place.destroy()
       expect(await host.associationQuery('rooms').count()).toEqual(0)
+      expect(await LocalizedText.count()).toEqual(1)
       await subject(place)
 
       expect(await Place.find(place.id)).toMatchDreamModel(place)
       expect(await Place.where({ id: place.id }).count()).toEqual(1)
       expect(await host.associationQuery('rooms').count()).toEqual(1)
+      expect(await LocalizedText.count()).toEqual(3)
     })
   })
 })

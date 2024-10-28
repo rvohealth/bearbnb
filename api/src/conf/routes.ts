@@ -3,6 +3,10 @@ import V1HostPlacesController from '../app/controllers/V1/Host/PlacesController'
 
 export default (r: PsychicRouter) => {
   r.namespace('v1', r => {
+    r.namespace('host', r => {
+      r.resources('localized-texts')
+    })
+
     r.namespace('guest', r => {
       r.resources('stays')
     })

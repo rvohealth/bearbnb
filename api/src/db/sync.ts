@@ -50,6 +50,21 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 
 export type Int8 = ColumnType<string, bigint | number | string, bigint | number | string>;
 
+export type LocalesEnum = "en-US" | "es-ES";
+export const LocalesEnumValues = [
+  "en-US",
+  "es-ES"
+] as const
+
+
+export type LocalizedTypesEnum = "Host" | "Place" | "RoomBase";
+export const LocalizedTypesEnumValues = [
+  "Host",
+  "Place",
+  "RoomBase"
+] as const
+
+
 export type PlaceStylesEnum = "cabin" | "cave" | "cottage" | "dump" | "lean_to" | "tent" | "treehouse";
 export const PlaceStylesEnumValues = [
   "cabin",
@@ -96,6 +111,18 @@ export interface Hosts {
   id: Generated<Int8>;
   updatedAt: Timestamp;
   userId: Int8;
+}
+
+export interface LocalizedTexts {
+  createdAt: Timestamp;
+  deletedAt: Timestamp | null;
+  id: Generated<Int8>;
+  locale: Generated<LocalesEnum>;
+  localizableId: Int8;
+  localizableType: LocalizedTypesEnum;
+  markdown: string | null;
+  title: string | null;
+  updatedAt: Timestamp;
 }
 
 export interface Places {
@@ -146,6 +173,7 @@ export interface DB {
   guests: Guests;
   host_places: HostPlaces;
   hosts: Hosts;
+  localized_texts: LocalizedTexts;
   places: Places;
   rooms: Rooms;
   stays: Stays;
@@ -157,6 +185,7 @@ export class DBClass {
   guests: Guests
   host_places: HostPlaces
   hosts: Hosts
+  localized_texts: LocalizedTexts
   places: Places
   rooms: Rooms
   stays: Stays

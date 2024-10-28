@@ -82,6 +82,7 @@ export default class V1HostPlacesController extends V1HostBaseController {
     await hostPlace.place.undestroy()
     this.noContent()
   }
+
   private async place() {
     return await this.currentHost.associationQuery('places').findOrFail(this.castParam('id', 'string'))
   }

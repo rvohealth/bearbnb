@@ -7,6 +7,9 @@ export class PlaceSummarySerializer<
 > extends DreamSerializer<DataType, Passthrough> {
   @Attribute(Place)
   public id: DreamColumn<Place, 'id'>
+
+  @Attribute(Place)
+  public name: DreamColumn<Place, 'name'>
 }
 
 export default class PlaceSerializer<
@@ -14,11 +17,8 @@ export default class PlaceSerializer<
   Passthrough extends object,
 > extends PlaceSummarySerializer<DataType, Passthrough> {
   @Attribute(Place)
-  public name: DreamColumn<Place, 'name'>
-
-    @Attribute(Place)
   public style: DreamColumn<Place, 'style'>
 
-    @Attribute(Place)
+  @Attribute(Place)
   public deletedAt: DreamColumn<Place, 'deletedAt'>
 }

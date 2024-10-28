@@ -17,10 +17,12 @@ export default class RoomBase extends ApplicationModel {
 
   public id: DreamColumn<RoomBase, 'id'>
   public type: DreamColumn<RoomBase, 'type'>
-  public position: DreamColumn<RoomBase, 'position'>
   public deletedAt: DreamColumn<RoomBase, 'deletedAt'>
   public createdAt: DreamColumn<RoomBase, 'createdAt'>
   public updatedAt: DreamColumn<RoomBase, 'updatedAt'>
+
+  @RoomBase.Sortable({ scope: 'place' })
+  public position: DreamColumn<RoomBase, 'position'>
 
   @RoomBase.BelongsTo('Place')
   public place: Place

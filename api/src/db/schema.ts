@@ -214,7 +214,7 @@ export const schema = {
       },
       localizedTexts: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['localized_texts'],
         optional: null,
         requiredWhereClauses: null,
@@ -249,7 +249,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -330,7 +330,7 @@ export const schema = {
     associations: {
       localizable: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['hosts', 'places', 'rooms'],
         optional: false,
         requiredWhereClauses: null,
@@ -408,7 +408,7 @@ export const schema = {
       },
       localizedTexts: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['localized_texts'],
         optional: null,
         requiredWhereClauses: null,
@@ -526,7 +526,7 @@ export const schema = {
     associations: {
       localizedTexts: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['localized_texts'],
         optional: null,
         requiredWhereClauses: null,

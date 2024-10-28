@@ -21,7 +21,7 @@ export async function up(db: Kysely<any>): Promise<void> {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function down(db: Kysely<any>): Promise<void> {
-  await db.schema.dropTable('room_bases').execute()
+  await db.schema.dropTable('rooms').execute()
 
   await db.schema.dropType('room_types_enum').execute()
 }

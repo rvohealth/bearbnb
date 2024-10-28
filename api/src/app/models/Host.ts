@@ -2,6 +2,7 @@ import { DreamColumn, DreamSerializers } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import HostPlace from './HostPlace'
 import Place from './Place'
+import RoomBase from './Room/Base'
 import User from './User'
 
 export default class Host extends ApplicationModel {
@@ -29,4 +30,7 @@ export default class Host extends ApplicationModel {
 
   @Host.HasMany('Place', { through: 'hostPlaces' })
   public places: Place[]
+
+  @Host.HasMany('Room/Base', { through: 'places' })
+  public rooms: RoomBase[]
 }

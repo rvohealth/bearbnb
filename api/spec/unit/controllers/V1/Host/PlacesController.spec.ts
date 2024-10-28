@@ -9,6 +9,7 @@ import User from '../../../../../src/app/models/User'
 import createHost from '../../../../factories/HostFactory'
 import createHostPlace from '../../../../factories/HostPlaceFactory'
 import createPlace from '../../../../factories/PlaceFactory'
+import createRoomBedroom from '../../../../factories/Room/BedroomFactory'
 import createUser from '../../../../factories/UserFactory'
 import { addEndUserAuthHeader } from '../../../helpers/authentication'
 
@@ -146,14 +147,17 @@ describe('V1/Host/PlacesController', () => {
       })
     }
 
-    it('deletes the Place', async () => {
+    it('soft-deletes the Place and its Rooms', async () => {
       const place = await createPlace()
+      await createRoomBedroom({ place })
       await createHostPlace({ host, place })
 
+      expect(await host.associationQuery('rooms').count()).toEqual(1)
       await subject(place)
 
       expect(await Place.find(place.id)).toBeNull()
       expect(await Place.where({ id: place.id }).count()).toEqual(0)
+      expect(await host.associationQuery('rooms').count()).toEqual(0)
 
       expect(await Place.removeAllDefaultScopes().find(place.id)).toMatchDreamModel(place)
       expect(await Place.removeAllDefaultScopes().where({ id: place.id }).count()).toEqual(1)
@@ -167,6 +171,27 @@ describe('V1/Host/PlacesController', () => {
 
         expect(await Place.find(otherUserPlace.id)).toMatchDreamModel(otherUserPlace)
       })
+    })
+  })
+
+  describe('POST undelete', () => {
+    function subject(place: Place, expectedStatus: number = 204) {
+      return request.post(`/v1/host/places/${place.id}/undelete`, expectedStatus, {
+        headers: addEndUserAuthHeader(request, user, {}),
+      })
+    }
+
+    it('undeletes the Place and its Rooms', async () => {
+      const place = await createPlace()
+      await createRoomBedroom({ place })
+      await createHostPlace({ host, place })
+      await place.destroy()
+      expect(await host.associationQuery('rooms').count()).toEqual(0)
+      await subject(place)
+
+      expect(await Place.find(place.id)).toMatchDreamModel(place)
+      expect(await Place.where({ id: place.id }).count()).toEqual(1)
+      expect(await host.associationQuery('rooms').count()).toEqual(1)
     })
   })
 })

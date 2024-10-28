@@ -1,13 +1,12 @@
-import { DreamColumn, DreamSerializers, STI } from '@rvohealth/dream'
+import { DreamSerializers, STI } from '@rvohealth/dream'
 import RoomBase from './Base'
 
 @STI(RoomBase)
-export default class RoomLivingRoom extends RoomBase {
-  public get serializers(): DreamSerializers<RoomLivingRoom> {
+export default class LivingRoom extends RoomBase {
+  public get serializers(): DreamSerializers<LivingRoom> {
     return {
       default: 'Room/LivingRoomSerializer',
       summary: 'Room/LivingRoomSummarySerializer',
     }
   }
-
 }

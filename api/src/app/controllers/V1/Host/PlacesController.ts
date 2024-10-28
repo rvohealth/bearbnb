@@ -1,5 +1,6 @@
 import { OpenAPI } from '@rvohealth/psychic'
 import ApplicationModel from '../../../models/ApplicationModel'
+import HostPlace from '../../../models/HostPlace'
 import Place from '../../../models/Place'
 import V1HostBaseController from './BaseController'
 
@@ -66,6 +67,21 @@ export default class V1HostPlacesController extends V1HostBaseController {
     this.noContent()
   }
 
+  @OpenAPI({
+    status: 204,
+    tags: openApiTags,
+    description: 'Undestroy a Place',
+  })
+  public async undestroy() {
+    const hostPlace = await HostPlace.removeDefaultScope('dream:SoftDelete')
+      .preload('place')
+      .findOrFailBy({
+        hostId: this.currentHost.id,
+        placeId: this.castParam('id', 'string'),
+      })
+    await hostPlace.place.undestroy()
+    this.noContent()
+  }
   private async place() {
     return await this.currentHost.associationQuery('places').findOrFail(this.castParam('id', 'string'))
   }

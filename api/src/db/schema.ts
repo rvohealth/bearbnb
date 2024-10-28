@@ -215,6 +215,13 @@ export const schema = {
         optional: null,
         requiredWhereClauses: null,
       },
+      rooms: {
+        type: 'HasMany',
+        foreignKey: null,
+        tables: ['rooms'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
       user: {
         type: 'BelongsTo',
         foreignKey: 'userId',
@@ -290,6 +297,13 @@ export const schema = {
         type: 'HasMany',
         foreignKey: 'placeId',
         tables: ['host_places'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
+      rooms: {
+        type: 'HasMany',
+        foreignKey: 'placeId',
+        tables: ['rooms'],
         optional: null,
         requiredWhereClauses: null,
       },

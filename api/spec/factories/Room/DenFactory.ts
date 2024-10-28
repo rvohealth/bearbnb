@@ -1,6 +1,8 @@
 import { UpdateableProperties } from '@rvohealth/dream'
-import RoomDen from '../../../src/app/models/Room/Den'
+import Den from '../../../src/app/models/Room/Den'
+import createPlace from '../PlaceFactory'
 
-export default async function createRoomDen(attrs: UpdateableProperties<RoomDen> = {}) {
-  return await RoomDen.create(attrs)
+export default async function createRoomDen(attrs: UpdateableProperties<Den> = {}) {
+  attrs.place ||= await createPlace()
+  return await Den.create(attrs)
 }

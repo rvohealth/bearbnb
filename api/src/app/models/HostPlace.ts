@@ -1,8 +1,9 @@
-import { DreamColumn } from '@rvohealth/dream'
+import { DreamColumn, SoftDelete } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import Host from './Host'
 import Place from './Place'
 
+@SoftDelete()
 export default class HostPlace extends ApplicationModel {
   public get table() {
     return 'host_places' as const

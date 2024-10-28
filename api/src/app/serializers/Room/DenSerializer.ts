@@ -1,16 +1,12 @@
-
+import Den from '../../models/Room/Den'
 import RoomBaseSerializer, { RoomBaseSummarySerializer } from './BaseSerializer'
-import RoomDen from '../../models/Room/Den'
 
 export class RoomDenSummarySerializer<
-  DataType extends RoomDen,
+  DataType extends Den,
   Passthrough extends object,
-> extends RoomBaseSummarySerializer<DataType, Passthrough> {
-}
+> extends RoomBaseSummarySerializer<DataType, Passthrough> {}
 
 export default class RoomDenSerializer<
-  DataType extends RoomDen,
+  DataType extends Den,
   Passthrough extends object,
-> extends RoomBaseSerializer<DataType, Passthrough> {
-
-}
+> extends RoomBaseSerializer<DataType, Passthrough> {}

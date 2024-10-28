@@ -1,6 +1,7 @@
 import { DreamColumn, DreamSerializers, SoftDelete } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import HostPlace from './HostPlace'
+import RoomBase from './Room/Base'
 
 @SoftDelete()
 export default class Place extends ApplicationModel {
@@ -24,4 +25,7 @@ export default class Place extends ApplicationModel {
 
   @Place.HasMany('HostPlace', { dependent: 'destroy' })
   public hostPlaces: HostPlace[]
+
+  @Place.HasMany('Room/Base', { dependent: 'destroy' })
+  public rooms: RoomBase[]
 }

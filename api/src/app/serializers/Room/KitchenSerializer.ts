@@ -1,17 +1,16 @@
 import { Attribute, DreamColumn } from '@rvohealth/dream'
+import Kitchen from '../../models/Room/Kitchen'
 import RoomBaseSerializer, { RoomBaseSummarySerializer } from './BaseSerializer'
-import RoomKitchen from '../../models/Room/Kitchen'
 
 export class RoomKitchenSummarySerializer<
-  DataType extends RoomKitchen,
+  DataType extends Kitchen,
   Passthrough extends object,
-> extends RoomBaseSummarySerializer<DataType, Passthrough> {
-}
+> extends RoomBaseSummarySerializer<DataType, Passthrough> {}
 
 export default class RoomKitchenSerializer<
-  DataType extends RoomKitchen,
+  DataType extends Kitchen,
   Passthrough extends object,
 > extends RoomBaseSerializer<DataType, Passthrough> {
-  @Attribute(RoomKitchen)
-  public appliances: DreamColumn<RoomKitchen, 'appliances'>
+  @Attribute(Kitchen)
+  public appliances: DreamColumn<Kitchen, 'appliances'>
 }

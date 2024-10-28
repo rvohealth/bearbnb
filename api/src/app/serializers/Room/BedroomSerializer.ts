@@ -1,20 +1,19 @@
 import { Attribute, DreamColumn } from '@rvohealth/dream'
+import Bedroom from '../../models/Room/Bedroom'
 import RoomBaseSerializer, { RoomBaseSummarySerializer } from './BaseSerializer'
-import RoomBedroom from '../../models/Room/Bedroom'
 
 export class RoomBedroomSummarySerializer<
-  DataType extends RoomBedroom,
+  DataType extends Bedroom,
   Passthrough extends object,
-> extends RoomBaseSummarySerializer<DataType, Passthrough> {
-}
+> extends RoomBaseSummarySerializer<DataType, Passthrough> {}
 
 export default class RoomBedroomSerializer<
-  DataType extends RoomBedroom,
+  DataType extends Bedroom,
   Passthrough extends object,
 > extends RoomBaseSerializer<DataType, Passthrough> {
-  @Attribute(RoomBedroom)
-  public numberOfBeds: DreamColumn<RoomBedroom, 'numberOfBeds'>
+  @Attribute(Bedroom)
+  public numberOfBeds: DreamColumn<Bedroom, 'numberOfBeds'>
 
-    @Attribute(RoomBedroom)
-  public bedTypes: DreamColumn<RoomBedroom, 'bedTypes'>
+  @Attribute(Bedroom)
+  public bedTypes: DreamColumn<Bedroom, 'bedTypes'>
 }

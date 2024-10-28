@@ -1,9 +1,9 @@
 import { UpdateableProperties } from '@rvohealth/dream'
-import RoomKitchen from '../../../src/app/models/Room/Kitchen'
+import Kitchen from '../../../src/app/models/Room/Kitchen'
+import createPlace from '../PlaceFactory'
 
-let counter = 0
-
-export default async function createRoomKitchen(attrs: UpdateableProperties<RoomKitchen> = {}) {
-  attrs.appliances ||= 'stove'
-  return await RoomKitchen.create(attrs)
+export default async function createRoomKitchen(attrs: UpdateableProperties<Kitchen> = {}) {
+  attrs.place ||= await createPlace()
+  attrs.appliances ||= ['stove']
+  return await Kitchen.create(attrs)
 }

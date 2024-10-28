@@ -1,6 +1,5 @@
-import { Attribute, DreamColumn, DreamSerializer, RendersOne } from '@rvohealth/dream'
+import { Attribute, DreamColumn, DreamSerializer } from '@rvohealth/dream'
 import RoomBase from '../../models/Room/Base'
-import Place from '../../models/Place'
 
 export class RoomBaseSummarySerializer<
   DataType extends RoomBase,
@@ -17,12 +16,9 @@ export default class RoomBaseSerializer<
   @Attribute(RoomBase)
   public type: DreamColumn<RoomBase, 'type'>
 
-    @RendersOne(Place)
-  public place: Place
-
-    @Attribute(RoomBase)
+  @Attribute(RoomBase)
   public position: DreamColumn<RoomBase, 'position'>
 
-    @Attribute(RoomBase)
+  @Attribute(RoomBase)
   public deletedAt: DreamColumn<RoomBase, 'deletedAt'>
 }

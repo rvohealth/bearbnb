@@ -1,7 +1,8 @@
-import { DreamColumn, DreamSerializers } from '@rvohealth/dream'
+import { DreamColumn, DreamSerializers, SoftDelete } from '@rvohealth/dream'
 import ApplicationModel from '../ApplicationModel'
 import Place from '../Place'
 
+@SoftDelete()
 export default class RoomBase extends ApplicationModel {
   public get table() {
     return 'rooms' as const

@@ -15,6 +15,20 @@ export type Int8 = ColumnType<string, bigint | number | string, bigint | number 
 export type IdType = string | number | bigint
 export type Timestamp = ColumnType<DateTime | CalendarDate>
 
+export interface Guests {
+  createdAt: Timestamp;
+  id: Generated<Int8>;
+  updatedAt: Timestamp;
+  userId: Int8;
+}
+
+export interface Hosts {
+  createdAt: Timestamp;
+  id: Generated<Int8>;
+  updatedAt: Timestamp;
+  userId: Int8;
+}
+
 export interface Users {
   createdAt: Timestamp;
   email: string;
@@ -25,10 +39,14 @@ export interface Users {
 }
 
 export interface DB {
+  guests: Guests;
+  hosts: Hosts;
   users: Users;
 }
 
 
 export class DBClass {
+  guests: Guests
+  hosts: Hosts
   users: Users
 }

@@ -7,11 +7,63 @@ import { DateTime } from 'luxon'
 
 import type { ColumnType } from "kysely";
 
+export type ApplianceTypesEnum = "dishwasher" | "microwave" | "oven" | "stove";
+export const ApplianceTypesEnumValues = [
+  "dishwasher",
+  "microwave",
+  "oven",
+  "stove"
+] as const
+
+
+export type ArrayType<T> = ArrayTypeImpl<T> extends (infer U)[]
+  ? U[]
+  : ArrayTypeImpl<T>;
+
+export type ArrayTypeImpl<T> = T extends ColumnType<infer S, infer I, infer U>
+  ? ColumnType<S[], I[], U[]>
+  : T[];
+
+export type BathOrShowerTypesEnum = "bath" | "bath_and_shower" | "none" | "shower";
+export const BathOrShowerTypesEnumValues = [
+  "bath",
+  "bath_and_shower",
+  "none",
+  "shower"
+] as const
+
+
+export type BedTypesEnum = "bunk" | "cot" | "king" | "queen" | "sofabed" | "twin";
+export const BedTypesEnumValues = [
+  "bunk",
+  "cot",
+  "king",
+  "queen",
+  "sofabed",
+  "twin"
+] as const
+
+
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
 export type Int8 = ColumnType<string, bigint | number | string, bigint | number | string>;
+
+export type LocalesEnum = "en-US" | "es-ES";
+export const LocalesEnumValues = [
+  "en-US",
+  "es-ES"
+] as const
+
+
+export type LocalizedTypesEnum = "Host" | "Place" | "Room";
+export const LocalizedTypesEnumValues = [
+  "Host",
+  "Place",
+  "Room"
+] as const
+
 
 export type PlaceStylesEnum = "cabin" | "cave" | "cottage" | "dump" | "lean_to" | "tent" | "treehouse";
 export const PlaceStylesEnumValues = [
@@ -61,6 +113,18 @@ export interface Hosts {
   userId: Int8;
 }
 
+export interface LocalizedTexts {
+  createdAt: Timestamp;
+  deletedAt: Timestamp | null;
+  id: Generated<Int8>;
+  locale: LocalesEnum;
+  localizableId: Int8;
+  localizableType: LocalizedTypesEnum;
+  markdown: string | null;
+  title: string | null;
+  updatedAt: Timestamp;
+}
+
 export interface Places {
   createdAt: Timestamp;
   deletedAt: Timestamp | null;
@@ -72,6 +136,9 @@ export interface Places {
 }
 
 export interface Rooms {
+  appliances: Generated<ArrayType<ApplianceTypesEnum>>;
+  bathOrShowerType: BathOrShowerTypesEnum | null;
+  bedTypes: Generated<ArrayType<BedTypesEnum>>;
   createdAt: Timestamp;
   deletedAt: Timestamp | null;
   id: Generated<Int8>;
@@ -94,6 +161,7 @@ export interface DB {
   guests: Guests;
   host_places: HostPlaces;
   hosts: Hosts;
+  localized_texts: LocalizedTexts;
   places: Places;
   rooms: Rooms;
   users: Users;
@@ -104,6 +172,7 @@ export class DBClass {
   guests: Guests
   host_places: HostPlaces
   hosts: Hosts
+  localized_texts: LocalizedTexts
   places: Places
   rooms: Rooms
   users: Users

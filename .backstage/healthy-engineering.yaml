@@ -4,6 +4,6 @@ metadata:
   name: bearbnb
   description: An AirBnB clone for bears to demonstrate Dream and Psychic
 spec:
-  type: service # can be one of: service, library, website, iac-pipeline
-  lifecycle: production # can be one of: experimental, production, deprecated
+  type: website # can be one of: service, library, website, iac-pipeline
+  lifecycle: experimental # can be one of: experimental, production, deprecated
   owner: team-wellos # your existing tech team in Backstage, i.e. team-developer-platforms

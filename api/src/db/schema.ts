@@ -64,6 +64,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       user: {
         type: 'BelongsTo',
@@ -81,7 +82,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: [],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -135,6 +136,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       host: {
         type: 'BelongsTo',
@@ -197,6 +199,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       hostPlaces: {
         type: 'HasMany',
@@ -235,7 +238,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -313,6 +316,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       localizable: {
         type: 'BelongsTo',
@@ -330,7 +334,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -392,6 +396,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       hostPlaces: {
         type: 'HasMany',
@@ -407,6 +412,13 @@ export const schema = {
         optional: null,
         requiredWhereClauses: null,
       },
+      rooms: {
+        type: 'HasMany',
+        foreignKey: 'placeId',
+        tables: ['rooms'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
     },
   },
   rooms: {
@@ -416,7 +428,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: ['dream:STI'],
+      default: ['dream:STI', 'dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -502,6 +514,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       localizedTexts: {
         type: 'HasMany',
@@ -580,6 +593,7 @@ export const schema = {
       },
     },
     virtualColumns: [],
+    encryptedColumns: [],
     associations: {
       
     },
@@ -588,7 +602,7 @@ export const schema = {
 
 export const globalSchema = {
   passthroughColumns: [],
-  allDefaultScopeNames: ['dream:STI'],
+  allDefaultScopeNames: ['dream:STI', 'dream:SoftDelete'],
   globalNames: {
     models: {
       'Guest': 'guests',

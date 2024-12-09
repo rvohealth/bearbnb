@@ -1,4 +1,5 @@
 import { PsychicRouter } from '@rvohealth/psychic'
+import V1HostPlacesController from '../app/controllers/V1/Host/PlacesController'
 
 export default (r: PsychicRouter) => {
   r.namespace('v1', r => {
@@ -9,8 +10,9 @@ export default (r: PsychicRouter) => {
         r.resources('rooms')
       })
 
-      r.resources('places')
+      r.resources('places', r => {
+        r.post('undestroy', V1HostPlacesController, 'undestroy')
+      })
     })
   })
-
 }

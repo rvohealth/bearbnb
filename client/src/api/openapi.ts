@@ -577,6 +577,9 @@ export interface components {
         };
         PlaceSummary: {
             id: string;
+            name: string;
+            /** @enum {string} */
+            style: "cabin" | "cave" | "cottage" | "dump" | "lean_to" | "tent" | "treehouse";
         };
         Room: {
             id: string;

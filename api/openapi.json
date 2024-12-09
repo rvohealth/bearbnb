@@ -948,11 +948,28 @@
       "PlaceSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "name",
+          "style"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "cabin",
+              "cave",
+              "cottage",
+              "dump",
+              "lean_to",
+              "tent",
+              "treehouse"
+            ]
           }
         }
       },

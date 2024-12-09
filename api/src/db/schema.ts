@@ -595,7 +595,20 @@ export const schema = {
     virtualColumns: [],
     encryptedColumns: [],
     associations: {
-      
+      guest: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        tables: ['guests'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
+      host: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        tables: ['hosts'],
+        optional: null,
+        requiredWhereClauses: null,
+      },
     },
   },
 } as const

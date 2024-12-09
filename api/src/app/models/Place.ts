@@ -1,4 +1,4 @@
-import { AfterCreate, DreamColumn, DreamSerializers, SoftDelete } from '@rvohealth/dream'
+import { AfterCreate, DreamColumn, DreamSerializers, SoftDelete, Validates } from '@rvohealth/dream'
 import { Room } from 'socket.io-adapter'
 import ApplicationModel from './ApplicationModel'
 import HostPlace from './HostPlace'
@@ -20,6 +20,7 @@ export default class Place extends ApplicationModel {
   public id: DreamColumn<Place, 'id'>
   public name: DreamColumn<Place, 'name'>
   public style: DreamColumn<Place, 'style'>
+  @Validates('presence')
   public sleeps: DreamColumn<Place, 'sleeps'>
   public deletedAt: DreamColumn<Place, 'deletedAt'>
   public createdAt: DreamColumn<Place, 'createdAt'>

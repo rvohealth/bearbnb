@@ -1,5 +1,7 @@
 import { DreamColumn } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
+import Guest from './Guest'
+import Host from './Host'
 
 export default class User extends ApplicationModel {
   public get table() {
@@ -12,4 +14,10 @@ export default class User extends ApplicationModel {
   public lastName: DreamColumn<User, 'lastName'>
   public createdAt: DreamColumn<User, 'createdAt'>
   public updatedAt: DreamColumn<User, 'updatedAt'>
+
+  @User.HasOne('Host')
+  public host: Host | null
+
+  @User.HasOne('Guest')
+  public guest: Guest | null
 }

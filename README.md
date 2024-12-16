@@ -2,7 +2,6 @@
 
 An AirBnB clone for bears to demonstrate Dream and Psychic
 
-
 # Generator commands used
 
 ```bash
@@ -25,3 +24,14 @@ yarn psy g:resource v1/host/localized-texts LocalizedText localizable_type:enum:
 yarn psy g:resource v1/guest/stays Stay Guest:belongs_to Place:belongs_to checkin_on:date checkout_on:date adults:integer cubs:integer
 yarn psy g:controller v1/guest/places index
 ```
+
+## Questions?
+
+- **Ask them on [Stack Overflow](https://stackoverflow.com)**, using the `[psychic]` tag.
+
+## Contributing
+
+Psychic is an open source library, so we encourage you to actively contribute. Visit our [Contributing](https://github.com/rvohealth/bearbnb/CONTRIBUTING.md) guide to learn more about the processes we use for submitting pull requests or issues.
+
+Are you trying to report a possible security vulnerability? Visit our [Security Policy](https://github.com/rvohealth/bearbnb/SECURITY.md) for guidelines about how to proceed.
+

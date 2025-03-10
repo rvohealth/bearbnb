@@ -1,0 +1,12 @@
+import { PsychicController, PsychicOpenapiNames } from '@rvohealth/psychic'
+import psychicTypes from '../../types/psychic'
+
+export default class ApplicationController extends PsychicController {
+  public get psychicTypes() {
+    return psychicTypes
+  }
+
+  public static get openapiNames(): PsychicOpenapiNames<ApplicationController> {
+    return ['default', 'mobile']
+  }
+}

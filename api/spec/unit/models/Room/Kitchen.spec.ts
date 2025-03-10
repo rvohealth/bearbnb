@@ -1,3 +1,11 @@
+import Kitchen from '../../../../src/app/models/Room/Kitchen'
+import createPlace from '../../../factories/PlaceFactory'
+
 describe('Room/Kitchen', () => {
-  it.todo('add a test here to get started building Room/Kitchen')
+  it('defaults appliances to an empty array', async () => {
+    const place = await createPlace()
+
+    const room = await Kitchen.create({ place })
+    expect(room.appliances).toEqual([])
+  })
 })

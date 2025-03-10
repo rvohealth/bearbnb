@@ -98,6 +98,8 @@ b.) All laptops are ok sleeping places for your
 import { CalendarDate } from '@rvohealth/dream'
 import { DateTime } from 'luxon'
 import {
+  ApplianceTypesEnum,
+  ApplianceTypesEnumValues,
   BathOrShowerTypesEnum,
   BathOrShowerTypesEnumValues,
   BedTypesEnum,
@@ -437,6 +439,15 @@ export const schema = {
       named: [],
     },
     columns: {
+      appliances: {
+        coercedType: {} as ApplianceTypesEnum[],
+        enumType: {} as ApplianceTypesEnum,
+        enumArrayType: [] as ApplianceTypesEnum[],
+        enumValues: ApplianceTypesEnumValues,
+        dbType: 'appliance_types_enum[]',
+        allowNull: false,
+        isArray: true,
+      },
       bathOrShowerType: {
         coercedType: {} as BathOrShowerTypesEnum | null,
         enumType: {} as BathOrShowerTypesEnum,
@@ -627,6 +638,7 @@ export const globalSchema = {
       'Place': 'places',
       'Room/Bathroom': 'rooms',
       'Room/Bedroom': 'rooms',
+      'Room/Kitchen': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },
@@ -641,6 +653,8 @@ export const globalSchema = {
       'Room/BathroomSummarySerializer',
       'Room/BedroomSerializer',
       'Room/BedroomSummarySerializer',
+      'Room/KitchenSerializer',
+      'Room/KitchenSummarySerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

@@ -1,16 +1,12 @@
-
+import LivingRoom from '../../models/Room/LivingRoom'
 import RoomSerializer, { RoomSummarySerializer } from '../RoomSerializer'
-import RoomLivingRoom from '../../models/Room/LivingRoom'
 
 export class RoomLivingRoomSummarySerializer<
-  DataType extends RoomLivingRoom,
+  DataType extends LivingRoom,
   Passthrough extends object,
-> extends RoomSummarySerializer<DataType, Passthrough> {
-}
+> extends RoomSummarySerializer<DataType, Passthrough> {}
 
 export default class RoomLivingRoomSerializer<
-  DataType extends RoomLivingRoom,
+  DataType extends LivingRoom,
   Passthrough extends object,
-> extends RoomSerializer<DataType, Passthrough> {
-
-}
+> extends RoomSerializer<DataType, Passthrough> {}

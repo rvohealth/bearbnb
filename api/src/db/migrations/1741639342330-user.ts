@@ -8,7 +8,7 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable('users')
     .addColumn('id', 'bigserial', col => col.primaryKey())
-    .addColumn('email', sql`citext`)
+    .addColumn('email', sql`citext`, col => col.notNull())
     .addColumn('first_name', 'varchar(255)')
     .addColumn('last_name', 'varchar(255)')
     .addColumn('created_at', 'timestamp', col => col.notNull())

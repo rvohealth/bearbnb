@@ -18,7 +18,26 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "sleeps": {
+                    "type": "integer"
+                  },
+                  "style": {
+                    "type": "string",
+                    "enum": [
+                      "cabin",
+                      "cave",
+                      "cottage",
+                      "dump",
+                      "lean_to",
+                      "tent",
+                      "treehouse"
+                    ]
+                  }
+                }
               }
             }
           }
@@ -160,7 +179,26 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "sleeps": {
+                    "type": "integer"
+                  },
+                  "style": {
+                    "type": "string",
+                    "enum": [
+                      "cabin",
+                      "cave",
+                      "cottage",
+                      "dump",
+                      "lean_to",
+                      "tent",
+                      "treehouse"
+                    ]
+                  }
+                }
               }
             }
           }
@@ -247,13 +285,16 @@
             "type": "string"
           },
           "style": {
-            "type": "string"
+            "type": "string",
+            "description": "\nThe following values will be allowed:\n  cabin,\n  cave,\n  cottage,\n  dump,\n  lean_to,\n  tent,\n  treehouse"
           },
           "sleeps": {
-            "type": "string"
+            "type": "integer"
           },
           "deletedAt": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },

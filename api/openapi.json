@@ -131,7 +131,34 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "bathOrShowerType": {
+                    "type": "string",
+                    "enum": [
+                      "bath",
+                      "bath_and_shower",
+                      "none",
+                      "shower",
+                      "null"
+                    ],
+                    "nullable": true
+                  },
+                  "position": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Bathroom",
+                      "Bedroom",
+                      "Den",
+                      "Garage",
+                      "Kitchen",
+                      "LivingRoom"
+                    ]
+                  }
+                }
               }
             }
           }
@@ -273,7 +300,34 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "bathOrShowerType": {
+                    "type": "string",
+                    "enum": [
+                      "bath",
+                      "bath_and_shower",
+                      "none",
+                      "shower",
+                      "null"
+                    ],
+                    "nullable": true
+                  },
+                  "position": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Bathroom",
+                      "Bedroom",
+                      "Den",
+                      "Garage",
+                      "Kitchen",
+                      "LivingRoom"
+                    ]
+                  }
+                }
               }
             }
           }
@@ -551,13 +605,24 @@
             "type": "string"
           },
           "type": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Garage",
+              "Kitchen",
+              "LivingRoom"
+            ]
           },
           "position": {
-            "type": "string"
+            "type": "integer",
+            "nullable": true
           },
           "deletedAt": {
-            "type": "string"
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },

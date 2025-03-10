@@ -1,16 +1,16 @@
-import { Decorators, DreamColumn, DreamSerializers, STI } from '@rvohealth/dream'
+import { DreamColumn, DreamSerializers, STI } from '@rvohealth/dream'
 import Room from '../Room'
 
-const Deco = new Decorators<InstanceType<typeof RoomBathroom>>()
+// const Deco = new Decorators<InstanceType<typeof Bathroom>>()
 
 @STI(Room)
-export default class RoomBathroom extends Room {
-  public get serializers(): DreamSerializers<RoomBathroom> {
+export default class Bathroom extends Room {
+  public get serializers(): DreamSerializers<Bathroom> {
     return {
       default: 'Room/BathroomSerializer',
       summary: 'Room/BathroomSummarySerializer',
     }
   }
 
-  public bathOrShowerType: DreamColumn<RoomBathroom, 'bathOrShowerType'>
+  public bathOrShowerType: DreamColumn<Bathroom, 'bathOrShowerType'>
 }

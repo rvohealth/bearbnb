@@ -98,6 +98,8 @@ b.) All laptops are ok sleeping places for your
 import { CalendarDate } from '@rvohealth/dream'
 import { DateTime } from 'luxon'
 import {
+  BathOrShowerTypesEnum,
+  BathOrShowerTypesEnumValues,
   IdType,
   PlaceStylesEnum,
   PlaceStylesEnumValues,
@@ -415,7 +417,7 @@ export const schema = {
       },
       rooms: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'placeId',
         tables: ['rooms'],
         optional: null,
         requiredOnClauses: null,
@@ -429,10 +431,19 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:STI'],
       named: [],
     },
     columns: {
+      bathOrShowerType: {
+        coercedType: {} as BathOrShowerTypesEnum | null,
+        enumType: {} as BathOrShowerTypesEnum,
+        enumArrayType: [] as BathOrShowerTypesEnum[],
+        enumValues: BathOrShowerTypesEnumValues,
+        dbType: 'bath_or_shower_types_enum',
+        allowNull: true,
+        isArray: false,
+      },
       createdAt: {
         coercedType: {} as DateTime,
         enumType: null,
@@ -501,7 +512,7 @@ export const schema = {
     associations: {
       place: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'placeId',
         tables: ['places'],
         optional: false,
         requiredOnClauses: null,
@@ -596,13 +607,14 @@ export const schema = {
 
 export const globalSchema = {
   passthroughColumns: [],
-  allDefaultScopeNames: [],
+  allDefaultScopeNames: ['dream:STI'],
   globalNames: {
     models: {
       'Guest': 'guests',
       'Host': 'hosts',
       'HostPlace': 'host_places',
       'Place': 'places',
+      'Room/Bathroom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },
@@ -613,6 +625,8 @@ export const globalSchema = {
       'HostSummarySerializer',
       'PlaceSerializer',
       'PlaceSummarySerializer',
+      'Room/BathroomSerializer',
+      'Room/BathroomSummarySerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

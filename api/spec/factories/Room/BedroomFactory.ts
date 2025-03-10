@@ -1,9 +1,9 @@
 import { UpdateableProperties } from '@rvohealth/dream'
-import RoomBedroom from '../../../src/app/models/Room/Bedroom'
+import Bedroom from '../../../src/app/models/Room/Bedroom'
 
 let counter = 0
 
-export default async function createRoomBedroom(attrs: UpdateableProperties<RoomBedroom> = {}) {
+export default async function createRoomBedroom(attrs: UpdateableProperties<Bedroom> = {}) {
   attrs.bedTypes ||= 'twin'
-  return await RoomBedroom.create(attrs)
+  return await Bedroom.create(attrs)
 }

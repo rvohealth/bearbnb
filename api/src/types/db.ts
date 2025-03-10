@@ -118,6 +118,13 @@ export interface Guests {
   userId: Int8;
 }
 
+export interface Hosts {
+  createdAt: Timestamp;
+  id: Generated<Int8>;
+  updatedAt: Timestamp;
+  userId: Int8;
+}
+
 export interface Users {
   createdAt: Timestamp;
   email: string;
@@ -129,11 +136,13 @@ export interface Users {
 
 export interface DB {
   guests: Guests;
+  hosts: Hosts;
   users: Users;
 }
 
 
 export class DBClass {
   guests: Guests
+  hosts: Hosts
   users: Users
 }

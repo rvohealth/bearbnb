@@ -1,6 +1,7 @@
 import { Decorators, DreamColumn } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import Guest from './Guest'
+import Host from './Host'
 
 const Deco = new Decorators<InstanceType<typeof User>>()
 
@@ -18,4 +19,7 @@ export default class User extends ApplicationModel {
 
   @Deco.HasOne('Guest')
   public guest: Guest | null
+
+  @Deco.HasOne('Host')
+  public host: Host | null
 }

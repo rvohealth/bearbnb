@@ -2,6 +2,7 @@ import { Decorators, DreamColumn, DreamSerializers } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import Host from './Host'
 import HostPlace from './HostPlace'
+import Room from './Room'
 
 const Deco = new Decorators<InstanceType<typeof Place>>()
 
@@ -30,4 +31,7 @@ export default class Place extends ApplicationModel {
 
   @Deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
+
+  @Deco.HasMany('Room', { dependent: 'destroy' })
+  public rooms: Room[]
 }

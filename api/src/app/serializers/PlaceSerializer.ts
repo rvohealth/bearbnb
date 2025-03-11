@@ -1,4 +1,4 @@
-import { Attribute, DreamColumn, DreamSerializer } from '@rvohealth/dream'
+import { Attribute, DreamColumn, DreamSerializer } from '@rvoh/dream'
 import Place from '../models/Place'
 
 export class PlaceSummarySerializer<
@@ -16,12 +16,12 @@ export default class PlaceSerializer<
   @Attribute(Place)
   public name: DreamColumn<Place, 'name'>
 
-    @Attribute(Place)
+  @Attribute(Place)
   public style: DreamColumn<Place, 'style'>
 
-    @Attribute(Place)
+  @Attribute(Place)
   public sleeps: DreamColumn<Place, 'sleeps'>
 
-    @Attribute(Place)
+  @Attribute(Place)
   public deletedAt: DreamColumn<Place, 'deletedAt'>
 }

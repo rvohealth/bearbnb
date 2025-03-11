@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvohealth/dream'
+import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel'
 import HostPlace from './HostPlace'
 import LocalizedText from './LocalizedText'

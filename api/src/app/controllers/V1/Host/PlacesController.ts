@@ -1,6 +1,6 @@
-import { OpenAPI } from '@rvohealth/psychic'
-import V1HostBaseController from './BaseController'
+import { OpenAPI } from '@rvoh/psychic'
 import Place from '../../../models/Place'
+import V1HostBaseController from './BaseController'
 
 const openApiTags = ['places']
 

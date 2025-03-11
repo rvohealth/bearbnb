@@ -1,4 +1,4 @@
-import { BackgroundJobConfig, BaseBackgroundedModel } from '@rvohealth/psychic-workers'
+import { BackgroundJobConfig, BaseBackgroundedModel } from '@rvoh/psychic-workers'
 import { DBClass } from '../../types/db'
 import { globalSchema, schema } from '../../types/dream'
 import psychicTypes from '../../types/psychic'

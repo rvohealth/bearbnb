@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn } from '@rvohealth/dream'
+import { Decorators, DreamColumn } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel'
 import Guest from './Guest'
 import Host from './Host'

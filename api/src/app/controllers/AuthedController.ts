@@ -1,4 +1,4 @@
-import { BeforeAction } from '@rvohealth/psychic'
+import { BeforeAction } from '@rvoh/psychic'
 import ApplicationController from './ApplicationController'
 // import User from '../models/User'
 

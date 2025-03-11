@@ -1,4 +1,4 @@
-import { UpdateableProperties } from '@rvohealth/dream'
+import { UpdateableProperties } from '@rvoh/dream'
 import Kitchen from '../../../src/app/models/Room/Kitchen'
 import createPlace from '../PlaceFactory'
 

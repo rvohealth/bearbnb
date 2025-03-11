@@ -1,4 +1,4 @@
-import { UpdateableProperties } from '@rvohealth/dream'
+import { UpdateableProperties } from '@rvoh/dream'
 import LocalizedText from '../../src/app/models/LocalizedText'
 
 let counter = 0

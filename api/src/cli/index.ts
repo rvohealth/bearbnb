@@ -7,10 +7,10 @@
 
 import '../conf/loadEnv'
 
-import { PsychicCLI } from '@rvohealth/psychic'
+import { PsychicCLI } from '@rvoh/psychic'
 import { Command } from 'commander'
-import seedDb from '../db/seed'
 import initializePsychicApplication from '../conf/initializePsychicApplication'
+import seedDb from '../db/seed'
 
 const program = new Command()
 

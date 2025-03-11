@@ -1,4 +1,4 @@
-import { Attribute, DreamColumn } from '@rvohealth/dream'
+import { Attribute, DreamColumn } from '@rvoh/dream'
 import Bathroom from '../../models/Room/Bathroom'
 import RoomSerializer, { RoomSummarySerializer } from '../RoomSerializer'
 

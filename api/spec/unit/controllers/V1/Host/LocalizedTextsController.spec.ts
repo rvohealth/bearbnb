@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { UpdateableProperties } from '@rvohealth/dream'
-import { PsychicServer } from '@rvohealth/psychic'
-import { specRequest as request } from '@rvohealth/psychic-spec-helpers'
+import { UpdateableProperties } from '@rvoh/dream'
+import { PsychicServer } from '@rvoh/psychic'
+import { specRequest as request } from '@rvoh/psychic-spec-helpers'
 import LocalizedText from '../../../../../src/app/models/LocalizedText'
 import User from '../../../../../src/app/models/User'
 import createLocalizedText from '../../../../factories/LocalizedTextFactory'

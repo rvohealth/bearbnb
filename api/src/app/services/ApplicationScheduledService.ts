@@ -1,4 +1,4 @@
-import { BaseScheduledService } from '@rvohealth/psychic-workers'
+import { BaseScheduledService } from '@rvoh/psychic-workers'
 import psychicTypes from '../../types/psychic'
 
 export default class ApplicationScheduledService extends BaseScheduledService {

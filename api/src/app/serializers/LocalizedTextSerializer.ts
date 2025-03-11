@@ -1,4 +1,4 @@
-import { Attribute, DreamColumn, DreamSerializer } from '@rvohealth/dream'
+import { Attribute, DreamColumn, DreamSerializer } from '@rvoh/dream'
 import LocalizedText from '../models/LocalizedText'
 
 export class LocalizedTextSummarySerializer<
@@ -16,18 +16,18 @@ export default class LocalizedTextSerializer<
   @Attribute(LocalizedText)
   public localizableType: DreamColumn<LocalizedText, 'localizableType'>
 
-    @Attribute(LocalizedText)
+  @Attribute(LocalizedText)
   public localizableId: DreamColumn<LocalizedText, 'localizableId'>
 
-    @Attribute(LocalizedText)
+  @Attribute(LocalizedText)
   public locale: DreamColumn<LocalizedText, 'locale'>
 
-    @Attribute(LocalizedText)
+  @Attribute(LocalizedText)
   public title: DreamColumn<LocalizedText, 'title'>
 
-    @Attribute(LocalizedText)
+  @Attribute(LocalizedText)
   public markdown: DreamColumn<LocalizedText, 'markdown'>
 
-    @Attribute(LocalizedText)
+  @Attribute(LocalizedText)
   public deletedAt: DreamColumn<LocalizedText, 'deletedAt'>
 }

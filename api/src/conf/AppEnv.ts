@@ -1,4 +1,4 @@
-import { Env } from '@rvohealth/dream'
+import { Env } from '@rvoh/dream'
 
 class AppEnvClass extends Env<{
   boolean: 'REQUEST_LOGGING'

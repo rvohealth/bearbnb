@@ -1,9 +1,9 @@
-import { DreamApplication } from '@rvohealth/dream'
+import { DreamApplication } from '@rvoh/dream'
 import { productionEnv } from '../app/helpers/environment'
-import inflections from './inflections'
 import importAll from '../app/helpers/importAll'
 import importDefault from '../app/helpers/importDefault'
 import srcPath from '../app/helpers/srcPath'
+import inflections from './inflections'
 
 export default async function (app: DreamApplication) {
   app.set('primaryKeyType', 'bigserial')

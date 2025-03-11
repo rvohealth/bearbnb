@@ -1,4 +1,4 @@
-import { PsychicApplicationWorkers } from '@rvohealth/psychic-workers'
+import { PsychicApplicationWorkers } from '@rvoh/psychic-workers'
 import { Queue, Worker } from 'bullmq'
 import Redis from 'ioredis'
 

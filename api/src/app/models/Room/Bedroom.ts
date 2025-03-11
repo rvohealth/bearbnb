@@ -1,4 +1,4 @@
-import { DreamColumn, DreamSerializers, STI } from '@rvohealth/dream'
+import { DreamColumn, DreamSerializers, STI } from '@rvoh/dream'
 import Room from '../Room'
 
 // const Deco = new Decorators<InstanceType<typeof Bedroom>>()

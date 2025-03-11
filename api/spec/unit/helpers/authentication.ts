@@ -1,4 +1,4 @@
-import { specRequest } from '@rvohealth/psychic-spec-helpers'
+import { specRequest } from '@rvoh/psychic-spec-helpers'
 import User from '../../../src/app/models/User'
 
 export function addEndUserAuthHeader(request: typeof specRequest, user: User, headers: object) {

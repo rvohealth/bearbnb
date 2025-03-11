@@ -1,4 +1,4 @@
-import { PsychicController, PsychicOpenapiNames } from '@rvohealth/psychic'
+import { PsychicController, PsychicOpenapiNames } from '@rvoh/psychic'
 import psychicTypes from '../../types/psychic'
 
 export default class ApplicationController extends PsychicController {

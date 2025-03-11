@@ -1,6 +1,6 @@
 import '../../../src/conf/loadEnv'
 
-import { PsychicBin } from '@rvohealth/psychic'
+import { PsychicBin } from '@rvoh/psychic'
 import initializePsychicApplication from '../../../src/conf/initializePsychicApplication'
 
 export async function setup() {

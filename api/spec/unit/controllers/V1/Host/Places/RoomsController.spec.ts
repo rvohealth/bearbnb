@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { UpdateableProperties } from '@rvohealth/dream'
-import { PsychicServer } from '@rvohealth/psychic'
-import { specRequest as request } from '@rvohealth/psychic-spec-helpers'
+import { UpdateableProperties } from '@rvoh/dream'
+import { PsychicServer } from '@rvoh/psychic'
+import { specRequest as request } from '@rvoh/psychic-spec-helpers'
 import Room from '../../../../../../src/app/models/Room'
 import User from '../../../../../../src/app/models/User'
 import createRoom from '../../../../../factories/RoomFactory'
@@ -25,7 +25,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     it('returns the index of Rooms', async () => {
       const room = await createRoom({
-        user
+        user,
       })
       const results = (await subject()).body
 
@@ -55,7 +55,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     it('returns the specified Room', async () => {
       const room = await createRoom({
-        user
+        user,
       })
       const results = (await subject(room)).body
 
@@ -83,9 +83,7 @@ describe('V1/Host/Places/RoomsController', () => {
     }
 
     it('creates a Room for this User', async () => {
-      const results = (await subject({
-        
-      })).body
+      const results = (await subject({})).body
       const room = await Room.findOrFailBy({ userId: user.id })
 
       expect(results).toEqual(
@@ -106,27 +104,19 @@ describe('V1/Host/Places/RoomsController', () => {
 
     it('updates the Room', async () => {
       const room = await createRoom({
-        user
+        user,
       })
-      await subject(room, {
-        
-      })
+      await subject(room, {})
 
       await room.reload()
-      
     })
 
     context('a Room created by another User', () => {
       it('is not updated', async () => {
-        const room = await createRoom({
-          
-        })
-        await subject(room, {
-          
-        }, 404)
+        const room = await createRoom({})
+        await subject(room, {}, 404)
 
         await room.reload()
-        
       })
     })
   })

@@ -1,4 +1,4 @@
-import { Attribute, DreamColumn, DreamSerializer } from '@rvohealth/dream'
+import { Attribute, DreamColumn, DreamSerializer } from '@rvoh/dream'
 import Guest from '../models/Guest'
 
 export class GuestSummarySerializer<
@@ -12,6 +12,4 @@ export class GuestSummarySerializer<
 export default class GuestSerializer<
   DataType extends Guest,
   Passthrough extends object,
-> extends GuestSummarySerializer<DataType, Passthrough> {
-
-}
+> extends GuestSummarySerializer<DataType, Passthrough> {}

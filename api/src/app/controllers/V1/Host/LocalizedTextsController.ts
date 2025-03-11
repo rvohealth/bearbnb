@@ -1,6 +1,6 @@
-import { OpenAPI } from '@rvohealth/psychic'
-import V1HostBaseController from './BaseController'
+import { OpenAPI } from '@rvoh/psychic'
 import LocalizedText from '../../../models/LocalizedText'
+import V1HostBaseController from './BaseController'
 
 const openApiTags = ['localized-texts']
 

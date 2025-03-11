@@ -1,4 +1,4 @@
-import { PsychicApplicationWebsockets } from '@rvohealth/psychic-websockets'
+import { PsychicApplicationWebsockets } from '@rvoh/psychic-websockets'
 import Redis from 'ioredis'
 import AppEnv from './AppEnv'
 // import User from '../app/models/User'

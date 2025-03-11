@@ -1,9 +1,9 @@
 import '../../../src/conf/global'
 
-import { DreamApplication } from '@rvohealth/dream'
-import { PsychicServer } from '@rvohealth/psychic'
-import { truncate, provideDreamViteMatchers } from '@rvohealth/dream-spec-helpers'
-import { providePuppeteerViteMatchers } from '@rvohealth/psychic-spec-helpers'
+import { DreamApplication } from '@rvoh/dream'
+import { provideDreamViteMatchers, truncate } from '@rvoh/dream-spec-helpers'
+import { PsychicServer } from '@rvoh/psychic'
+import { providePuppeteerViteMatchers } from '@rvoh/psychic-spec-helpers'
 import initializePsychicApplication from '../../../src/conf/initializePsychicApplication'
 
 provideDreamViteMatchers()

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { UpdateableProperties } from '@rvohealth/dream'
-import { PsychicServer } from '@rvohealth/psychic'
-import { specRequest as request } from '@rvohealth/psychic-spec-helpers'
+import { UpdateableProperties } from '@rvoh/dream'
+import { PsychicServer } from '@rvoh/psychic'
+import { specRequest as request } from '@rvoh/psychic-spec-helpers'
 import Place from '../../../../../src/app/models/Place'
 import User from '../../../../../src/app/models/User'
 import createPlace from '../../../../factories/PlaceFactory'
@@ -25,7 +25,7 @@ describe('V1/Host/PlacesController', () => {
 
     it('returns the index of Places', async () => {
       const place = await createPlace({
-        user
+        user,
       })
       const results = (await subject()).body
 
@@ -55,7 +55,7 @@ describe('V1/Host/PlacesController', () => {
 
     it('returns the specified Place', async () => {
       const place = await createPlace({
-        user
+        user,
       })
       const results = (await subject(place)).body
 
@@ -83,9 +83,7 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('creates a Place for this User', async () => {
-      const results = (await subject({
-        
-      })).body
+      const results = (await subject({})).body
       const place = await Place.findOrFailBy({ userId: user.id })
 
       expect(results).toEqual(
@@ -106,27 +104,19 @@ describe('V1/Host/PlacesController', () => {
 
     it('updates the Place', async () => {
       const place = await createPlace({
-        user
+        user,
       })
-      await subject(place, {
-        
-      })
+      await subject(place, {})
 
       await place.reload()
-      
     })
 
     context('a Place created by another User', () => {
       it('is not updated', async () => {
-        const place = await createPlace({
-          
-        })
-        await subject(place, {
-          
-        }, 404)
+        const place = await createPlace({})
+        await subject(place, {}, 404)
 
         await place.reload()
-        
       })
     })
   })

@@ -1,4 +1,4 @@
-import { BeforeAction, PsychicOpenapiNames } from '@rvohealth/psychic'
+import { BeforeAction, PsychicOpenapiNames } from '@rvoh/psychic'
 import ApplicationController from '../ApplicationController'
 
 export default class AdminAuthedController extends ApplicationController {

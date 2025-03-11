@@ -1,4 +1,4 @@
-import { I18nProvider } from '@rvohealth/psychic'
+import { I18nProvider } from '@rvoh/psychic'
 import locales from '../../conf/locales'
 
 const SUPPORTED_LOCALES = ['en-US']

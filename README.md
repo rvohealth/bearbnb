@@ -1,4 +1,4 @@
-![BearBnB_logo](https://github.com/user-attachments/assets/6e2b7eb7-527a-4e61-aab0-847eb9d12904 | width=200)# BearBnB
+![BearBnB_logo](https://github.com/user-attachments/assets/6e2b7eb7-527a-4e61-aab0-847eb9d12904){ width=200 }# BearBnB
 
 An AirBnB clone for bears to demonstrate Dream and Psychic
 

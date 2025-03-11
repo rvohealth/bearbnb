@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn, DreamSerializers } from '@rvohealth/dream'
+import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import HostPlace from './HostPlace'
 import LocalizedText from './LocalizedText'
@@ -35,6 +35,13 @@ export default class Host extends ApplicationModel {
 
   @Deco.HasMany('LocalizedText', { polymorphic: true, foreignKey: 'localizableId' })
   public localizedTexts: LocalizedText[]
+
+  @Deco.HasOne('LocalizedText', {
+    polymorphic: true,
+    foreignKey: 'localizableId',
+    on: { locale: DreamConst.required },
+  })
+  public currentLocalizedText: LocalizedText
 
   @Deco.AfterCreate()
   public async createDefaultLocalizedText(this: Host) {

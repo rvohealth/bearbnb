@@ -309,6 +309,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: ['locale'],
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'hostId',
@@ -520,6 +527,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: ['locale'],
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'placeId',
@@ -654,6 +668,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: ['locale'],
+      },
       localizedTexts: {
         type: 'HasMany',
         foreignKey: 'localizableId',

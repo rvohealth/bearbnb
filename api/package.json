@@ -1,10 +1,10 @@
 {
   "type": "module",
-  "name": "tbd",
+  "name": "bearbnb",
   "version": "0.0.0",
   "main": "src/index.ts",
-  "author": "tbd",
-  "private": true,
+  "author": "Daniel Nelson",
+  "license": "MIT",
   "scripts": {
     "client": "PORT=3000 yarn --cwd=../client dev",
     "psy": "node --experimental-specifier-resolution=node --import ./bin/esm.js src/cli/index.ts",

@@ -182,7 +182,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: [],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -353,7 +353,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -457,7 +457,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -571,7 +571,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: ['dream:STI'],
+      default: ['dream:STI', 'dream:SoftDelete'],
       named: [],
     },
     columns: {
@@ -779,7 +779,7 @@ export const schema = {
 
 export const globalSchema = {
   passthroughColumns: [],
-  allDefaultScopeNames: ['dream:STI'],
+  allDefaultScopeNames: ['dream:STI', 'dream:SoftDelete'],
   globalNames: {
     models: {
       'Guest': 'guests',

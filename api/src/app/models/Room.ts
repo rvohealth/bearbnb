@@ -1,10 +1,11 @@
-import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvohealth/dream'
+import { Decorators, DreamColumn, DreamConst, DreamSerializers, SoftDelete } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import LocalizedText from './LocalizedText'
 import Place from './Place'
 
 const Deco = new Decorators<InstanceType<typeof Room>>()
 
+@SoftDelete()
 export default class Room extends ApplicationModel {
   public get table() {
     return 'rooms' as const

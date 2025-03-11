@@ -1,10 +1,11 @@
-import { Decorators, DreamColumn } from '@rvohealth/dream'
+import { Decorators, DreamColumn, SoftDelete } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
 import Host from './Host'
 import Place from './Place'
 
 const Deco = new Decorators<InstanceType<typeof HostPlace>>()
 
+@SoftDelete()
 export default class HostPlace extends ApplicationModel {
   public get table() {
     return 'host_places' as const

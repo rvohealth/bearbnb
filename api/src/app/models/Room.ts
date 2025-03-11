@@ -1,5 +1,6 @@
 import { Decorators, DreamColumn, DreamSerializers } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
+import LocalizedText from './LocalizedText'
 import Place from './Place'
 
 const Deco = new Decorators<InstanceType<typeof Room>>()
@@ -26,4 +27,12 @@ export default class Room extends ApplicationModel {
   @Deco.BelongsTo('Place')
   public place: Place
   public placeId: DreamColumn<Room, 'placeId'>
+
+  @Deco.HasMany('LocalizedText', { polymorphic: true, foreignKey: 'localizableId', dependent: 'destroy' })
+  public localizedTexts: LocalizedText[]
+
+  @Deco.AfterCreate()
+  public async createDefaultLocalizedText(this: Room) {
+    await this.createAssociation('localizedTexts', { locale: 'en-US', title: this.type })
+  }
 }

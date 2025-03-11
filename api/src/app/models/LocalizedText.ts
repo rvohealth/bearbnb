@@ -1,5 +1,8 @@
 import { Decorators, DreamColumn, DreamSerializers } from '@rvohealth/dream'
 import ApplicationModel from './ApplicationModel'
+import Host from './Host'
+import Place from './Place'
+import Room from './Room'
 
 const Deco = new Decorators<InstanceType<typeof LocalizedText>>()
 
@@ -24,4 +27,7 @@ export default class LocalizedText extends ApplicationModel {
   public deletedAt: DreamColumn<LocalizedText, 'deletedAt'>
   public createdAt: DreamColumn<LocalizedText, 'createdAt'>
   public updatedAt: DreamColumn<LocalizedText, 'updatedAt'>
+
+  @Deco.BelongsTo(['Host', 'Place', 'Room'], { polymorphic: true, foreignKey: 'localizableId' })
+  public localizable: Host | Place | Room
 }

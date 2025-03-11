@@ -20,6 +20,7 @@ export default class Room extends ApplicationModel {
 
   public id: DreamColumn<Room, 'id'>
   public type: DreamColumn<Room, 'type'>
+  @Deco.Sortable({ scope: 'place' })
   public position: DreamColumn<Room, 'position'>
   public deletedAt: DreamColumn<Room, 'deletedAt'>
   public createdAt: DreamColumn<Room, 'createdAt'>

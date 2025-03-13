@@ -7,7 +7,7 @@ A good way to follow along with building a new Psychic app is:
 2. Start with the second commit in this repo (`Generate User model`).
 3. Then follow along with the changes. The commits are broken down into generated code and hand coded features.
 
-Full guides available at [https://psychic-docs.netlify.app/docs/installation](https://psychic-docs.netlify.app/docs/installation).
+Full guides available at [https://psychicframework.com/](https://psychicframework.com/).
 
 ## Running specs locally
 

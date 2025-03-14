@@ -3,6 +3,7 @@
 An AirBnB clone for bears to demonstrate [Dream ORM](https://github.com/rvohealth/dream) and [Psychic web framework](https://github.com/rvohealth/psychic).
 
 A good way to follow along with building a new Psychic app is:
+0. Have PostgreSQL and Redis running (e.g. by `brew install postgres` `brew install redis` & following post-install instructions for each)
 1. Create a new Psychic app with `npx @rvoh/create-psychic bearbnb`.
 2. Start with the second commit in this repo (`Generate User model`).
 3. Then follow along with the changes. The commits are broken down into generated code and hand coded features.

@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn, DreamSerializers } from '@rvoh/dream'
+import { Decorators, DreamColumn, DreamSerializers, SoftDelete } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel.js'
 import Host from './Host.js'
 import Place from './Place.js'
@@ -6,6 +6,7 @@ import Room from './Room.js'
 
 const Deco = new Decorators<InstanceType<typeof LocalizedText>>()
 
+@SoftDelete()
 export default class LocalizedText extends ApplicationModel {
   public get table() {
     return 'localized_texts' as const

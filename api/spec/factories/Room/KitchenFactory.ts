@@ -1,9 +1,9 @@
 import { UpdateableProperties } from '@rvoh/dream'
-import RoomKitchen from '../../../src/app/models/Room/Kitchen.js'
+import Kitchen from '../../../src/app/models/Room/Kitchen.js'
 
 let counter = 0
 
-export default async function createRoomKitchen(attrs: UpdateableProperties<RoomKitchen> = {}) {
+export default async function createRoomKitchen(attrs: UpdateableProperties<Kitchen> = {}) {
   attrs.appliances ||= 'stove'
-  return await RoomKitchen.create(attrs)
+  return await Kitchen.create(attrs)
 }

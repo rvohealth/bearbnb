@@ -715,9 +715,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rvoh/dream@npm:^0.29.3":
-  version: 0.29.3
-  resolution: "@rvoh/dream@npm:0.29.3"
+"@rvoh/dream@npm:^0.29.9":
+  version: 0.29.9
+  resolution: "@rvoh/dream@npm:0.29.9"
   dependencies:
     colorette: "npm:^2.0.20"
     commander: "npm:^12.1.0"
@@ -733,14 +733,14 @@ __metadata:
     luxon: ^3.5.0
     pg: "*"
   bin:
-    dream: dist/src/global-cli/dream.js
-  checksum: 10c0/64c16a8f1767323dd7c42fb8f233597d707f3261da84cb6b388693c4b1b5d74039e5670be29b54618cddecb96e06bc184d5d415dceed2321228479a86d6882ed
+    dream: dist/esm/src/global-cli/dream.js
+  checksum: 10c0/87c350d1376ce6e9132f3ee352880c88803a0630cd513085c857a98a4a39cc487cfec31f03509cfacfe360c932d648d0da8c163008cb4671626d7b35923df9cd
   languageName: node
   linkType: hard
 
-"@rvoh/psychic-spec-helpers@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@rvoh/psychic-spec-helpers@npm:0.3.0"
+"@rvoh/psychic-spec-helpers@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@rvoh/psychic-spec-helpers@npm:0.3.1"
   dependencies:
     cookiejar: "npm:^2.1.4"
   peerDependencies:
@@ -750,7 +750,7 @@ __metadata:
     supertest: "*"
     ts-node: "*"
     typescript: "*"
-  checksum: 10c0/e4bdd0293737e4c030f249f61b4c0543a292d5bb3993496226cbce528a6ac644c6683a611cf14f9ee0cd4e626c05d634084ca67047b67d7f834af2d8334f9a2e
+  checksum: 10c0/d376206c280d60c4ac5985d694461535478c2f4ba1d463746b606b3b17caf29334fc5bd1b96c0c673450d5d9d251ca741f97d031a7bc5e35d47cd17391c68346
   languageName: node
   linkType: hard
 
@@ -781,9 +781,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rvoh/psychic@npm:^0.24.2":
-  version: 0.24.2
-  resolution: "@rvoh/psychic@npm:0.24.2"
+"@rvoh/psychic@npm:^0.24.3":
+  version: 0.24.3
+  resolution: "@rvoh/psychic@npm:0.24.3"
   dependencies:
     "@types/cookie-parser": "npm:^1.4.7"
     "@types/cors": "npm:^2.8.17"
@@ -804,7 +804,7 @@ __metadata:
     "@types/express": "*"
     commander: "*"
     express: "*"
-  checksum: 10c0/90681c5758bdb474540f7f3f12362ac76d54a81f50aa8515b471d188a0caa39805c2c5d12eb7747f15f1a098070733d1902b871d55792344293f323eadd6c65c
+  checksum: 10c0/575348c5984eca7b9bd26832271a5844f94cf2b722a5c68482cfe0e13d78c9236c2d8ddc944ea69f0dc5b79258a07c52c8ab36c5cbce28bb984c5cf4adb7e947
   languageName: node
   linkType: hard
 
@@ -1602,6 +1602,53 @@ __metadata:
   checksum: 10c0/be983a3997749856da87b839ffce6b8ed6c7dbf91ea991d5c980d8add275f9f2926c19f80217ac3e7f353815be879371d636407ca72b038cea8cab30e53928a6
   languageName: node
   linkType: hard
+
+"bearbnb@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "bearbnb@workspace:."
+  dependencies:
+    "@bull-board/express": "npm:^5.21.4"
+    "@eslint/js": "npm:^9.9.1"
+    "@rvoh/dream": "npm:^0.29.9"
+    "@rvoh/dream-spec-helpers": "npm:^0.2.0"
+    "@rvoh/psychic": "npm:^0.24.3"
+    "@rvoh/psychic-spec-helpers": "npm:^0.3.1"
+    "@rvoh/psychic-websockets": "npm:^0.2.1"
+    "@rvoh/psychic-workers": "npm:^0.2.2"
+    "@socket.io/redis-adapter": "npm:^8.3.0"
+    "@socket.io/redis-emitter": "npm:^5.1.0"
+    "@types/express": "npm:^4.17.21"
+    "@types/luxon": "npm:^3.4.2"
+    "@types/node": "npm:^22.5.2"
+    "@types/pg": "npm:^8.11.8"
+    "@types/supertest": "npm:^6.0.2"
+    "@typescript-eslint/eslint-plugin": "npm:^8.4.0"
+    "@typescript-eslint/parser": "npm:^8.4.0"
+    bullmq: "npm:^5.12.12"
+    commander: "npm:^12.1.0"
+    eslint: "npm:^9.9.1"
+    expect-playwright: "npm:^0.8.0"
+    express: "npm:^4.21.1"
+    express-openapi-validator: "npm:^5.3.7"
+    express-winston: "npm:^4.2.0"
+    ioredis: "npm:^5.4.1"
+    kysely: "npm:^0.27.4"
+    kysely-codegen: "npm:~0.17.0"
+    luxon: "npm:^3.5.0"
+    luxon-jest-matchers: "npm:^0.1.14"
+    pg: "npm:^8.12.0"
+    prettier: "npm:^3.3.3"
+    puppeteer: "npm:^24.4.0"
+    socket.io: "npm:^4.8.0"
+    socket.io-adapter: "npm:^2.5.5"
+    supertest: "npm:^7.0.0"
+    ts-node: "npm:^10.9.2"
+    typescript: "npm:^5.5.4"
+    typescript-eslint: "npm:^8.4.0"
+    vitest: "npm:^3.0.8"
+    winston: "npm:^3.14.2"
+  languageName: unknown
+  linkType: soft
 
 "body-parser@npm:1.20.3":
   version: 1.20.3
@@ -5480,53 +5527,6 @@ __metadata:
   checksum: 10c0/d4679609bb2a9b48eeaf84632b6d844128d2412b95b6de07d53d8ee8baf4ca0857c9331dfa510390a0727b550fd543d4d1a10995ad86cdf078423fbb8d99831d
   languageName: node
   linkType: hard
-
-"tbd@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "tbd@workspace:."
-  dependencies:
-    "@bull-board/express": "npm:^5.21.4"
-    "@eslint/js": "npm:^9.9.1"
-    "@rvoh/dream": "npm:^0.29.3"
-    "@rvoh/dream-spec-helpers": "npm:^0.2.0"
-    "@rvoh/psychic": "npm:^0.24.2"
-    "@rvoh/psychic-spec-helpers": "npm:^0.3.0"
-    "@rvoh/psychic-websockets": "npm:^0.2.1"
-    "@rvoh/psychic-workers": "npm:^0.2.2"
-    "@socket.io/redis-adapter": "npm:^8.3.0"
-    "@socket.io/redis-emitter": "npm:^5.1.0"
-    "@types/express": "npm:^4.17.21"
-    "@types/luxon": "npm:^3.4.2"
-    "@types/node": "npm:^22.5.2"
-    "@types/pg": "npm:^8.11.8"
-    "@types/supertest": "npm:^6.0.2"
-    "@typescript-eslint/eslint-plugin": "npm:^8.4.0"
-    "@typescript-eslint/parser": "npm:^8.4.0"
-    bullmq: "npm:^5.12.12"
-    commander: "npm:^12.1.0"
-    eslint: "npm:^9.9.1"
-    expect-playwright: "npm:^0.8.0"
-    express: "npm:^4.21.1"
-    express-openapi-validator: "npm:^5.3.7"
-    express-winston: "npm:^4.2.0"
-    ioredis: "npm:^5.4.1"
-    kysely: "npm:^0.27.4"
-    kysely-codegen: "npm:~0.17.0"
-    luxon: "npm:^3.5.0"
-    luxon-jest-matchers: "npm:^0.1.14"
-    pg: "npm:^8.12.0"
-    prettier: "npm:^3.3.3"
-    puppeteer: "npm:^24.4.0"
-    socket.io: "npm:^4.8.0"
-    socket.io-adapter: "npm:^2.5.5"
-    supertest: "npm:^7.0.0"
-    ts-node: "npm:^10.9.2"
-    typescript: "npm:^5.5.4"
-    typescript-eslint: "npm:^8.4.0"
-    vitest: "npm:^3.0.8"
-    winston: "npm:^3.14.2"
-  languageName: unknown
-  linkType: soft
 
 "text-decoder@npm:^1.1.0":
   version: 1.2.3

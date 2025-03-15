@@ -308,6 +308,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: ['locale'],
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'hostId',
@@ -317,7 +324,7 @@ export const schema = {
       },
       localizedTexts: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['localized_texts'],
         optional: null,
         requiredOnClauses: null,
@@ -435,7 +442,7 @@ export const schema = {
     associations: {
       localizable: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['hosts', 'places', 'rooms'],
         optional: false,
         requiredOnClauses: null,
@@ -519,6 +526,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: ['locale'],
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'placeId',
@@ -535,7 +549,7 @@ export const schema = {
       },
       localizedTexts: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['localized_texts'],
         optional: null,
         requiredOnClauses: null,
@@ -653,9 +667,16 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: ['locale'],
+      },
       localizedTexts: {
         type: 'HasMany',
-        foreignKey: null,
+        foreignKey: 'localizableId',
         tables: ['localized_texts'],
         optional: null,
         requiredOnClauses: null,

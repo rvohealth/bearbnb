@@ -1,0 +1,13 @@
+dist
+node_modules
+logs/!.gitkeep
+.env*
+src/.psy/*
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

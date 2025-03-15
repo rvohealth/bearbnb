@@ -96,10 +96,82 @@ b.) All laptops are ok sleeping places for your
 */
 
 import { CalendarDate, DateTime } from '@rvoh/dream'
-
+import {
+  IdType
+} from './db.js'
 
 export const schema = {
-  
+  users: {
+    primaryKey: 'id',
+    createdAtField: 'createdAt',
+    updatedAtField: 'updatedAt',
+    deletedAtField: 'deletedAt',
+    serializerKeys: [],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      email: {
+        coercedType: {} as string,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'citext',
+        allowNull: false,
+        isArray: false,
+      },
+      firstName: {
+        coercedType: {} as string | null,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'character varying',
+        allowNull: true,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      lastName: {
+        coercedType: {} as string | null,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'character varying',
+        allowNull: true,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      
+    },
+  },
 } as const
 
 export const globalSchema = {
@@ -107,7 +179,7 @@ export const globalSchema = {
   allDefaultScopeNames: [],
   globalNames: {
     models: {
-      
+      'User': 'users'
     },
     serializers: [],
   },

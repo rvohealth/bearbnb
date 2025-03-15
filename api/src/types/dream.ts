@@ -97,7 +97,9 @@ b.) All laptops are ok sleeping places for your
 
 import { CalendarDate, DateTime } from '@rvoh/dream'
 import {
-  IdType
+  IdType,
+  PlaceStylesEnum,
+  PlaceStylesEnumValues
 } from './db.js'
 
 export const schema = {
@@ -212,11 +214,91 @@ export const schema = {
     associations: {
       user: {
         type: 'BelongsTo',
-        foreignKey: null,
+        foreignKey: 'userId',
         tables: ['users'],
         optional: false,
         requiredOnClauses: null,
       },
+    },
+  },
+  places: {
+    primaryKey: 'id',
+    createdAtField: 'createdAt',
+    updatedAtField: 'updatedAt',
+    deletedAtField: 'deletedAt',
+    serializerKeys: ['default', 'summary'],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      deletedAt: {
+        coercedType: {} as DateTime | null,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: true,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      name: {
+        coercedType: {} as string,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'citext',
+        allowNull: false,
+        isArray: false,
+      },
+      sleeps: {
+        coercedType: {} as number,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'integer',
+        allowNull: false,
+        isArray: false,
+      },
+      style: {
+        coercedType: {} as PlaceStylesEnum,
+        enumType: {} as PlaceStylesEnum,
+        enumArrayType: [] as PlaceStylesEnum[],
+        enumValues: PlaceStylesEnumValues,
+        dbType: 'place_styles_enum',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      
     },
   },
   users: {
@@ -296,7 +378,7 @@ export const schema = {
       },
       host: {
         type: 'HasOne',
-        foreignKey: null,
+        foreignKey: 'userId',
         tables: ['hosts'],
         optional: null,
         requiredOnClauses: null,
@@ -312,13 +394,16 @@ export const globalSchema = {
     models: {
       'Guest': 'guests',
       'Host': 'hosts',
+      'Place': 'places',
       'User': 'users'
     },
     serializers: [
       'GuestSerializer',
       'GuestSummarySerializer',
       'HostSerializer',
-      'HostSummarySerializer'
+      'HostSummarySerializer',
+      'PlaceSerializer',
+      'PlaceSummarySerializer'
     ],
   },
 } as const

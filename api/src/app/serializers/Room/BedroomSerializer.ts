@@ -1,17 +1,16 @@
 import { Attribute, DreamColumn } from '@rvoh/dream'
+import Bedroom from '../../models/Room/Bedroom.js'
 import RoomSerializer, { RoomSummarySerializer } from '../RoomSerializer.js'
-import RoomBedroom from '../../models/Room/Bedroom.js'
 
 export class RoomBedroomSummarySerializer<
-  DataType extends RoomBedroom,
+  DataType extends Bedroom,
   Passthrough extends object,
-> extends RoomSummarySerializer<DataType, Passthrough> {
-}
+> extends RoomSummarySerializer<DataType, Passthrough> {}
 
 export default class RoomBedroomSerializer<
-  DataType extends RoomBedroom,
+  DataType extends Bedroom,
   Passthrough extends object,
 > extends RoomSerializer<DataType, Passthrough> {
-  @Attribute(RoomBedroom)
-  public bedTypes: DreamColumn<RoomBedroom, 'bedTypes'>
+  @Attribute(Bedroom)
+  public bedTypes: DreamColumn<Bedroom, 'bedTypes'>
 }

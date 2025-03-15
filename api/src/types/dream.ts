@@ -162,6 +162,90 @@ export const schema = {
       },
     },
   },
+  host_places: {
+    primaryKey: 'id',
+    createdAtField: 'createdAt',
+    updatedAtField: 'updatedAt',
+    deletedAtField: 'deletedAt',
+    serializerKeys: [],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      deletedAt: {
+        coercedType: {} as DateTime | null,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: true,
+        isArray: false,
+      },
+      hostId: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      placeId: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      host: {
+        type: 'BelongsTo',
+        foreignKey: null,
+        tables: ['hosts'],
+        optional: false,
+        requiredOnClauses: null,
+      },
+      place: {
+        type: 'BelongsTo',
+        foreignKey: null,
+        tables: ['places'],
+        optional: false,
+        requiredOnClauses: null,
+      },
+    },
+  },
   hosts: {
     primaryKey: 'id',
     createdAtField: 'createdAt',
@@ -212,6 +296,20 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      hostPlaces: {
+        type: 'HasMany',
+        foreignKey: null,
+        tables: ['host_places'],
+        optional: null,
+        requiredOnClauses: null,
+      },
+      places: {
+        type: 'HasMany',
+        foreignKey: null,
+        tables: ['places'],
+        optional: null,
+        requiredOnClauses: null,
+      },
       user: {
         type: 'BelongsTo',
         foreignKey: 'userId',
@@ -298,7 +396,20 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
-      
+      hostPlaces: {
+        type: 'HasMany',
+        foreignKey: null,
+        tables: ['host_places'],
+        optional: null,
+        requiredOnClauses: null,
+      },
+      hosts: {
+        type: 'HasMany',
+        foreignKey: null,
+        tables: ['hosts'],
+        optional: null,
+        requiredOnClauses: null,
+      },
     },
   },
   users: {
@@ -394,6 +505,7 @@ export const globalSchema = {
     models: {
       'Guest': 'guests',
       'Host': 'hosts',
+      'HostPlace': 'host_places',
       'Place': 'places',
       'User': 'users'
     },

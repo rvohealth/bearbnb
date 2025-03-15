@@ -1,10 +1,10 @@
 {
   "type": "module",
-  "name": "tbd",
+  "name": "bearbnb",
   "version": "0.0.0",
   "main": "src/index.ts",
-  "author": "tbd",
-  "private": true,
+  "author": "Daniel Nelson",
+  "license": "MIT",
   "scripts": {
     "client": "yarn --cwd=../client dev",
     "client:fspec": "VITE_PSYCHIC_ENV=test yarn --cwd=../client dev",

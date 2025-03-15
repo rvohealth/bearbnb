@@ -119,6 +119,17 @@ export const PlaceStylesEnumValues = [
   "treehouse"
 ] as const
 
+
+export type RoomTypesEnum = "Bathroom" | "Bedroom" | "Den" | "Garage" | "Kitchen" | "LivingRoom";
+export const RoomTypesEnumValues = [
+  "Bathroom",
+  "Bedroom",
+  "Den",
+  "Garage",
+  "Kitchen",
+  "LivingRoom"
+] as const
+
 export type IdType = string | number | bigint
 export type Timestamp = ColumnType<DateTime | CalendarDate>
 
@@ -155,6 +166,16 @@ export interface Places {
   updatedAt: Timestamp;
 }
 
+export interface Rooms {
+  createdAt: Timestamp;
+  deletedAt: Timestamp | null;
+  id: Generated<Int8>;
+  placeId: Int8;
+  position: number | null;
+  type: RoomTypesEnum;
+  updatedAt: Timestamp;
+}
+
 export interface Users {
   createdAt: Timestamp;
   email: string;
@@ -169,6 +190,7 @@ export interface DB {
   host_places: HostPlaces;
   hosts: Hosts;
   places: Places;
+  rooms: Rooms;
   users: Users;
 }
 
@@ -178,5 +200,6 @@ export class DBClass {
   host_places: HostPlaces
   hosts: Hosts
   places: Places
+  rooms: Rooms
   users: Users
 }

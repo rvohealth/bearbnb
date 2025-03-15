@@ -1,9 +1,9 @@
 import { DreamApplication } from '@rvoh/dream'
-import { productionEnv } from '../app/helpers/environment.js'
-import inflections from './inflections.js'
-import importAll from '../app/helpers/importAll.js'
-import importDefault from '../app/helpers/importDefault.js'
-import srcPath from '../app/helpers/srcPath.js'
+import { productionEnv } from '../app/helpers/environment'
+import importAll from '../app/helpers/importAll'
+import importDefault from '../app/helpers/importDefault'
+import srcPath from '../app/helpers/srcPath'
+import inflections from './inflections'
 
 export default async function (app: DreamApplication) {
   app.set('primaryKeyType', 'bigserial')
@@ -39,4 +39,27 @@ export default async function (app: DreamApplication) {
         }
       : undefined,
   })
+
+  app.on('db:log', event => {
+    if (process.env.SQL_LOGGING !== '1') return
+
+    if (event.level === 'error') {
+      console.error('the following db query encountered an unexpected error: ', {
+        durationMs: event.queryDurationMillis,
+        error: event.error,
+        sql: event.query.sql,
+        params: event.query.parameters.map(maskPII),
+      })
+    } else {
+      console.log('db query completed:', {
+        durationMs: event.queryDurationMillis,
+        sql: event.query.sql,
+        params: event.query.parameters.map(maskPII),
+      })
+    }
+  })
+}
+
+function maskPII(data: unknown) {
+  return data
 }

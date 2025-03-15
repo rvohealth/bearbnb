@@ -5,11 +5,9 @@ export default (r: PsychicRouter) => {
     r.namespace('host', r => {
       r.resources('localized-texts')
 
-      r.namespace('places', r => {
+      r.resources('places', r => {
         r.resources('rooms')
       })
-
-      r.resources('places')
     })
   })
 

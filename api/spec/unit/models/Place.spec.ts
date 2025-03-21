@@ -70,6 +70,20 @@ describe('Place', () => {
       expect(await Room.removeAllDefaultScopes().where({ id: room.id }).exists()).toBe(true)
       expect(await LocalizedText.removeAllDefaultScopes().where({ id: placeText.id }).exists()).toBe(true)
       expect(await LocalizedText.removeAllDefaultScopes().where({ id: roomText.id }).exists()).toBe(true)
+
+      await place.reallyDestroy()
+
+      expect(await Place.where({ id: place.id }).exists()).toBe(false)
+      expect(await HostPlace.where({ id: hostPlace.id }).exists()).toBe(false)
+      expect(await Room.where({ id: room.id }).exists()).toBe(false)
+      expect(await LocalizedText.where({ id: placeText.id }).exists()).toBe(false)
+      expect(await LocalizedText.where({ id: roomText.id }).exists()).toBe(false)
+
+      expect(await Place.removeAllDefaultScopes().where({ id: place.id }).exists()).toBe(false)
+      expect(await HostPlace.removeAllDefaultScopes().where({ id: hostPlace.id }).exists()).toBe(false)
+      expect(await Room.removeAllDefaultScopes().where({ id: room.id }).exists()).toBe(false)
+      expect(await LocalizedText.removeAllDefaultScopes().where({ id: placeText.id }).exists()).toBe(false)
+      expect(await LocalizedText.removeAllDefaultScopes().where({ id: roomText.id }).exists()).toBe(false)
     })
   })
 })

@@ -10,13 +10,10 @@ provideDreamViteMatchers()
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 ;(global as any).context = describe
 
-beforeEach(async () => {
-  try {
-    await initializePsychicApplication()
-  } catch (err) {
-    console.error(err)
-    throw err
-  }
+beforeAll(async () => {
+  await initializePsychicApplication()
+})
 
+beforeEach(async () => {
   await truncate(DreamApplication)
-}, 15000)
+})

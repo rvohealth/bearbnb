@@ -11,7 +11,7 @@
 
   "compilerOptions": {
     "baseUrl": "src",
-    "types": ["luxon-jest-matchers"]
+    "types": ["luxon-jest-matchers", "spec/global.d.ts"]
   },
   "include": ["src", "spec"]
 }

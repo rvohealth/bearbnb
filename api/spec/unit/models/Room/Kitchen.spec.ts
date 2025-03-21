@@ -1,4 +1,4 @@
-import Kitchen from '../../../../src/app/models/Room/Kitchen'
+import Kitchen from '../../../../src/app/models/Room/Kitchen.js'
 import createPlace from '../../../factories/PlaceFactory.js'
 
 describe('Room/Kitchen', () => {

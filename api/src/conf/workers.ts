@@ -1,6 +1,6 @@
 import { PsychicApplicationWorkers } from '@rvoh/psychic-workers'
 import { Queue, Worker } from 'bullmq'
-import Redis from 'ioredis'
+import { Redis } from 'ioredis'
 
 export default (workersApp: PsychicApplicationWorkers) => {
   workersApp.set('background', {

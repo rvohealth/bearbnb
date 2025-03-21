@@ -1,5 +1,5 @@
 import { PsychicApplicationWebsockets } from '@rvoh/psychic-websockets'
-import Redis from 'ioredis'
+import { Redis } from 'ioredis'
 import AppEnv from './AppEnv.js'
 // import User from '../app/models/User.js'
 
@@ -29,6 +29,7 @@ export default (wsApp: PsychicApplicationWebsockets) => {
   // ******
 
   wsApp.on('ws:start', io => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     io.of('/').on('connection', async socket => {
       // below is an example of how you might connect to websockets
       // const token = socket.handshake.auth.token as string

@@ -1,21 +1,13 @@
 import '../../../src/conf/loadEnv.js'
 
-import { PsychicServer } from '@rvoh/psychic'
-import { launchViteServer, stopViteServer } from '@rvoh/psychic-spec-helpers'
-import initializePsychicApplication from '../../../src/conf/initializePsychicApplication.js'
-
-let server: PsychicServer
+import { PsychicDevtools } from '@rvoh/psychic'
 
 export async function setup() {
-  await initializePsychicApplication()
-
-  server = new PsychicServer()
-  await server.start(parseInt(process.env.DEV_SERVER_PORT || '7778'))
-
-  await launchViteServer({ port: 3000, cmd: 'yarn client:fspec' })
+  await PsychicDevtools.launchDevServer('clientFspecApp', { port: 3000, cmd: 'yarn client:fspec' })
+  await PsychicDevtools.launchDevServer('adminFspecApp', { port: 3001, cmd: 'yarn admin:fspec' })
 }
 
-export async function teardown() {
-  stopViteServer()
-  await server.stop()
+export function teardown() {
+  PsychicDevtools.stopDevServer('clientFspecApp')
+  PsychicDevtools.stopDevServer('adminFspecApp')
 }

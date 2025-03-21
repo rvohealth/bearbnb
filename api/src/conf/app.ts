@@ -1,4 +1,5 @@
-import { PsychicApplication } from '@rvoh/psychic'
+import { DreamCLI } from '@rvoh/dream'
+import { PsychicApplication, PsychicDevtools } from '@rvoh/psychic'
 import { background } from '@rvoh/psychic-workers'
 import expressWinston from 'express-winston'
 import winston from 'winston'
@@ -59,6 +60,7 @@ export default async (psy: PsychicApplication) => {
   })
 
   psy.set('openapi', {
+    outputFilename: 'openapi/openapi.json',
     defaults: {
       components: {
         schemas: {},
@@ -67,7 +69,7 @@ export default async (psy: PsychicApplication) => {
   })
 
   psy.set('openapi', 'mobile', {
-    outputFilename: 'mobile.openapi.json',
+    outputFilename: 'openapi/mobile.openapi.json',
     suppressResponseEnums: true,
     defaults: {
       components: {
@@ -77,7 +79,7 @@ export default async (psy: PsychicApplication) => {
   })
 
   psy.set('openapi', 'admin', {
-    outputFilename: 'admin.openapi.json',
+    outputFilename: 'openapi/admin.openapi.json',
     defaults: {
       components: {
         schemas: {},
@@ -95,7 +97,7 @@ export default async (psy: PsychicApplication) => {
       app.use(
         expressWinston.logger({
           transports: [new winston.transports.Console()],
-          format: winston.format.combine(winston.format.colorize(), winston.format.json()),
+          format: winston.format.combine(winston.format.json()),
           meta: true, // optional: control whether you want to log the meta data about the request (default to true)
           msg: 'HTTP {{req.method}} {{req.url}}', // optional: customize the default logging message. E.g. "{{res.statusCode}} {{req.method}} {{res.responseTime}}ms {{req.url}}"
           expressFormat: true, // Use the default Express/morgan request formatting. Enabling this will override any msg if true. Will only output colors with colorize set to true
@@ -120,8 +122,22 @@ export default async (psy: PsychicApplication) => {
     }
   })
 
+  psy.on('server:start', async () => {
+    if (AppEnv.isDevelopment && AppEnv.boolean('CLIENT')) {
+      const spinner = DreamCLI.logger.log('starting dev servers...', { spinner: true })
+      await PsychicDevtools.launchDevServer('clientApp', { port: 3000, cmd: 'yarn client' })
+      await PsychicDevtools.launchDevServer('adminApp', { port: 3001, cmd: 'yarn admin' })
+      spinner.stop()
+    }
+  })
+
   psy.on('server:shutdown', () => {
-    // run custom code when server is shutdown
+    if (AppEnv.isDevelopment && AppEnv.boolean('CLIENT')) {
+      const spinner = DreamCLI.logger.log('stopping dev servers...', { spinner: true })
+      PsychicDevtools.stopDevServer('clientApp')
+      PsychicDevtools.stopDevServer('adminApp')
+      spinner.stop()
+    }
   })
 
   // run a callback after routes are done processing

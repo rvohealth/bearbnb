@@ -1,5 +1,6 @@
 import '../../../src/conf/global.js'
 
+import { PsychicServer } from '@rvoh/psychic'
 import { DreamApplication } from '@rvoh/dream'
 import { provideDreamViteMatchers, truncate } from '@rvoh/dream-spec-helpers'
 import { providePuppeteerViteMatchers } from '@rvoh/psychic-spec-helpers'
@@ -9,15 +10,10 @@ import getPage from './getPage.js'
 provideDreamViteMatchers()
 providePuppeteerViteMatchers()
 
-// define global context variable, setting it equal to describe
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 ;(global as any).context = describe
 
-// this is done so that the `@jest-mock/express` library can continue
-// to function. Since jest and vi have near parity, this seems to work,
-// though it is very hacky, and we should eventually back out of it.
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-;(global as any).jest = vi
+let server: PsychicServer
 
 beforeAll(async () => {
   /*
@@ -26,12 +22,16 @@ beforeAll(async () => {
    * provide your application code to psychic for initialization,
    * prior to launching your server.
    */
-  try {
-    await initializePsychicApplication()
-  } catch (err) {
-    console.error(err)
-    throw err
-  }
+  await initializePsychicApplication()
+
+  /*
+   * start api server
+   *
+   * start your api server, so that your frontend client can drive through
+   * it at http://localhost:7778
+   */
+  server = new PsychicServer()
+  await server.start(parseInt(process.env.DEV_SERVER_PORT || '7778'))
 
   /*
    * Launch a web browser
@@ -39,7 +39,6 @@ beforeAll(async () => {
    * User puppeteer to launch a headless (or not, if you specify HEADLESS=0)
    * browser to drive through your front end client applications.
    */
-
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
   if (!(global as any).page) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
@@ -49,4 +48,8 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await truncate(DreamApplication)
-}, 50000)
+})
+
+afterAll(async () => {
+  await server.stop()
+})

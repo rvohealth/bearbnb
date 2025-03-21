@@ -1,9 +1,9 @@
 import { DreamApplication } from '@rvoh/dream'
-import { productionEnv } from '../app/helpers/environment'
-import importAll from '../app/helpers/importAll'
-import importDefault from '../app/helpers/importDefault'
-import srcPath from '../app/helpers/srcPath'
-import inflections from './inflections'
+import { productionEnv } from '../app/helpers/environment.js'
+import importAll from '../app/helpers/importAll.js'
+import importDefault from '../app/helpers/importDefault.js'
+import srcPath from '../app/helpers/srcPath.js'
+import inflections from './inflections.js'
 
 export default async function (app: DreamApplication) {
   app.set('primaryKeyType', 'bigserial')
@@ -57,7 +57,7 @@ export default async function (app: DreamApplication) {
         params: event.query.parameters.map(maskPII),
       })
     }
-  })
+ })
 }
 
 function maskPII(data: unknown) {

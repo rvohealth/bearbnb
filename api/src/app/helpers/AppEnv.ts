@@ -14,7 +14,7 @@ const EnvInternal = new Env<{
     | 'WS_REDIS_HOST'
     | 'WS_REDIS_PASSWORD'
     | 'WS_REDIS_USERNAME'
-  boolean: 'DEBUG' | 'REQUEST_LOGGING'
+  boolean: 'CLIENT' | 'DEBUG' | 'REQUEST_LOGGING'
   integer: 'BG_JOBS_REDIS_PORT' | 'WS_REDIS_PORT'
 }>()
 

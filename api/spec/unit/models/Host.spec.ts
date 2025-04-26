@@ -19,6 +19,15 @@ describe('Host', () => {
     expect(await host.associationQuery('localizedTexts').last()).toMatchDreamModel(localizedText)
   })
 
+  it('has one currentLocalizedText', async () => {
+    const host = await createHost()
+    const esLocalizedText = await createLocalizedText({ localizable: host, locale: 'es-ES' })
+
+    expect(
+      await host.associationQuery('currentLocalizedText', { and: { locale: 'es-ES' } }).first(),
+    ).toMatchDreamModel(esLocalizedText)
+  })
+
   context('upon creation', () => {
     it('creates en-US LocalizedText for the Host', async () => {
       const host = await createHost()

@@ -132,6 +132,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "appliances": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "dishwasher",
+                        "microwave",
+                        "oven",
+                        "stove"
+                      ]
+                    }
+                  },
                   "bathOrShowerType": {
                     "type": [
                       "string",
@@ -319,6 +331,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "appliances": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "dishwasher",
+                        "microwave",
+                        "oven",
+                        "stove"
+                      ]
+                    }
+                  },
                   "bathOrShowerType": {
                     "type": [
                       "string",

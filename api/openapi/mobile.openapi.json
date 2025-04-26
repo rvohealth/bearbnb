@@ -132,6 +132,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "bathOrShowerType": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "bath",
+                      "bath_and_shower",
+                      "none",
+                      "shower",
+                      null
+                    ]
+                  },
                   "position": {
                     "type": [
                       "integer",
@@ -292,6 +305,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "bathOrShowerType": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "bath",
+                      "bath_and_shower",
+                      "none",
+                      "shower",
+                      null
+                    ]
+                  },
                   "position": {
                     "type": [
                       "integer",

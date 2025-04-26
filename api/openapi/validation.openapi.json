@@ -145,6 +145,20 @@
                       null
                     ]
                   },
+                  "bedTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "bunk",
+                        "cot",
+                        "king",
+                        "queen",
+                        "sofabed",
+                        "twin"
+                      ]
+                    }
+                  },
                   "position": {
                     "type": [
                       "integer",
@@ -317,6 +331,20 @@
                       "shower",
                       null
                     ]
+                  },
+                  "bedTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "bunk",
+                        "cot",
+                        "king",
+                        "queen",
+                        "sofabed",
+                        "twin"
+                      ]
+                    }
                   },
                   "position": {
                     "type": [

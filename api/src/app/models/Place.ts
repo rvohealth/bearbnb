@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvoh/dream'
+import { Decorators, DreamColumn, DreamConst, DreamSerializers, SoftDelete } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel.js'
 import Host from './Host.js'
 import HostPlace from './HostPlace.js'
@@ -7,6 +7,7 @@ import Room from './Room.js'
 
 const deco = new Decorators<typeof Place>()
 
+@SoftDelete()
 export default class Place extends ApplicationModel {
   public override get table() {
     return 'places' as const

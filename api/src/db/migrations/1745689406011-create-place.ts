@@ -7,23 +7,15 @@ export async function up(db: Kysely<any>): Promise<void> {
 
   await db.schema
     .createType('place_styles_enum')
-    .asEnum([
-      'cottage',
-      'cabin',
-      'lean_to',
-      'treehouse',
-      'tent',
-      'cave',
-      'dump'
-    ])
+    .asEnum(['cabin', 'cave', 'cottage', 'dump', 'lean_to', 'tent', 'treehouse'])
     .execute()
 
   await db.schema
     .createTable('places')
     .addColumn('id', 'bigserial', col => col.primaryKey())
-    .addColumn('name', sql`citext`)
-    .addColumn('style', sql`place_styles_enum`)
-    .addColumn('sleeps', 'integer')
+    .addColumn('name', sql`citext`, col => col.notNull())
+    .addColumn('style', sql`place_styles_enum`, col => col.notNull())
+    .addColumn('sleeps', 'integer', col => col.notNull())
     .addColumn('deleted_at', 'timestamp')
     .addColumn('created_at', 'timestamp', col => col.notNull())
     .addColumn('updated_at', 'timestamp', col => col.notNull())

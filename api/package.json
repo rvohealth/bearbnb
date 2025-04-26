@@ -3,8 +3,8 @@
   "name": "bearbnb",
   "version": "0.0.0",
   "main": "src/index.ts",
-  "author": "tbd",
-  "private": true,
+  "author": "Daniel Nelson",
+  "license": "MIT",
   "scripts": {
     "psy": "NODE_ENV=${NODE_ENV:-test} tsx src/cli/index.ts",
     "psy:js": "node ./dist/src/cli/index.js",

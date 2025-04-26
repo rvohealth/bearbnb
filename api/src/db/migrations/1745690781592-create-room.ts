@@ -4,14 +4,7 @@ import { Kysely, sql } from 'kysely'
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createType('room_types_enum')
-    .asEnum([
-      'Bathroom',
-      'Bedroom',
-      'Kitchen',
-      'Den',
-      'LivingRoom',
-      'Garage'
-    ])
+    .asEnum(['Bathroom', 'Bedroom', 'Den', 'Garage', 'Kitchen', 'LivingRoom'])
     .execute()
 
   await db.schema
@@ -25,11 +18,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn('updated_at', 'timestamp', col => col.notNull())
     .execute()
 
-  await db.schema
-    .createIndex('rooms_type')
-    .on('rooms')
-    .column('type')
-    .execute()
+  await db.schema.createIndex('rooms_type').on('rooms').column('type').execute()
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -63,6 +63,65 @@ import {
 } from './db.js'
 
 export const schema = {
+  guests: {
+    primaryKey: 'id',
+    createdAtField: 'createdAt',
+    updatedAtField: 'updatedAt',
+    deletedAtField: 'deletedAt',
+    serializerKeys: ['default', 'summary'],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      userId: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      user: {
+        type: 'BelongsTo',
+        foreignKey: 'userId',
+        tables: ['users'],
+        optional: false,
+        requiredOnClauses: null,
+      },
+    },
+  },
   users: {
     primaryKey: 'id',
     createdAtField: 'createdAt',
@@ -131,7 +190,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
-      
+      guest: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        tables: ['guests'],
+        optional: null,
+        requiredOnClauses: null,
+      },
     },
   },
 } as const
@@ -141,8 +206,9 @@ export const globalSchema = {
   allDefaultScopeNames: [],
   globalNames: {
     models: {
+      'Guest': 'guests',
       'User': 'users'
     },
-    serializers: [],
+    serializers: ['GuestSerializer', 'GuestSummarySerializer'],
   },
 } as const

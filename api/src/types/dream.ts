@@ -61,6 +61,8 @@ import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {
   BathOrShowerTypesEnum,
   BathOrShowerTypesEnumValues,
+  BedTypesEnum,
+  BedTypesEnumValues,
   IdType,
   PlaceStylesEnum,
   PlaceStylesEnumValues,
@@ -405,6 +407,15 @@ export const schema = {
         allowNull: true,
         isArray: false,
       },
+      bedTypes: {
+        coercedType: {} as BedTypesEnum[],
+        enumType: {} as BedTypesEnum,
+        enumArrayType: [] as BedTypesEnum[],
+        enumValues: BedTypesEnumValues,
+        dbType: 'bed_types_enum[]',
+        allowNull: false,
+        isArray: true,
+      },
       createdAt: {
         coercedType: {} as DateTime,
         enumType: null,
@@ -576,6 +587,7 @@ export const globalSchema = {
       'HostPlace': 'host_places',
       'Place': 'places',
       'Room/Bathroom': 'rooms',
+      'Room/Bedroom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },
@@ -588,6 +600,8 @@ export const globalSchema = {
       'PlaceSummarySerializer',
       'Room/BathroomSerializer',
       'Room/BathroomSummarySerializer',
+      'Room/BedroomSerializer',
+      'Room/BedroomSummarySerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

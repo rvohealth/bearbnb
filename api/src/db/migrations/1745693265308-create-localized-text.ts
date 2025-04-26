@@ -2,29 +2,16 @@ import { Kysely, sql } from 'kysely'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function up(db: Kysely<any>): Promise<void> {
-  await db.schema
-    .createType('localized_types_enum')
-    .asEnum([
-      'Host',
-      'Place',
-      'Room'
-    ])
-    .execute()
+  await db.schema.createType('localized_types_enum').asEnum(['Host', 'Place', 'Room']).execute()
 
-  await db.schema
-    .createType('locales_enum')
-    .asEnum([
-      'en-US',
-      'es-ES'
-    ])
-    .execute()
+  await db.schema.createType('locales_enum').asEnum(['en-US', 'es-ES']).execute()
 
   await db.schema
     .createTable('localized_texts')
     .addColumn('id', 'bigserial', col => col.primaryKey())
-    .addColumn('localizable_type', sql`localized_types_enum`)
-    .addColumn('localizable_id', 'bigint')
-    .addColumn('locale', sql`locales_enum`)
+    .addColumn('localizable_type', sql`localized_types_enum`, col => col.notNull())
+    .addColumn('localizable_id', 'bigint', col => col.notNull())
+    .addColumn('locale', sql`locales_enum`, col => col.notNull())
     .addColumn('title', 'varchar(255)')
     .addColumn('markdown', 'text')
     .addColumn('deleted_at', 'timestamp')

@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn, DreamSerializers } from '@rvoh/dream'
+import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel.js'
 import LocalizedText from './LocalizedText.js'
 import Place from './Place.js'
@@ -30,6 +30,13 @@ export default class Room extends ApplicationModel {
 
   @deco.HasMany('LocalizedText', { polymorphic: true, foreignKey: 'localizableId', dependent: 'destroy' })
   public localizedTexts: LocalizedText[]
+
+  @deco.HasOne('LocalizedText', {
+    polymorphic: true,
+    foreignKey: 'localizableId',
+    and: { locale: DreamConst.required },
+  })
+  public currentLocalizedText: LocalizedText
 
   @deco.AfterCreate()
   public async createDefaultLocalizedText(this: Room) {

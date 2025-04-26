@@ -1,6 +1,7 @@
 import { Decorators, DreamColumn } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel.js'
 import Guest from './Guest.js'
+import Host from './Host.js'
 
 const deco = new Decorators<typeof User>()
 
@@ -23,4 +24,7 @@ export default class User extends ApplicationModel {
 
   @deco.HasOne('Guest')
   public guest: Guest
+
+  @deco.HasOne('Host')
+  public host: Host | null
 }

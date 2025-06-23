@@ -210,7 +210,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroomSummary"][];
+                        "application/json": (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"])[];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -238,6 +238,7 @@ export interface paths {
                     "application/json": {
                         /** @enum {string|null} */
                         bathOrShowerType?: "bath" | "bath_and_shower" | "none" | "shower" | null;
+                        bedTypes?: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
                         position?: number | null;
                     };
                 };
@@ -249,7 +250,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -296,7 +297,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -352,6 +353,7 @@ export interface paths {
                     "application/json": {
                         /** @enum {string|null} */
                         bathOrShowerType?: "bath" | "bath_and_shower" | "none" | "shower" | null;
+                        bedTypes?: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
                         position?: number | null;
                     };
                 };
@@ -398,6 +400,18 @@ export interface components {
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         RoomBathroomSummary: {
+            id: string;
+        };
+        RoomBedroom: {
+            bedTypes: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
+            /** Format: date-time */
+            deletedAt: string | null;
+            id: string;
+            position: number | null;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
+        RoomBedroomSummary: {
             id: string;
         };
         ValidationErrors: {

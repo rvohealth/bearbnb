@@ -1,8 +1,8 @@
 import { UpdateableProperties } from '@rvoh/dream'
-import RoomBedroom from '../../../src/app/models/Room/Bedroom.js'
+import Bedroom from '../../../src/app/models/Room/Bedroom.js'
 
-export default async function createRoomBedroom(attrs: UpdateableProperties<RoomBedroom> = {}) {
-  return await RoomBedroom.create({
+export default async function createRoomBedroom(attrs: UpdateableProperties<Bedroom> = {}) {
+  return await Bedroom.create({
     bedTypes: 'twin',
     ...attrs,
   })

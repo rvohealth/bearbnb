@@ -61,6 +61,8 @@ import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {
   BathOrShowerTypesEnum,
   BathOrShowerTypesEnumValues,
+  BedTypesEnum,
+  BedTypesEnumValues,
   IdType,
   PlaceStylesEnum,
   PlaceStylesEnumValues,
@@ -392,7 +394,7 @@ export const schema = {
       default: ['dream:STI'],
       named: [],
     },
-    nonJsonColumnNames: ['bathOrShowerType', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
+    nonJsonColumnNames: ['bathOrShowerType', 'bedTypes', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
     columns: {
       bathOrShowerType: {
         coercedType: {} as BathOrShowerTypesEnum | null,
@@ -402,6 +404,15 @@ export const schema = {
         dbType: 'bath_or_shower_types_enum',
         allowNull: true,
         isArray: false,
+      },
+      bedTypes: {
+        coercedType: {} as BedTypesEnum[],
+        enumType: {} as BedTypesEnum,
+        enumArrayType: [] as BedTypesEnum[],
+        enumValues: BedTypesEnumValues,
+        dbType: 'bed_types_enum[]',
+        allowNull: false,
+        isArray: true,
       },
       createdAt: {
         coercedType: {} as DateTime,

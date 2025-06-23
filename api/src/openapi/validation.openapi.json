@@ -288,7 +288,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RoomSummary"
+                    "$ref": "#/components/schemas/RoomBathroomSummary"
                   }
                 }
               }
@@ -329,20 +329,23 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "bathOrShowerType": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "bath",
+                      "bath_and_shower",
+                      "none",
+                      "shower",
+                      null
+                    ]
+                  },
                   "position": {
                     "type": [
                       "integer",
                       "null"
-                    ]
-                  },
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "Bathroom",
-                      "Bedroom",
-                      "Den",
-                      "Kitchen",
-                      "LivingRoom"
                     ]
                   }
                 }
@@ -355,7 +358,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Room"
+                  "$ref": "#/components/schemas/RoomBathroom"
                 }
               }
             },
@@ -414,7 +417,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Room"
+                  "$ref": "#/components/schemas/RoomBathroom"
                 }
               }
             },
@@ -454,20 +457,23 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "bathOrShowerType": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "enum": [
+                      "bath",
+                      "bath_and_shower",
+                      "none",
+                      "shower",
+                      null
+                    ]
+                  },
                   "position": {
                     "type": [
                       "integer",
                       "null"
-                    ]
-                  },
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "Bathroom",
-                      "Bedroom",
-                      "Den",
-                      "Kitchen",
-                      "LivingRoom"
                     ]
                   }
                 }
@@ -595,15 +601,28 @@
           }
         }
       },
-      "Room": {
+      "RoomBathroom": {
         "type": "object",
         "required": [
+          "bathOrShowerType",
           "deletedAt",
           "id",
           "position",
           "type"
         ],
         "properties": {
+          "bathOrShowerType": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "bath",
+              "bath_and_shower",
+              "none",
+              "shower"
+            ]
+          },
           "deletedAt": {
             "type": [
               "string",
@@ -632,7 +651,7 @@
           }
         }
       },
-      "RoomSummary": {
+      "RoomBathroomSummary": {
         "type": "object",
         "required": [
           "id"

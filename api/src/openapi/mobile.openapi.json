@@ -735,11 +735,16 @@
       "RoomBathroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Kitchen,\n  LivingRoom"
           }
         }
       },
@@ -785,11 +790,16 @@
       "RoomBedroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Kitchen,\n  LivingRoom"
           }
         }
       },
@@ -827,11 +837,16 @@
       "RoomDenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Kitchen,\n  LivingRoom"
           }
         }
       },
@@ -877,11 +892,16 @@
       "RoomKitchenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Kitchen,\n  LivingRoom"
           }
         }
       },
@@ -919,11 +939,16 @@
       "RoomLivingRoomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Kitchen,\n  LivingRoom"
           }
         }
       },

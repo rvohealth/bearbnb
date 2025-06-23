@@ -1,10 +1,13 @@
-import { UpdateableProperties, DateTime } from '@rvoh/dream'
-import Room from '../../../../../../src/app/models/Room.js'
-import User from '../../../../../../src/app/models/User.js'
+import { UpdateableProperties } from '@rvoh/dream'
 import Place from '../../../../../../src/app/models/Place.js'
-import createRoom from '../../../../../factories/RoomFactory.js'
-import createUser from '../../../../../factories/UserFactory.js'
+import Room from '../../../../../../src/app/models/Room.js'
+import Bathroom from '../../../../../../src/app/models/Room/Bathroom.js'
+import User from '../../../../../../src/app/models/User.js'
+import createHost from '../../../../../factories/HostFactory.js'
+import createHostPlace from '../../../../../factories/HostPlaceFactory.js'
 import createPlace from '../../../../../factories/PlaceFactory.js'
+import createRoomBathroom from '../../../../../factories/Room/BathroomFactory.js'
+import createUser from '../../../../../factories/UserFactory.js'
 import { session, SpecRequestType } from '../../../../helpers/authentication.js'
 
 describe('V1/Host/Places/RoomsController', () => {
@@ -14,30 +17,35 @@ describe('V1/Host/Places/RoomsController', () => {
 
   beforeEach(async () => {
     user = await createUser()
-    place = await createPlace({ user })
+    const host = await createHost({ user })
+    place = await createPlace()
+    await createHostPlace({ host, place })
     request = await session(user)
   })
 
   describe('GET index', () => {
     const subject = async <StatusCode extends 200 | 400>(expectedStatus: StatusCode) => {
-      return request.get('/v1/host/places/rooms', expectedStatus)
+      return request.get('/v1/host/places/{placeId}/rooms', expectedStatus, {
+        placeId: place.id,
+      })
     }
 
     it('returns the index of Rooms', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomBathroom({ place })
 
       const { body } = await subject(200)
 
       expect(body).toEqual([
         expect.objectContaining({
           id: room.id,
+          type: room.type,
         }),
       ])
     })
 
     context('Rooms created by another Place', () => {
       it('are omitted', async () => {
-        await createRoom()
+        await createRoomBathroom()
 
         const { body } = await subject(200)
 
@@ -48,13 +56,14 @@ describe('V1/Host/Places/RoomsController', () => {
 
   describe('GET show', () => {
     const subject = async <StatusCode extends 200 | 400 | 404>(room: Room, expectedStatus: StatusCode) => {
-      return request.get('/v1/host/places/rooms/{id}', expectedStatus, {
+      return request.get('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
+        placeId: place.id,
         id: room.id,
       })
     }
 
     it('returns the specified Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomBathroom({ place })
 
       const { body } = await subject(room, 200)
 
@@ -63,14 +72,13 @@ describe('V1/Host/Places/RoomsController', () => {
           id: room.id,
           type: room.type,
           position: room.position,
-          deletedAt: room.deletedAt.toISO(),
         }),
       )
     })
 
     context('Room created by another Place', () => {
       it('is not found', async () => {
-        const otherPlaceRoom = await createRoom()
+        const otherPlaceRoom = await createRoomBathroom()
 
         await subject(otherPlaceRoom, 404)
       })
@@ -80,31 +88,30 @@ describe('V1/Host/Places/RoomsController', () => {
   describe('POST create', () => {
     const subject = async <StatusCode extends 201 | 400>(
       data: UpdateableProperties<Room>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
-      return request.post('/v1/host/places/rooms', expectedStatus, { data })
+      return request.post('/v1/host/places/{placeId}/rooms', expectedStatus, {
+        placeId: place.id,
+        data,
+      })
     }
 
     it('creates a Room for this Place', async () => {
-      const now = DateTime.now()
+      const { body } = await subject(
+        {
+          type: 'Bathroom',
+          bathOrShowerType: 'bath_and_shower',
+        },
+        201,
+      )
 
-      const { body } = await subject({
-        type: 'Bathroom',
-        position: 1,
-        deletedAt: now,
-      }, 201)
-
-      const room = await place.associationQuery('rooms').firstOrFail()
-      expect(room.type).toEqual('Bathroom')
-      expect(room.position).toEqual(1)
-      expect(room.deletedAt).toEqualDateTime(now)
+      const room: Bathroom = (await place.associationQuery('rooms').firstOrFail()) as Bathroom
+      expect(room.bathOrShowerType).toEqual('bath_and_shower')
 
       expect(body).toEqual(
         expect.objectContaining({
           id: room.id,
-          type: room.type,
-          position: room.position,
-          deletedAt: room.deletedAt.toISO(),
+          bathOrShowerType: room.bathOrShowerType,
         }),
       )
     })
@@ -114,61 +121,60 @@ describe('V1/Host/Places/RoomsController', () => {
     const subject = async <StatusCode extends 204 | 400 | 404>(
       room: Room,
       data: UpdateableProperties<Room>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
-      return request.patch('/v1/host/places/rooms/{id}', expectedStatus, {
+      return request.patch('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
+        placeId: place.id,
         id: room.id,
         data,
       })
     }
 
     it('updates the Room', async () => {
-      const lastHour = DateTime.now().minus({ hour: 1 })
+      const room = await createRoomBathroom({ place })
 
-      const room = await createRoom({ place })
-
-      await subject(room, {
-        type: 'LivingRoom',
-        position: 2,
-        deletedAt: lastHour,
-      }, 204)
+      await subject(
+        room,
+        {
+          bathOrShowerType: 'bath_and_shower',
+        },
+        204,
+      )
 
       await room.reload()
-      expect(room.type).toEqual('LivingRoom')
-      expect(room.position).toEqual(2)
-      expect(room.deletedAt).toEqualDateTime(lastHour)
+      expect(room.bathOrShowerType).toEqual('bath_and_shower')
     })
 
     context('a Room created by another Place', () => {
       it('is not updated', async () => {
-        const room = await createRoom()
-        const originalType = room.type
-        const originalPosition = room.position
-        const originalDeletedAt = room.deletedAt
+        const room = await createRoomBathroom()
+        const originalBathOrShowerType = room.bathOrShowerType
 
-        await subject(room, {
-          type: 'LivingRoom',
-          position: 2,
-          deletedAt: lastHour,
-        }, 404)
+        await subject(
+          room,
+          {
+            position: 2,
+            bathOrShowerType: 'none',
+          },
+          404,
+        )
 
         await room.reload()
-        expect(room.type).toEqual(originalType)
-        expect(room.position).toEqual(originalPosition)
-        expect(room.deletedAt).toEqual(originalDeletedAt)
+        expect(room.bathOrShowerType).toEqual(originalBathOrShowerType)
       })
     })
   })
 
   describe('DELETE destroy', () => {
     const subject = async <StatusCode extends 204 | 400 | 404>(room: Room, expectedStatus: StatusCode) => {
-      return request.delete('/v1/host/places/rooms/{id}', expectedStatus, {
+      return request.delete('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
+        placeId: place.id,
         id: room.id,
       })
     }
 
     it('deletes the Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomBathroom({ place })
 
       await subject(room, 204)
 
@@ -177,7 +183,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     context('a Room created by another Place', () => {
       it('is not deleted', async () => {
-        const room = await createRoom()
+        const room = await createRoomBathroom()
 
         await subject(room, 404)
 

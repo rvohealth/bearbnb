@@ -403,6 +403,8 @@ export interface components {
         };
         RoomBathroomSummary: {
             id: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         RoomBedroom: {
             bedTypes: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
@@ -415,6 +417,8 @@ export interface components {
         };
         RoomBedroomSummary: {
             id: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         RoomDen: {
             /** Format: date-time */
@@ -426,6 +430,8 @@ export interface components {
         };
         RoomDenSummary: {
             id: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         RoomKitchen: {
             appliances: ("dishwasher" | "microwave" | "oven" | "stove")[];
@@ -438,6 +444,8 @@ export interface components {
         };
         RoomKitchenSummary: {
             id: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         RoomLivingRoom: {
             /** Format: date-time */
@@ -449,6 +457,8 @@ export interface components {
         };
         RoomLivingRoomSummary: {
             id: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         ValidationErrors: {
             errors?: {

@@ -754,11 +754,22 @@
       "RoomBathroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Kitchen",
+              "LivingRoom"
+            ]
           }
         }
       },
@@ -817,11 +828,22 @@
       "RoomBedroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Kitchen",
+              "LivingRoom"
+            ]
           }
         }
       },
@@ -865,11 +887,22 @@
       "RoomDenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Kitchen",
+              "LivingRoom"
+            ]
           }
         }
       },
@@ -926,11 +959,22 @@
       "RoomKitchenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Kitchen",
+              "LivingRoom"
+            ]
           }
         }
       },
@@ -974,11 +1018,22 @@
       "RoomLivingRoomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Kitchen",
+              "LivingRoom"
+            ]
           }
         }
       },

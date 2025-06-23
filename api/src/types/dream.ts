@@ -575,6 +575,7 @@ export const globalSchema = {
       'HostPlace': 'host_places',
       'Place': 'places',
       'Room/Bathroom': 'rooms',
+      'Room/Bedroom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },
@@ -587,6 +588,8 @@ export const globalSchema = {
       'PlaceSummarySerializer',
       'Room/BathroomSerializer',
       'Room/BathroomSummarySerializer',
+      'Room/BedroomSerializer',
+      'Room/BedroomSummarySerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

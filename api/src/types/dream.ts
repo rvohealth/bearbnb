@@ -600,6 +600,7 @@ export const globalSchema = {
       'Room/Bedroom': 'rooms',
       'Room/Den': 'rooms',
       'Room/Kitchen': 'rooms',
+      'Room/LivingRoom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },
@@ -618,6 +619,8 @@ export const globalSchema = {
       'Room/DenSummarySerializer',
       'Room/KitchenSerializer',
       'Room/KitchenSummarySerializer',
+      'Room/LivingRoomSerializer',
+      'Room/LivingRoomSummarySerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

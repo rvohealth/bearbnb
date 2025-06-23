@@ -300,6 +300,9 @@
                       },
                       {
                         "$ref": "#/components/schemas/RoomKitchenSummary"
+                      },
+                      {
+                        "$ref": "#/components/schemas/RoomLivingRoomSummary"
                       }
                     ]
                   }
@@ -409,6 +412,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -481,6 +487,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -915,6 +924,55 @@
         }
       },
       "RoomKitchenSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomLivingRoom": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Garage",
+              "Kitchen",
+              "LivingRoom"
+            ]
+          }
+        }
+      },
+      "RoomLivingRoomSummary": {
         "type": "object",
         "required": [
           "id"

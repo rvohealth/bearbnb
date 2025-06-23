@@ -912,7 +912,7 @@
           },
           "type": {
             "type": "string",
-            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Garage,\n  Kitchen,\n  LivingRoom"
+            "description": "The following values will be allowed:\n  Bathroom,\n  Bedroom,\n  Den,\n  Kitchen,\n  LivingRoom"
           }
         }
       },

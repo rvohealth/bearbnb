@@ -123,6 +123,66 @@ export const schema = {
       },
     },
   },
+  hosts: {
+    primaryKey: 'id',
+    createdAtField: 'createdAt',
+    updatedAtField: 'updatedAt',
+    deletedAtField: 'deletedAt',
+    serializerKeys: ['default', 'summary'],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    nonJsonColumnNames: ['createdAt', 'id', 'updatedAt', 'userId'],
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      userId: {
+        coercedType: {} as IdType,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      user: {
+        type: 'BelongsTo',
+        foreignKey: 'userId',
+        tables: ['users'],
+        optional: false,
+        requiredOnClauses: null,
+      },
+    },
+  },
   users: {
     primaryKey: 'id',
     createdAtField: 'createdAt',
@@ -199,6 +259,13 @@ export const schema = {
         optional: null,
         requiredOnClauses: null,
       },
+      host: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        tables: ['hosts'],
+        optional: null,
+        requiredOnClauses: null,
+      },
     },
   },
 } as const
@@ -209,8 +276,14 @@ export const globalSchema = {
   globalNames: {
     models: {
       'Guest': 'guests',
+      'Host': 'hosts',
       'User': 'users'
     },
-    serializers: ['GuestSerializer', 'GuestSummarySerializer'],
+    serializers: [
+      'GuestSerializer',
+      'GuestSummarySerializer',
+      'HostSerializer',
+      'HostSummarySerializer'
+    ],
   },
 } as const

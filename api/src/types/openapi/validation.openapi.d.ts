@@ -210,7 +210,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomDenSummary"] | components["schemas"]["RoomKitchenSummary"])[];
+                        "application/json": (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomDenSummary"] | components["schemas"]["RoomKitchenSummary"] | components["schemas"]["RoomLivingRoomSummary"])[];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -251,7 +251,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"] | components["schemas"]["RoomLivingRoom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -298,7 +298,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"] | components["schemas"]["RoomLivingRoom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -437,6 +437,17 @@ export interface components {
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
         RoomKitchenSummary: {
+            id: string;
+        };
+        RoomLivingRoom: {
+            /** Format: date-time */
+            deletedAt: string | null;
+            id: string;
+            position: number | null;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
+        RoomLivingRoomSummary: {
             id: string;
         };
         ValidationErrors: {

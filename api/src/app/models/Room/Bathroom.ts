@@ -1,16 +1,16 @@
 import { Decorators, DreamColumn, DreamSerializers, STI } from '@rvoh/dream'
 import Room from '../Room.js'
 
-const deco = new Decorators<typeof RoomBathroom>()
+const deco = new Decorators<typeof Bathroom>()
 
 @STI(Room)
-export default class RoomBathroom extends Room {
-  public override get serializers(): DreamSerializers<RoomBathroom> {
+export default class Bathroom extends Room {
+  public override get serializers(): DreamSerializers<Bathroom> {
     return {
       default: 'Room/BathroomSerializer',
       summary: 'Room/BathroomSummarySerializer',
     }
   }
 
-  public bathOrShowerType: DreamColumn<RoomBathroom, 'bathOrShowerType'>
+  public bathOrShowerType: DreamColumn<Bathroom, 'bathOrShowerType'>
 }

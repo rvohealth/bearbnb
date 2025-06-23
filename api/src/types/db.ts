@@ -64,6 +64,15 @@ import { type CalendarDate, type DateTime } from '@rvoh/dream'
 
 import type { ColumnType } from "kysely";
 
+export type BathOrShowerTypesEnum = "bath" | "bath_and_shower" | "none" | "shower";
+export const BathOrShowerTypesEnumValues = [
+  "bath",
+  "bath_and_shower",
+  "none",
+  "shower"
+] as const
+
+
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
@@ -128,6 +137,7 @@ export interface Places {
 }
 
 export interface Rooms {
+  bathOrShowerType: BathOrShowerTypesEnum | null;
   createdAt: Timestamp;
   deletedAt: Timestamp | null;
   id: Generated<Int8>;

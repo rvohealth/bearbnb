@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: bearbnb
+  description: An AirBnB clone for bears to demonstrate Dream and Psychic
+spec:
+  type: website # can be one of: service, library, website, iac-pipeline
+  lifecycle: experimental # can be one of: experimental, production, deprecated
+  owner: team-wellos # your existing tech team in Backstage, i.e. team-developer-platforms

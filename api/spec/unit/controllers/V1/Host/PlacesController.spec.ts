@@ -1,10 +1,11 @@
-import { UpdateableProperties, DateTime } from '@rvoh/dream'
+import { UpdateableProperties } from '@rvoh/dream'
+import Host from '../../../../../src/app/models/Host.js'
 import Place from '../../../../../src/app/models/Place.js'
 import User from '../../../../../src/app/models/User.js'
-import Host from '../../../../../src/app/models/Host.js'
+import createHost from '../../../../factories/HostFactory.js'
+import createHostPlace from '../../../../factories/HostPlaceFactory.js'
 import createPlace from '../../../../factories/PlaceFactory.js'
 import createUser from '../../../../factories/UserFactory.js'
-import createHost from '../../../../factories/HostFactory.js'
 import { session, SpecRequestType } from '../../../helpers/authentication.js'
 
 describe('V1/Host/PlacesController', () => {
@@ -24,7 +25,8 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('returns the index of Places', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
       const { body } = await subject(200)
 
@@ -54,7 +56,8 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('returns the specified Place', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
       const { body } = await subject(place, 200)
 
@@ -64,7 +67,6 @@ describe('V1/Host/PlacesController', () => {
           name: place.name,
           style: place.style,
           sleeps: place.sleeps,
-          deletedAt: place.deletedAt.toISO(),
         }),
       )
     })
@@ -81,26 +83,25 @@ describe('V1/Host/PlacesController', () => {
   describe('POST create', () => {
     const subject = async <StatusCode extends 201 | 400>(
       data: UpdateableProperties<Place>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
       return request.post('/v1/host/places', expectedStatus, { data })
     }
 
     it('creates a Place for this Host', async () => {
-      const now = DateTime.now()
-
-      const { body } = await subject({
-        name: 'The Place name',
-        style: 'cottage',
-        sleeps: 1,
-        deletedAt: now,
-      }, 201)
+      const { body } = await subject(
+        {
+          name: 'The Place name',
+          style: 'cottage',
+          sleeps: 1,
+        },
+        201,
+      )
 
       const place = await host.associationQuery('places').firstOrFail()
       expect(place.name).toEqual('The Place name')
       expect(place.style).toEqual('cottage')
       expect(place.sleeps).toEqual(1)
-      expect(place.deletedAt).toEqualDateTime(now)
 
       expect(body).toEqual(
         expect.objectContaining({
@@ -108,7 +109,6 @@ describe('V1/Host/PlacesController', () => {
           name: place.name,
           style: place.style,
           sleeps: place.sleeps,
-          deletedAt: place.deletedAt.toISO(),
         }),
       )
     })
@@ -118,7 +118,7 @@ describe('V1/Host/PlacesController', () => {
     const subject = async <StatusCode extends 204 | 400 | 404>(
       place: Place,
       data: UpdateableProperties<Place>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
       return request.patch('/v1/host/places/{id}', expectedStatus, {
         id: place.id,
@@ -127,22 +127,23 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('updates the Place', async () => {
-      const lastHour = DateTime.now().minus({ hour: 1 })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
-      const place = await createPlace({ host })
-
-      await subject(place, {
-        name: 'Updated Place name',
-        style: 'dump',
-        sleeps: 2,
-        deletedAt: lastHour,
-      }, 204)
+      await subject(
+        place,
+        {
+          name: 'Updated Place name',
+          style: 'dump',
+          sleeps: 2,
+        },
+        204,
+      )
 
       await place.reload()
       expect(place.name).toEqual('Updated Place name')
       expect(place.style).toEqual('dump')
       expect(place.sleeps).toEqual(2)
-      expect(place.deletedAt).toEqualDateTime(lastHour)
     })
 
     context('a Place created by another Host', () => {
@@ -151,20 +152,21 @@ describe('V1/Host/PlacesController', () => {
         const originalName = place.name
         const originalStyle = place.style
         const originalSleeps = place.sleeps
-        const originalDeletedAt = place.deletedAt
 
-        await subject(place, {
-          name: 'Updated Place name',
-          style: 'dump',
-          sleeps: 2,
-          deletedAt: lastHour,
-        }, 404)
+        await subject(
+          place,
+          {
+            name: 'Updated Place name',
+            style: 'dump',
+            sleeps: 2,
+          },
+          404,
+        )
 
         await place.reload()
         expect(place.name).toEqual(originalName)
         expect(place.style).toEqual(originalStyle)
         expect(place.sleeps).toEqual(originalSleeps)
-        expect(place.deletedAt).toEqual(originalDeletedAt)
       })
     })
   })
@@ -177,7 +179,8 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('deletes the Place', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
       await subject(place, 204)
 

@@ -387,7 +387,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:STI'],
       named: [],
     },
     nonJsonColumnNames: ['createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
@@ -556,13 +556,14 @@ export const schema = {
 
 export const globalSchema = {
   passthroughColumns: [],
-  allDefaultScopeNames: [],
+  allDefaultScopeNames: ['dream:STI'],
   globalNames: {
     models: {
       'Guest': 'guests',
       'Host': 'hosts',
       'HostPlace': 'host_places',
       'Place': 'places',
+      'Room/Bathroom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },
@@ -573,6 +574,8 @@ export const globalSchema = {
       'HostSummarySerializer',
       'PlaceSerializer',
       'PlaceSummarySerializer',
+      'Room/BathroomSerializer',
+      'Room/BathroomSummarySerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

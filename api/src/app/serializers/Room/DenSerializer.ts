@@ -1,8 +1,6 @@
+import Den from '../../models/Room/Den.js'
 import { RoomSerializer, RoomSummarySerializer } from '../RoomSerializer.js'
-import RoomDen from '../../models/Room/Den.js'
 
-export const RoomDenSummarySerializer = (roomDen: RoomDen) =>
-  RoomSummarySerializer(RoomDen, roomDen)
+export const RoomDenSummarySerializer = (roomDen: Den) => RoomSummarySerializer(Den, roomDen)
 
-export const RoomDenSerializer = (roomDen: RoomDen) =>
-  RoomSerializer(RoomDen, roomDen)
+export const RoomDenSerializer = (roomDen: Den) => RoomSerializer(Den, roomDen)

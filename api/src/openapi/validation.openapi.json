@@ -296,6 +296,9 @@
                         "$ref": "#/components/schemas/RoomBedroomSummary"
                       },
                       {
+                        "$ref": "#/components/schemas/RoomDenSummary"
+                      },
+                      {
                         "$ref": "#/components/schemas/RoomKitchenSummary"
                       }
                     ]
@@ -402,6 +405,9 @@
                       "$ref": "#/components/schemas/RoomBedroom"
                     },
                     {
+                      "$ref": "#/components/schemas/RoomDen"
+                    },
+                    {
                       "$ref": "#/components/schemas/RoomKitchen"
                     }
                   ]
@@ -469,6 +475,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomBedroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomDen"
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
@@ -797,6 +806,54 @@
         }
       },
       "RoomBedroomSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomDen": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom",
+              "Bedroom",
+              "Den",
+              "Kitchen",
+              "LivingRoom"
+            ]
+          }
+        }
+      },
+      "RoomDenSummary": {
         "type": "object",
         "required": [
           "id"

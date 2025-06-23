@@ -59,6 +59,8 @@ us humans, he says:
 
 import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {
+  ApplianceTypesEnum,
+  ApplianceTypesEnumValues,
   BathOrShowerTypesEnum,
   BathOrShowerTypesEnumValues,
   BedTypesEnum,
@@ -394,8 +396,17 @@ export const schema = {
       default: ['dream:STI'],
       named: [],
     },
-    nonJsonColumnNames: ['bathOrShowerType', 'bedTypes', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
+    nonJsonColumnNames: ['appliances', 'bathOrShowerType', 'bedTypes', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
     columns: {
+      appliances: {
+        coercedType: {} as ApplianceTypesEnum[],
+        enumType: {} as ApplianceTypesEnum,
+        enumArrayType: [] as ApplianceTypesEnum[],
+        enumValues: ApplianceTypesEnumValues,
+        dbType: 'appliance_types_enum[]',
+        allowNull: false,
+        isArray: true,
+      },
       bathOrShowerType: {
         coercedType: {} as BathOrShowerTypesEnum | null,
         enumType: {} as BathOrShowerTypesEnum,

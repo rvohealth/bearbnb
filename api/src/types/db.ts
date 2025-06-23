@@ -62,9 +62,30 @@ import { type CalendarDate, type DateTime } from '@rvoh/dream'
  * Please do not edit it manually.
  */
 
-export interface DB {}
+import type { ColumnType } from "kysely";
+
+export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
+  ? ColumnType<S, I | undefined, U>
+  : ColumnType<T, T | undefined, T>;
+
+export type Int8 = ColumnType<string, bigint | number | string, bigint | number | string>;
+export type IdType = string | number | bigint
+export type Timestamp = ColumnType<DateTime | CalendarDate>
+
+export interface Users {
+  createdAt: Timestamp;
+  email: string;
+  firstName: string;
+  id: Generated<Int8>;
+  lastName: string;
+  updatedAt: Timestamp;
+}
+
+export interface DB {
+  users: Users;
+}
 
 
 export class DBClass {
-  
+  users: Users
 }

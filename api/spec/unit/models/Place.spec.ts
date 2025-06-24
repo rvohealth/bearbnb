@@ -19,6 +19,15 @@ describe('Place', () => {
     expect(await place.associationQuery('localizedTexts').last()).toMatchDreamModel(localizedText)
   })
 
+  it('has one currentLocalizedText', async () => {
+    let place = await createPlace()
+    const esLocalizedText = await createLocalizedText({ localizable: place, locale: 'es-ES' })
+
+    place = await place.passthrough({ locale: 'es-ES' }).load('currentLocalizedText').execute()
+
+    expect(place.currentLocalizedText).toMatchDreamModel(esLocalizedText)
+  })
+
   context('upon creation', () => {
     it('creates en-US LocalizedText for the Place', async () => {
       const place = await createPlace({ style: 'cottage' })

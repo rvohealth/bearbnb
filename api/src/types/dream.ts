@@ -273,6 +273,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: null,
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'hostId',
@@ -486,6 +493,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: null,
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'placeId',
@@ -621,6 +635,13 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredOnClauses: null,
+      },
       localizedTexts: {
         type: 'HasMany',
         foreignKey: 'localizableId',
@@ -725,7 +746,7 @@ export const schema = {
 } as const
 
 export const globalSchema = {
-  passthroughColumns: [],
+  passthroughColumns: ['locale'],
   allDefaultScopeNames: ['dream:STI'],
   globalNames: {
     models: {

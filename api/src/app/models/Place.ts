@@ -16,6 +16,8 @@ export default class Place extends ApplicationModel {
     return {
       default: 'PlaceSerializer',
       summary: 'PlaceSummarySerializer',
+      summaryForGuests: 'PlaceSummaryForGuestsSerializer',
+      forGuests: 'PlaceForGuestsSerializer',
     }
   }
 
@@ -33,7 +35,7 @@ export default class Place extends ApplicationModel {
   @deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
 
-  @deco.HasMany('Room')
+  @deco.HasMany('Room', { order: 'createdAt' })
   public rooms: Room[]
 
   @deco.HasMany('LocalizedText', { polymorphic: true, foreignKey: 'localizableId', dependent: 'destroy' })

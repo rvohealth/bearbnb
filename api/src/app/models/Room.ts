@@ -1,4 +1,4 @@
-import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvoh/dream'
+import { Decorators, DreamColumn, DreamConst } from '@rvoh/dream'
 import ApplicationModel from './ApplicationModel.js'
 import LocalizedText from './LocalizedText.js'
 import Place from './Place.js'
@@ -8,13 +8,6 @@ const deco = new Decorators<typeof Room>()
 export default class Room extends ApplicationModel {
   public override get table() {
     return 'rooms' as const
-  }
-
-  public get serializers(): DreamSerializers<Room> {
-    return {
-      default: 'RoomSerializer',
-      summary: 'RoomSummarySerializer',
-    }
   }
 
   public id: DreamColumn<Room, 'id'>

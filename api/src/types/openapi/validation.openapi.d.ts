@@ -4,6 +4,96 @@
  */
 
 export interface paths {
+    "/v1/guest/places": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Place index endpoint for Guests */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Success */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PlaceSummaryForGuests"][];
+                    };
+                };
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/guest/places/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Place show endpoint for Guests */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Success */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["PlaceForGuests"];
+                    };
+                };
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/host/localized-texts/{id}": {
         parameters: {
             query?: never;
@@ -470,9 +560,22 @@ export interface components {
             /** @enum {string} */
             style: "cabin" | "cave" | "cottage" | "dump" | "lean_to" | "tent" | "treehouse";
         };
+        PlaceForGuests: {
+            displayStyle: string;
+            id: string;
+            rooms: (components["schemas"]["RoomBathroomForGuests"] | components["schemas"]["RoomBedroomForGuests"] | components["schemas"]["RoomDenForGuests"] | components["schemas"]["RoomKitchenForGuests"] | components["schemas"]["RoomLivingRoomForGuests"])[];
+            sleeps: number;
+            /** @enum {string} */
+            style: "cabin" | "cave" | "cottage" | "dump" | "lean_to" | "tent" | "treehouse";
+            title: string;
+        };
         PlaceSummary: {
             id: string;
             name: string;
+        };
+        PlaceSummaryForGuests: {
+            id: string;
+            title: string;
         };
         RoomBathroom: {
             /** @enum {string|null} */
@@ -481,6 +584,14 @@ export interface components {
             deletedAt: string | null;
             id: string;
             position: number | null;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
+        RoomBathroomForGuests: {
+            bathOrShowerType: string;
+            displayType: string;
+            id: string;
+            title: string;
             /** @enum {string} */
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
@@ -498,6 +609,18 @@ export interface components {
             /** @enum {string} */
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
+        RoomBedroomForGuests: {
+            bedTypes: {
+                /** @enum {string} */
+                value?: "dishwasher" | "microwave" | "oven" | "stove";
+                label?: string;
+            }[];
+            displayType: string;
+            id: string;
+            title: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
         RoomBedroomSummary: {
             id: string;
             /** @enum {string} */
@@ -508,6 +631,13 @@ export interface components {
             deletedAt: string | null;
             id: string;
             position: number | null;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
+        RoomDenForGuests: {
+            displayType: string;
+            id: string;
+            title: string;
             /** @enum {string} */
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
@@ -525,6 +655,18 @@ export interface components {
             /** @enum {string} */
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };
+        RoomKitchenForGuests: {
+            appliances: {
+                /** @enum {string} */
+                value?: "dishwasher" | "microwave" | "oven" | "stove";
+                label?: string;
+            }[];
+            displayType: string;
+            id: string;
+            title: string;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
         RoomKitchenSummary: {
             id: string;
             /** @enum {string} */
@@ -535,6 +677,13 @@ export interface components {
             deletedAt: string | null;
             id: string;
             position: number | null;
+            /** @enum {string} */
+            type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
+        };
+        RoomLivingRoomForGuests: {
+            displayType: string;
+            id: string;
+            title: string;
             /** @enum {string} */
             type: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
         };

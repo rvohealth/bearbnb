@@ -198,6 +198,7 @@ export interface components {
         };
         PlaceSummary: {
             id: string;
+            name: string;
         };
         ValidationErrors: {
             errors?: {

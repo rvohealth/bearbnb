@@ -144,7 +144,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: [],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     nonJsonColumnNames: ['createdAt', 'deletedAt', 'hostId', 'id', 'placeId', 'updatedAt'],
@@ -317,7 +317,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     nonJsonColumnNames: ['createdAt', 'deletedAt', 'id', 'locale', 'localizableId', 'localizableType', 'markdown', 'title', 'updatedAt'],
@@ -422,7 +422,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'forGuests', 'summary', 'summaryForGuests'],
     scopes: {
-      default: [],
+      default: ['dream:SoftDelete'],
       named: [],
     },
     nonJsonColumnNames: ['createdAt', 'deletedAt', 'id', 'name', 'sleeps', 'style', 'updatedAt'],
@@ -537,7 +537,7 @@ export const schema = {
     deletedAtField: 'deletedAt',
     serializerKeys: ['default', 'forGuests', 'summary'],
     scopes: {
-      default: ['dream:STI'],
+      default: ['dream:STI', 'dream:SoftDelete'],
       named: [],
     },
     nonJsonColumnNames: ['appliances', 'bathOrShowerType', 'bedTypes', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
@@ -747,7 +747,7 @@ export const schema = {
 
 export const globalSchema = {
   passthroughColumns: ['locale'],
-  allDefaultScopeNames: ['dream:STI'],
+  allDefaultScopeNames: ['dream:STI', 'dream:SoftDelete'],
   globalNames: {
     models: {
       'Guest': 'guests',

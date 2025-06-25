@@ -33,7 +33,7 @@ export default class Host extends ApplicationModel {
   @deco.HasMany('Place', { through: 'hostPlaces' })
   public places: Place[]
 
-  @deco.HasMany('LocalizedText', { polymorphic: true, foreignKey: 'localizableId' })
+  @deco.HasMany('LocalizedText', { polymorphic: true, foreignKey: 'localizableId', dependent: 'destroy' })
   public localizedTexts: LocalizedText[]
 
   @deco.HasOne('LocalizedText', {

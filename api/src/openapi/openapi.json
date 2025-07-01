@@ -18,9 +18,29 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PlaceSummaryForGuests"
+                  "type": "object",
+                  "required": [
+                    "recordCount",
+                    "pageCount",
+                    "currentPage",
+                    "results"
+                  ],
+                  "properties": {
+                    "recordCount": {
+                      "type": "number"
+                    },
+                    "pageCount": {
+                      "type": "number"
+                    },
+                    "currentPage": {
+                      "type": "number"
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PlaceSummaryForGuests"
+                      }
+                    }
                   }
                 }
               }

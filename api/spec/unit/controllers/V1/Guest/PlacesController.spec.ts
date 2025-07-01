@@ -34,12 +34,17 @@ describe('V1/Guest/PlacesController', () => {
 
       const { body } = await subject(200)
 
-      expect(body).toEqual([
-        {
-          id: place.id,
-          title: 'The Spanish title',
-        },
-      ])
+      expect(body).toEqual({
+        currentPage: 1,
+        pageCount: 1,
+        recordCount: 1,
+        results: [
+          {
+            id: place.id,
+            title: 'The Spanish title',
+          },
+        ],
+      })
     })
   })
 

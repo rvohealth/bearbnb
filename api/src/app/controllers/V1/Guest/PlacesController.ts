@@ -10,10 +10,17 @@ export default class V1GuestPlacesController extends V1GuestBaseController {
     tags: openApiTags,
     description: 'Place index endpoint for Guests',
     many: true,
+    // https://psychicframework.com/docs/openapi/pagination
+    paginate: true,
     serializerKey: 'summaryForGuests',
   })
   public async index() {
-    this.ok(await Place.passthrough({ locale: this.locale }).preloadFor('summaryForGuests').all())
+    this.ok(
+      await Place.passthrough({ locale: this.locale })
+        .preloadFor('summaryForGuests')
+        // https://psychicframework.com/docs/models/querying/paginate
+        .paginate({ page: this.castParam('page', 'integer', { allowNull: true }) }),
+    )
   }
 
   @OpenAPI(Place, {

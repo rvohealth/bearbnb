@@ -27,7 +27,12 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["PlaceSummaryForGuests"][];
+                        "application/json": {
+                            recordCount: number;
+                            pageCount: number;
+                            currentPage: number;
+                            results: components["schemas"]["PlaceSummaryForGuests"][];
+                        };
                     };
                 };
                 400: components["responses"]["BadRequest"];

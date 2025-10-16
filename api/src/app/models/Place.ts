@@ -1,5 +1,7 @@
-import { Decorators, DreamColumn, DreamSerializers } from '@rvoh/dream'
 import ApplicationModel from '@models/ApplicationModel.js'
+import Host from '@models/Host.js'
+import HostPlace from '@models/HostPlace.js'
+import { Decorators, DreamColumn, DreamSerializers } from '@rvoh/dream'
 
 const deco = new Decorators<typeof Place>()
 
@@ -22,4 +24,10 @@ export default class Place extends ApplicationModel {
   public deletedAt: DreamColumn<Place, 'deletedAt'>
   public createdAt: DreamColumn<Place, 'createdAt'>
   public updatedAt: DreamColumn<Place, 'updatedAt'>
+
+  @deco.HasMany('HostPlace', { dependent: 'destroy' })
+  public hostPlaces: HostPlace[]
+
+  @deco.HasMany('Host', { through: 'hostPlaces' })
+  public hosts: Host[]
 }

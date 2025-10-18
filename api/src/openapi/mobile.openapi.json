@@ -355,6 +355,9 @@
                           },
                           {
                             "$ref": "#/components/schemas/RoomKitchenSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomLivingRoomSummary"
                           }
                         ]
                       }
@@ -443,6 +446,16 @@
                       "integer",
                       "null"
                     ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Bathroom",
+                      "Bedroom",
+                      "Den",
+                      "Kitchen",
+                      "LivingRoom"
+                    ]
                   }
                 }
               }
@@ -466,6 +479,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -538,6 +554,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -841,12 +860,24 @@
       "RoomBathroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bathroom"
           }
         }
       },
@@ -893,12 +924,24 @@
       "RoomBedroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Bedroom"
           }
         }
       },
@@ -937,12 +980,24 @@
       "RoomDenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Den"
           }
         }
       },
@@ -989,12 +1044,80 @@
       "RoomKitchenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Kitchen"
+          }
+        }
+      },
+      "RoomLivingRoom": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  LivingRoom"
+          }
+        }
+      },
+      "RoomLivingRoomSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  LivingRoom"
           }
         }
       },

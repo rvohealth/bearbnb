@@ -355,6 +355,9 @@
                           },
                           {
                             "$ref": "#/components/schemas/RoomKitchenSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomLivingRoomSummary"
                           }
                         ]
                       }
@@ -443,6 +446,16 @@
                       "integer",
                       "null"
                     ]
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "Bathroom",
+                      "Bedroom",
+                      "Den",
+                      "Kitchen",
+                      "LivingRoom"
+                    ]
                   }
                 }
               }
@@ -466,6 +479,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -538,6 +554,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -857,12 +876,26 @@
       "RoomBathroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bathroom"
+            ]
           }
         }
       },
@@ -918,12 +951,26 @@
       "RoomBedroomSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bedroom"
+            ]
           }
         }
       },
@@ -964,12 +1011,26 @@
       "RoomDenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Den"
+            ]
           }
         }
       },
@@ -1023,12 +1084,86 @@
       "RoomKitchenSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "position",
+          "type"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Kitchen"
+            ]
+          }
+        }
+      },
+      "RoomLivingRoom": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LivingRoom"
+            ]
+          }
+        }
+      },
+      "RoomLivingRoomSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LivingRoom"
+            ]
           }
         }
       },

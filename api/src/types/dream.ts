@@ -383,6 +383,15 @@ export const schema = {
         requiredAndClauses: null,
         passthroughAndClauses: null,
       },
+      rooms: {
+        type: 'HasMany',
+        foreignKey: 'placeId',
+        foreignKeyTypeColumn: null,
+        tables: ['rooms'],
+        optional: null,
+        requiredAndClauses: null,
+        passthroughAndClauses: null,
+      },
     },
   },
   rooms: {
@@ -579,6 +588,7 @@ export const connectionTypeConfig = {
       'Room/Bedroom': 'rooms',
       'Room/Den': 'rooms',
       'Room/Kitchen': 'rooms',
+      'Room/LivingRoom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },

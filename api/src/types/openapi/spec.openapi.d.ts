@@ -225,7 +225,7 @@ export interface paths {
                     content: {
                         "application/json": {
                             cursor: string | null;
-                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomDenSummary"] | components["schemas"]["RoomKitchenSummary"])[];
+                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomDenSummary"] | components["schemas"]["RoomKitchenSummary"] | components["schemas"]["RoomLivingRoomSummary"])[];
                         };
                     };
                 };
@@ -260,6 +260,8 @@ export interface paths {
                         bathOrShowerStyle?: "bath" | "bath_and_shower" | "none" | "shower" | null;
                         bedTypes?: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
                         position?: number | null;
+                        /** @enum {string} */
+                        type?: "Bathroom" | "Bedroom" | "Den" | "Kitchen" | "LivingRoom";
                     };
                 };
             };
@@ -270,7 +272,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"] | components["schemas"]["RoomLivingRoom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -317,7 +319,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"] | components["schemas"]["RoomLivingRoom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -439,6 +441,9 @@ export interface components {
         RoomBathroomSummary: {
             /** Format: bigint */
             id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "Bathroom";
         };
         RoomBedroom: {
             bedTypes: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
@@ -453,6 +458,9 @@ export interface components {
         RoomBedroomSummary: {
             /** Format: bigint */
             id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "Bedroom";
         };
         RoomDen: {
             /** Format: date-time */
@@ -466,6 +474,9 @@ export interface components {
         RoomDenSummary: {
             /** Format: bigint */
             id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "Den";
         };
         RoomKitchen: {
             appliances: ("dishwasher" | "microwave" | "oven" | "stove")[];
@@ -480,6 +491,25 @@ export interface components {
         RoomKitchenSummary: {
             /** Format: bigint */
             id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "Kitchen";
+        };
+        RoomLivingRoom: {
+            /** Format: date-time */
+            deletedAt: string | null;
+            /** Format: bigint */
+            id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "LivingRoom";
+        };
+        RoomLivingRoomSummary: {
+            /** Format: bigint */
+            id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "LivingRoom";
         };
         ValidationErrors: {
             /** @enum {string} */

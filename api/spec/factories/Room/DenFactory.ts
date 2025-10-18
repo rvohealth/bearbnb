@@ -1,8 +1,8 @@
+import Den from '@models/Room/Den.js'
 import { UpdateableProperties } from '@rvoh/dream'
-import RoomDen from '@models/Room/Den.js'
 
-export default async function createRoomDen(attrs: UpdateableProperties<RoomDen> = {}) {
-  return await RoomDen.create({
+export default async function createRoomDen(attrs: UpdateableProperties<Den> = {}) {
+  return await Den.create({
     ...attrs,
   })
 }

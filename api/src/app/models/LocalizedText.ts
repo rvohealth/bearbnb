@@ -1,5 +1,8 @@
-import { Decorators, DreamColumn, DreamSerializers } from '@rvoh/dream'
 import ApplicationModel from '@models/ApplicationModel.js'
+import Host from '@models/Host.js'
+import Place from '@models/Place.js'
+import Room from '@models/Room.js'
+import { Decorators, DreamColumn, DreamSerializers } from '@rvoh/dream'
 
 const deco = new Decorators<typeof LocalizedText>()
 
@@ -24,4 +27,7 @@ export default class LocalizedText extends ApplicationModel {
   public deletedAt: DreamColumn<LocalizedText, 'deletedAt'>
   public createdAt: DreamColumn<LocalizedText, 'createdAt'>
   public updatedAt: DreamColumn<LocalizedText, 'updatedAt'>
+
+  @deco.BelongsTo(['Host', 'Place', 'Room'], { polymorphic: true, on: 'localizableId' })
+  public localizable: Host | Place | Room
 }

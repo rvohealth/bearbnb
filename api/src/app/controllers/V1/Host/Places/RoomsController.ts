@@ -22,7 +22,6 @@ export default class V1HostPlacesRoomsController extends V1HostPlacesBaseControl
     const rooms = await this.currentPlace
       .associationQuery('rooms')
       .preloadFor('summary')
-      .order({ createdAt: 'desc' })
       .scrollPaginate({ cursor: this.castParam('cursor', 'string', { allowNull: true }) })
     this.ok(rooms)
   }

@@ -3,10 +3,11 @@ import Host from '@models/Host.js'
 import HostPlace from '@models/HostPlace.js'
 import LocalizedText from '@models/LocalizedText.js'
 import Room from '@models/Room.js'
-import { Decorators, DreamColumn, DreamConst, DreamSerializers } from '@rvoh/dream'
+import { Decorators, DreamColumn, DreamConst, DreamSerializers, SoftDelete } from '@rvoh/dream'
 
 const deco = new Decorators<typeof Place>()
 
+@SoftDelete()
 export default class Place extends ApplicationModel {
   public override get table() {
     return 'places' as const
@@ -35,7 +36,7 @@ export default class Place extends ApplicationModel {
   @deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
 
-  @deco.HasMany('Room', { order: 'createdAt' })
+  @deco.HasMany('Room', { order: 'createdAt', dependent: 'destroy' })
   public rooms: Room[]
 
   @deco.HasMany('LocalizedText', { polymorphic: true, on: 'localizableId', dependent: 'destroy' })

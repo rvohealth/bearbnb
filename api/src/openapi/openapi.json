@@ -967,6 +967,27 @@
           }
         }
       },
+      "BathOrShowerStyle": {
+        "type": "object",
+        "required": [
+          "label",
+          "value"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "bath",
+              "bath_and_shower",
+              "none",
+              "shower"
+            ]
+          }
+        }
+      },
       "BedType": {
         "type": "object",
         "required": [
@@ -1237,7 +1258,7 @@
         ],
         "properties": {
           "bathOrShowerStyle": {
-            "type": "string"
+            "$ref": "#/components/schemas/BathOrShowerStyle"
           },
           "displayType": {
             "type": "string"

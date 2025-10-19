@@ -1,10 +1,11 @@
-import { Decorators, DreamColumn } from '@rvoh/dream'
 import ApplicationModel from '@models/ApplicationModel.js'
 import Host from '@models/Host.js'
 import Place from '@models/Place.js'
+import { Decorators, DreamColumn, SoftDelete } from '@rvoh/dream'
 
 const deco = new Decorators<typeof HostPlace>()
 
+@SoftDelete()
 export default class HostPlace extends ApplicationModel {
   public override get table() {
     return 'host_places' as const

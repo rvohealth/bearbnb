@@ -962,6 +962,22 @@
           }
         }
       },
+      "BathOrShowerStyle": {
+        "type": "object",
+        "required": [
+          "label",
+          "value"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "description": "\nThe following values will be allowed:\n  bath,\n  bath_and_shower,\n  none,\n  shower"
+          }
+        }
+      },
       "BedType": {
         "type": "object",
         "required": [
@@ -1201,7 +1217,7 @@
         ],
         "properties": {
           "bathOrShowerStyle": {
-            "type": "string"
+            "$ref": "#/components/schemas/BathOrShowerStyle"
           },
           "displayType": {
             "type": "string"

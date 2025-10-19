@@ -574,6 +574,11 @@ export interface components {
             /** @enum {string} */
             value: "dishwasher" | "microwave" | "oven" | "stove";
         };
+        BathOrShowerStyle: {
+            label: string;
+            /** @enum {string} */
+            value: "bath" | "bath_and_shower" | "none" | "shower";
+        };
         BedType: {
             label: string;
             /** @enum {string} */
@@ -634,7 +639,7 @@ export interface components {
             type: "Bathroom";
         };
         RoomBathroomForGuests: {
-            bathOrShowerStyle: string;
+            bathOrShowerStyle: components["schemas"]["BathOrShowerStyle"];
             displayType: string;
             /** Format: bigint */
             id: string | number | bigint;

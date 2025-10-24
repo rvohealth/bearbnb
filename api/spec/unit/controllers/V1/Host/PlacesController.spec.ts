@@ -32,6 +32,7 @@ describe('V1/Host/PlacesController', () => {
       expect(body.results).toEqual([
         expect.objectContaining({
           id: place.id,
+          name: place.name,
         }),
       ])
     })

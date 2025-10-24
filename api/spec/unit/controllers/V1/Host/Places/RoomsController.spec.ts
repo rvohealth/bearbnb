@@ -1,9 +1,11 @@
+import Place from '@models/Place.js'
 import Room from '@models/Room.js'
 import User from '@models/User.js'
-import Place from '@models/Place.js'
-import createRoom from '@spec/factories/RoomFactory.js'
-import createUser from '@spec/factories/UserFactory.js'
+import createHost from '@spec/factories/HostFactory.js'
+import createHostPlace from '@spec/factories/HostPlaceFactory.js'
 import createPlace from '@spec/factories/PlaceFactory.js'
+import createRoomKitchen from '@spec/factories/Room/KitchenFactory.js'
+import createUser from '@spec/factories/UserFactory.js'
 import { RequestBody, session, SpecRequestType } from '@spec/unit/helpers/authentication.js'
 
 describe('V1/Host/Places/RoomsController', () => {
@@ -13,30 +15,35 @@ describe('V1/Host/Places/RoomsController', () => {
 
   beforeEach(async () => {
     user = await createUser()
-    place = await createPlace({ user })
+    const host = await createHost({ user })
+    place = await createPlace()
+    await createHostPlace({ host, place })
     request = await session(user)
   })
 
   describe('GET index', () => {
     const subject = async <StatusCode extends 200 | 400 | 404>(expectedStatus: StatusCode) => {
-      return request.get('/v1/host/places/rooms', expectedStatus)
+      return request.get('/v1/host/places/{placeId}/rooms', expectedStatus, {
+        placeId: place.id,
+      })
     }
 
     it('returns the index of Rooms', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
       const { body } = await subject(200)
 
       expect(body.results).toEqual([
         expect.objectContaining({
           id: room.id,
+          type: room.type,
         }),
       ])
     })
 
     context('Rooms created by another Place', () => {
       it('are omitted', async () => {
-        await createRoom()
+        await createRoomKitchen()
 
         const { body } = await subject(200)
 
@@ -47,13 +54,14 @@ describe('V1/Host/Places/RoomsController', () => {
 
   describe('GET show', () => {
     const subject = async <StatusCode extends 200 | 400 | 404>(room: Room, expectedStatus: StatusCode) => {
-      return request.get('/v1/host/places/rooms/{id}', expectedStatus, {
+      return request.get('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
+        placeId: place.id,
         id: room.id,
       })
     }
 
     it('returns the specified Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
       const { body } = await subject(room, 200)
 
@@ -61,14 +69,13 @@ describe('V1/Host/Places/RoomsController', () => {
         expect.objectContaining({
           id: room.id,
           type: room.type,
-          position: room.position,
         }),
       )
     })
 
     context('Room created by another Place', () => {
       it('is not found', async () => {
-        const otherPlaceRoom = await createRoom()
+        const otherPlaceRoom = await createRoomKitchen()
 
         await subject(otherPlaceRoom, 404)
       })
@@ -77,27 +84,32 @@ describe('V1/Host/Places/RoomsController', () => {
 
   describe('POST create', () => {
     const subject = async <StatusCode extends 201 | 400 | 404>(
-      data: RequestBody<'post', '/v1/host/places/rooms'>,
-      expectedStatus: StatusCode
+      data: RequestBody<'post', '/v1/host/places/{placeId}/rooms'>,
+      expectedStatus: StatusCode,
     ) => {
-      return request.post('/v1/host/places/rooms', expectedStatus, { data })
+      return request.post('/v1/host/places/{placeId}/rooms', expectedStatus, {
+        placeId: place.id,
+        data,
+      })
     }
 
     it('creates a Room for this Place', async () => {
-      const { body } = await subject({
-        type: 'Bathroom',
-        position: 1,
-      }, 201)
+      const { body } = await subject(
+        {
+          type: 'Kitchen',
+          appliances: ['oven', 'stove'],
+        },
+        201,
+      )
 
       const room = await place.associationQuery('rooms').firstOrFail()
-      expect(room.type).toEqual('Bathroom')
-      expect(room.position).toEqual(1)
+      expect(room.type).toEqual('Kitchen')
 
       expect(body).toEqual(
         expect.objectContaining({
           id: room.id,
           type: room.type,
-          position: room.position,
+          appliances: ['oven', 'stove'],
         }),
       )
     })
@@ -106,55 +118,61 @@ describe('V1/Host/Places/RoomsController', () => {
   describe('PATCH update', () => {
     const subject = async <StatusCode extends 204 | 400 | 404>(
       room: Room,
-      data: RequestBody<'patch', '/v1/host/places/rooms/{id}'>,
-      expectedStatus: StatusCode
+      data: RequestBody<'patch', '/v1/host/places/{placeId}/rooms/{id}'>,
+      expectedStatus: StatusCode,
     ) => {
-      return request.patch('/v1/host/places/rooms/{id}', expectedStatus, {
+      return request.patch('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
+        placeId: place.id,
         id: room.id,
         data,
       })
     }
 
     it('updates the Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
-      await subject(room, {
-        type: 'LivingRoom',
-        position: 2,
-      }, 204)
+      await subject(
+        room,
+        {
+          appliances: ['dishwasher'],
+        },
+        204,
+      )
 
       await room.reload()
-      expect(room.type).toEqual('LivingRoom')
-      expect(room.position).toEqual(2)
+      expect(room.appliances).toEqual(['dishwasher'])
     })
 
     context('a Room created by another Place', () => {
       it('is not updated', async () => {
-        const room = await createRoom()
+        const room = await createRoomKitchen()
         const originalType = room.type
-        const originalPosition = room.position
+        const originalAppliances = room.appliances
 
-        await subject(room, {
-          type: 'LivingRoom',
-          position: 2,
-        }, 404)
+        await subject(
+          room,
+          {
+            appliances: ['dishwasher'],
+          },
+          404,
+        )
 
         await room.reload()
-        expect(room.type).toEqual(originalType)
-        expect(room.position).toEqual(originalPosition)
+        expect(room.appliances).toEqual(originalAppliances)
       })
     })
   })
 
   describe('DELETE destroy', () => {
     const subject = async <StatusCode extends 204 | 400 | 404>(room: Room, expectedStatus: StatusCode) => {
-      return request.delete('/v1/host/places/rooms/{id}', expectedStatus, {
+      return request.delete('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
+        placeId: place.id,
         id: room.id,
       })
     }
 
     it('deletes the Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
       await subject(room, 204)
 
@@ -163,7 +181,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     context('a Room created by another Place', () => {
       it('is not deleted', async () => {
-        const room = await createRoom()
+        const room = await createRoomKitchen()
 
         await subject(room, 404)
 

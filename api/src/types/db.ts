@@ -64,12 +64,40 @@ import { type CalendarDate, type DateTime } from '@rvoh/dream'
 
 import type { ColumnType } from "kysely";
 
+export type ApplianceTypesEnum = "dishwasher" | "microwave" | "oven" | "stove";
+export const ApplianceTypesEnumValues = [
+  "dishwasher",
+  "microwave",
+  "oven",
+  "stove"
+] as const
+
+
+export type ArrayType<T> = ArrayTypeImpl<T> extends (infer U)[]
+  ? U[]
+  : ArrayTypeImpl<T>;
+
+export type ArrayTypeImpl<T> = T extends ColumnType<infer S, infer I, infer U>
+  ? ColumnType<S[], I[], U[]>
+  : T[];
+
 export type BathOrShowerStylesEnum = "bath" | "bath_and_shower" | "none" | "shower";
 export const BathOrShowerStylesEnumValues = [
   "bath",
   "bath_and_shower",
   "none",
   "shower"
+] as const
+
+
+export type BedTypesEnum = "bunk" | "cot" | "king" | "queen" | "sofabed" | "twin";
+export const BedTypesEnumValues = [
+  "bunk",
+  "cot",
+  "king",
+  "queen",
+  "sofabed",
+  "twin"
 ] as const
 
 
@@ -136,7 +164,9 @@ export interface Places {
 }
 
 export interface Rooms {
+  appliances: Generated<ArrayType<ApplianceTypesEnum>>;
   bathOrShowerStyle: BathOrShowerStylesEnum | null;
+  bedTypes: Generated<ArrayType<BedTypesEnum>>;
   createdAt: Timestamp;
   deletedAt: Timestamp | null;
   id: Generated<Int8>;

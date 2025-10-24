@@ -59,8 +59,12 @@ us humans, he says:
 
 import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {
+  ApplianceTypesEnum,
+  ApplianceTypesEnumValues,
   BathOrShowerStylesEnum,
   BathOrShowerStylesEnumValues,
+  BedTypesEnum,
+  BedTypesEnumValues,
   PlaceStylesEnum,
   PlaceStylesEnumValues,
   RoomTypesEnum,
@@ -387,8 +391,17 @@ export const schema = {
       default: ['dream:STI'],
       named: [],
     },
-    nonJsonColumnNames: ['bathOrShowerStyle', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
+    nonJsonColumnNames: ['appliances', 'bathOrShowerStyle', 'bedTypes', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
     columns: {
+      appliances: {
+        coercedType: {} as ApplianceTypesEnum[],
+        enumType: {} as ApplianceTypesEnum,
+        enumArrayType: [] as ApplianceTypesEnum[],
+        enumValues: ApplianceTypesEnumValues,
+        dbType: 'appliance_types_enum[]',
+        allowNull: false,
+        isArray: true,
+      },
       bathOrShowerStyle: {
         coercedType: {} as BathOrShowerStylesEnum | null,
         enumType: {} as BathOrShowerStylesEnum,
@@ -397,6 +410,15 @@ export const schema = {
         dbType: 'bath_or_shower_styles_enum',
         allowNull: true,
         isArray: false,
+      },
+      bedTypes: {
+        coercedType: {} as BedTypesEnum[],
+        enumType: {} as BedTypesEnum,
+        enumArrayType: [] as BedTypesEnum[],
+        enumValues: BedTypesEnumValues,
+        dbType: 'bed_types_enum[]',
+        allowNull: false,
+        isArray: true,
       },
       createdAt: {
         coercedType: {} as DateTime,
@@ -554,6 +576,8 @@ export const connectionTypeConfig = {
       'HostPlace': 'host_places',
       'Place': 'places',
       'Room/Bathroom': 'rooms',
+      'Room/Bedroom': 'rooms',
+      'Room/Kitchen': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },

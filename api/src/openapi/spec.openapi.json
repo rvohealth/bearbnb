@@ -343,7 +343,17 @@
                     "results": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/RoomBathroomSummary"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/RoomBathroomSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomBedroomSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomKitchenSummary"
+                          }
+                        ]
                       }
                     }
                   }
@@ -386,6 +396,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "appliances": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "dishwasher",
+                        "microwave",
+                        "oven",
+                        "stove"
+                      ]
+                    }
+                  },
                   "bathOrShowerStyle": {
                     "type": [
                       "string",
@@ -398,6 +420,20 @@
                       "shower",
                       null
                     ]
+                  },
+                  "bedTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "bunk",
+                        "cot",
+                        "king",
+                        "queen",
+                        "sofabed",
+                        "twin"
+                      ]
+                    }
                   },
                   "position": {
                     "type": [
@@ -415,7 +451,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomBathroom"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/RoomBathroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomBedroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomKitchen"
+                    }
+                  ]
                 }
               }
             },
@@ -474,7 +520,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RoomBathroom"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/RoomBathroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomBedroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomKitchen"
+                    }
+                  ]
                 }
               }
             },
@@ -514,6 +570,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "appliances": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "dishwasher",
+                        "microwave",
+                        "oven",
+                        "stove"
+                      ]
+                    }
+                  },
                   "bathOrShowerStyle": {
                     "type": [
                       "string",
@@ -526,6 +594,20 @@
                       "shower",
                       null
                     ]
+                  },
+                  "bedTypes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "bunk",
+                        "cot",
+                        "king",
+                        "queen",
+                        "sofabed",
+                        "twin"
+                      ]
+                    }
                   },
                   "position": {
                     "type": [
@@ -764,6 +846,126 @@
         }
       },
       "RoomBathroomSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          }
+        }
+      },
+      "RoomBedroom": {
+        "type": "object",
+        "required": [
+          "bedTypes",
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "bedTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bunk",
+                "cot",
+                "king",
+                "queen",
+                "sofabed",
+                "twin"
+              ]
+            }
+          },
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Bedroom"
+            ]
+          }
+        }
+      },
+      "RoomBedroomSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          }
+        }
+      },
+      "RoomKitchen": {
+        "type": "object",
+        "required": [
+          "appliances",
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "appliances": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "dishwasher",
+                "microwave",
+                "oven",
+                "stove"
+              ]
+            }
+          },
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Kitchen"
+            ]
+          }
+        }
+      },
+      "RoomKitchenSummary": {
         "type": "object",
         "required": [
           "id"

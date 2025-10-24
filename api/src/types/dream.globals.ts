@@ -1,1 +1,3 @@
-export const globalTypeConfig = {} as const
+export const globalTypeConfig = {
+  serializers: [],
+} as const

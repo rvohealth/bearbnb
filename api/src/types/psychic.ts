@@ -1,7 +1,14 @@
 const psychicTypes = {
-  workstreamNames: [],
-  queueGroupMap: {},
-  openapiNames: ['default', 'admin', 'mobile', 'validation'],
+  "openapiNames": [
+    "default",
+    "mobile",
+    "admin",
+    "validation"
+  ],
+  "workstreamNames": [
+    "NamedWorkstream"
+  ],
+  "queueGroupMap": {}
 } as const
 
 export default psychicTypes

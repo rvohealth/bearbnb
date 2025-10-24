@@ -16,6 +16,7 @@ export const globalTypeConfig = {
       'Room/KitchenSummarySerializer',
       'Room/LivingRoomSerializer',
       'Room/LivingRoomSummarySerializer',
+      'RoomForGuestsSerializer',
       'RoomSerializer',
       'RoomSummarySerializer'
     ],

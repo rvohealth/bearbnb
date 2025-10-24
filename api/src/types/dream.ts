@@ -383,6 +383,15 @@ export const schema = {
         requiredAndClauses: null,
         passthroughAndClauses: null,
       },
+      rooms: {
+        type: 'HasMany',
+        foreignKey: 'placeId',
+        foreignKeyTypeColumn: null,
+        tables: ['rooms'],
+        optional: null,
+        requiredAndClauses: null,
+        passthroughAndClauses: null,
+      },
     },
   },
   rooms: {

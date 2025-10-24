@@ -1,9 +1,8 @@
+import Bathroom from '@models/Room/Bathroom.js'
 import { RoomSerializer, RoomSummarySerializer } from '@serializers/RoomSerializer.js'
-import RoomBathroom from '@models/Room/Bathroom.js'
 
-export const RoomBathroomSummarySerializer = (roomBathroom: RoomBathroom) =>
-  RoomSummarySerializer(RoomBathroom, roomBathroom)
+export const RoomBathroomSummarySerializer = (roomBathroom: Bathroom) =>
+  RoomSummarySerializer(Bathroom, roomBathroom)
 
-export const RoomBathroomSerializer = (roomBathroom: RoomBathroom) =>
-  RoomSerializer(RoomBathroom, roomBathroom)
-    .attribute('bathOrShowerStyle')
+export const RoomBathroomSerializer = (roomBathroom: Bathroom) =>
+  RoomSerializer(Bathroom, roomBathroom).attribute('bathOrShowerStyle')

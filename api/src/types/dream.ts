@@ -59,6 +59,8 @@ us humans, he says:
 
 import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {
+  BathOrShowerStylesEnum,
+  BathOrShowerStylesEnumValues,
   PlaceStylesEnum,
   PlaceStylesEnumValues,
   RoomTypesEnum,
@@ -382,11 +384,20 @@ export const schema = {
   rooms: {
     serializerKeys: ['default', 'summary'],
     scopes: {
-      default: [],
+      default: ['dream:STI'],
       named: [],
     },
-    nonJsonColumnNames: ['createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
+    nonJsonColumnNames: ['bathOrShowerStyle', 'createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
     columns: {
+      bathOrShowerStyle: {
+        coercedType: {} as BathOrShowerStylesEnum | null,
+        enumType: {} as BathOrShowerStylesEnum,
+        enumArrayType: [] as BathOrShowerStylesEnum[],
+        enumValues: BathOrShowerStylesEnumValues,
+        dbType: 'bath_or_shower_styles_enum',
+        allowNull: true,
+        isArray: false,
+      },
       createdAt: {
         coercedType: {} as DateTime,
         enumType: null,
@@ -535,13 +546,14 @@ export const schema = {
 
 export const connectionTypeConfig = {
   passthroughColumns: [],
-  allDefaultScopeNames: [],
+  allDefaultScopeNames: ['dream:STI'],
   globalNames: {
     models: {
       'Guest': 'guests',
       'Host': 'hosts',
       'HostPlace': 'host_places',
       'Place': 'places',
+      'Room/Bathroom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },

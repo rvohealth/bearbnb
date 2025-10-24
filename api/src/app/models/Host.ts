@@ -1,5 +1,6 @@
 import ApplicationModel from '@models/ApplicationModel.js'
 import HostPlace from '@models/HostPlace.js'
+import LocalizedText from '@models/LocalizedText.js'
 import Place from '@models/Place.js'
 import User from '@models/User.js'
 import { Decorators } from '@rvoh/dream'
@@ -32,4 +33,12 @@ export default class Host extends ApplicationModel {
 
   @deco.HasMany('Place', { through: 'hostPlaces' })
   public places: Place[]
+
+  @deco.HasMany('LocalizedText', { polymorphic: true, on: 'localizableId' })
+  public localizedTexts: LocalizedText[]
+
+  @deco.AfterCreate()
+  public async createDefaultLocalizedText(this: Host) {
+    await this.createAssociation('localizedTexts', { locale: 'en-US' })
+  }
 }

@@ -4,6 +4,8 @@ export const globalTypeConfig = {
       'GuestSummarySerializer',
       'HostSerializer',
       'HostSummarySerializer',
+      'LocalizedTextSerializer',
+      'LocalizedTextSummarySerializer',
       'PlaceSerializer',
       'PlaceSummarySerializer',
       'Room/BathroomSerializer',

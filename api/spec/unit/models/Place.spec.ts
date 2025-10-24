@@ -28,4 +28,13 @@ describe('Place', () => {
       expect(localizedText.title).toEqual('My cottage')
     })
   })
+
+  it('has one currentLocalizedText', async () => {
+    let place = await createPlace()
+    const esLocalizedText = await createLocalizedText({ localizable: place, locale: 'es-ES' })
+
+    place = await place.passthrough({ locale: 'es-ES' }).load('currentLocalizedText').execute()
+
+    expect(place.currentLocalizedText).toMatchDreamModel(esLocalizedText)
+  })
 })

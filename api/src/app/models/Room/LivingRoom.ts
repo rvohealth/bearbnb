@@ -6,10 +6,11 @@ const deco = new Decorators<typeof LivingRoom>()
 
 @STI(Room)
 export default class LivingRoom extends Room {
-  public override get serializers(): DreamSerializers<LivingRoom> {
+  public get serializers(): DreamSerializers<LivingRoom> {
     return {
       default: 'Room/LivingRoomSerializer',
       summary: 'Room/LivingRoomSummarySerializer',
+      forGuests: 'Room/LivingRoomForGuestsSerializer',
     }
   }
 }

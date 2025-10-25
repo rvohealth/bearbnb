@@ -1,5 +1,6 @@
 import LocalizedText from '@models/LocalizedText.js'
 import { UpdateableProperties } from '@rvoh/dream/types'
+import createPlace from '@spec/factories/PlaceFactory.js'
 
 let counter = 0
 

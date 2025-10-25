@@ -1,7 +1,12 @@
+import HostPlace from '@models/HostPlace.js'
+import LocalizedText from '@models/LocalizedText.js'
+import Place from '@models/Place.js'
+import Room from '@models/Room.js'
 import createHost from '@spec/factories/HostFactory.js'
 import createHostPlace from '@spec/factories/HostPlaceFactory.js'
 import createLocalizedText from '@spec/factories/LocalizedTextFactory.js'
 import createPlace from '@spec/factories/PlaceFactory.js'
+import createRoomKitchen from '@spec/factories/Room/KitchenFactory.js'
 
 describe('Place', () => {
   it('has many Hosts (through hostPlaces)', async () => {
@@ -36,5 +41,35 @@ describe('Place', () => {
     place = await place.passthrough({ locale: 'es-ES' }).load('currentLocalizedText').execute()
 
     expect(place.currentLocalizedText).toMatchDreamModel(esLocalizedText)
+  })
+
+  context('upon destruction', () => {
+    it('soft-deletes associated HostPlaces, Rooms, and LocalizedTexts', async () => {
+      const place = await createPlace()
+      const hostPlace = await createHostPlace({ place })
+      const room = await createRoomKitchen({ place })
+      const placeText = await place.associationQuery('localizedTexts').firstOrFail()
+      const roomText = await room.associationQuery('localizedTexts').firstOrFail()
+
+      expect(await Place.where({ id: place.id }).exists()).toBe(true)
+      expect(await HostPlace.where({ id: hostPlace.id }).exists()).toBe(true)
+      expect(await Room.where({ id: room.id }).exists()).toBe(true)
+      expect(await LocalizedText.where({ id: placeText.id }).exists()).toBe(true)
+      expect(await LocalizedText.where({ id: roomText.id }).exists()).toBe(true)
+
+      await place.destroy()
+
+      expect(await Place.where({ id: place.id }).exists()).toBe(false)
+      expect(await HostPlace.where({ id: hostPlace.id }).exists()).toBe(false)
+      expect(await Room.where({ id: room.id }).exists()).toBe(false)
+      expect(await LocalizedText.where({ id: placeText.id }).exists()).toBe(false)
+      expect(await LocalizedText.where({ id: roomText.id }).exists()).toBe(false)
+
+      expect(await Place.removeAllDefaultScopes().where({ id: place.id }).exists()).toBe(true)
+      expect(await HostPlace.removeAllDefaultScopes().where({ id: hostPlace.id }).exists()).toBe(true)
+      expect(await Room.removeAllDefaultScopes().where({ id: room.id }).exists()).toBe(true)
+      expect(await LocalizedText.removeAllDefaultScopes().where({ id: placeText.id }).exists()).toBe(true)
+      expect(await LocalizedText.removeAllDefaultScopes().where({ id: roomText.id }).exists()).toBe(true)
+    })
   })
 })

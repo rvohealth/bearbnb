@@ -6,4 +6,4 @@ metadata:
 spec:
   type: website # can be one of: service, library, website, iac-pipeline
   lifecycle: experimental # can be one of: experimental, production, deprecated
-  owner: team-wellos # your existing tech team in Backstage, i.e. team-developer-platforms
+  owner: team-wellos-be # your existing tech team in Backstage, i.e. team-developer-platforms

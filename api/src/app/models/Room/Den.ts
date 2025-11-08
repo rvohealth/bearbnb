@@ -6,7 +6,7 @@ const deco = new Decorators<typeof Den>()
 
 @STI(Room)
 export default class Den extends Room {
-  public override get serializers(): DreamSerializers<Den> {
+  public get serializers(): DreamSerializers<Den> {
     return {
       default: 'Room/DenSerializer',
       summary: 'Room/DenSummarySerializer',

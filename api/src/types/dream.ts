@@ -60,7 +60,9 @@ us humans, he says:
 import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {
   PlaceStylesEnum,
-  PlaceStylesEnumValues
+  PlaceStylesEnumValues,
+  RoomTypesEnum,
+  RoomTypesEnumValues
 } from './db.js'
 
 export const schema = {
@@ -377,6 +379,91 @@ export const schema = {
       },
     },
   },
+  rooms: {
+    serializerKeys: ['default', 'summary'],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    nonJsonColumnNames: ['createdAt', 'deletedAt', 'id', 'placeId', 'position', 'type', 'updatedAt'],
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      deletedAt: {
+        coercedType: {} as DateTime | null,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: true,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as string,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      placeId: {
+        coercedType: {} as string,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'bigint',
+        allowNull: false,
+        isArray: false,
+      },
+      position: {
+        coercedType: {} as number | null,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'integer',
+        allowNull: true,
+        isArray: false,
+      },
+      type: {
+        coercedType: {} as RoomTypesEnum,
+        enumType: {} as RoomTypesEnum,
+        enumArrayType: [] as RoomTypesEnum[],
+        enumValues: RoomTypesEnumValues,
+        dbType: 'room_types_enum',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      place: {
+        type: 'BelongsTo',
+        foreignKey: 'placeId',
+        foreignKeyTypeColumn: null,
+        tables: ['places'],
+        optional: false,
+        requiredAndClauses: null,
+        passthroughAndClauses: null,
+      },
+    },
+  },
   users: {
     serializerKeys: [],
     scopes: {
@@ -455,6 +542,7 @@ export const connectionTypeConfig = {
       'Host': 'hosts',
       'HostPlace': 'host_places',
       'Place': 'places',
+      'Room': 'rooms',
       'User': 'users'
     },
   },

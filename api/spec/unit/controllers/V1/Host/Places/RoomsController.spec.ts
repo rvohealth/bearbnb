@@ -1,9 +1,12 @@
-import Room from '@models/Room.js'
-import User from '@models/User.js'
 import Place from '@models/Place.js'
-import createRoom from '@spec/factories/RoomFactory.js'
-import createUser from '@spec/factories/UserFactory.js'
+import Room from '@models/Room.js'
+import Kitchen from '@models/Room/Kitchen.js'
+import User from '@models/User.js'
+import createHost from '@spec/factories/HostFactory.js'
+import createHostPlace from '@spec/factories/HostPlaceFactory.js'
 import createPlace from '@spec/factories/PlaceFactory.js'
+import createRoomKitchen from '@spec/factories/Room/KitchenFactory.js'
+import createUser from '@spec/factories/UserFactory.js'
 import { RequestBody, session, SpecRequestType } from '@spec/unit/helpers/authentication.js'
 
 describe('V1/Host/Places/RoomsController', () => {
@@ -13,7 +16,9 @@ describe('V1/Host/Places/RoomsController', () => {
 
   beforeEach(async () => {
     user = await createUser()
-    place = await createPlace({ user })
+    const host = await createHost({ user })
+    place = await createPlace()
+    await createHostPlace({ host, place })
     request = await session(user)
   })
 
@@ -25,7 +30,7 @@ describe('V1/Host/Places/RoomsController', () => {
     }
 
     it('returns the index of Rooms', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
       const { body } = await subject(200)
 
@@ -38,7 +43,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     context('Rooms created by another Place', () => {
       it('are omitted', async () => {
-        await createRoom()
+        await createRoomKitchen()
 
         const { body } = await subject(200)
 
@@ -56,7 +61,7 @@ describe('V1/Host/Places/RoomsController', () => {
     }
 
     it('returns the specified Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
       const { body } = await subject(room, 200)
 
@@ -71,7 +76,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     context('Room created by another Place', () => {
       it('is not found', async () => {
-        const otherPlaceRoom = await createRoom()
+        const otherPlaceRoom = await createRoomKitchen()
 
         await subject(otherPlaceRoom, 404)
       })
@@ -81,27 +86,31 @@ describe('V1/Host/Places/RoomsController', () => {
   describe('POST create', () => {
     const subject = async <StatusCode extends 201 | 400 | 404>(
       data: RequestBody<'post', '/v1/host/places/{placeId}/rooms'>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
       return request.post('/v1/host/places/{placeId}/rooms', expectedStatus, {
         placeId: place.id,
-        data
+        data,
       })
     }
 
     it('creates a Room for this Place', async () => {
-      const { body } = await subject({
-        position: 1,
-      }, 201)
+      const { body } = await subject(
+        {
+          type: 'Kitchen',
+          appliances: ['oven', 'stove'],
+        },
+        201,
+      )
 
       const room = await place.associationQuery('rooms').firstOrFail()
-      expect(room.position).toEqual(1)
+      expect((room as Kitchen).appliances).toEqual(['oven', 'stove'])
 
       expect(body).toEqual(
         expect.objectContaining({
           id: room.id,
           type: room.type,
-          position: room.position,
+          appliances: ['oven', 'stove'],
         }),
       )
     })
@@ -111,7 +120,7 @@ describe('V1/Host/Places/RoomsController', () => {
     const subject = async <StatusCode extends 204 | 400 | 404>(
       room: Room,
       data: RequestBody<'patch', '/v1/host/places/{placeId}/rooms/{id}'>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
       return request.patch('/v1/host/places/{placeId}/rooms/{id}', expectedStatus, {
         placeId: place.id,
@@ -121,27 +130,35 @@ describe('V1/Host/Places/RoomsController', () => {
     }
 
     it('updates the Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
-      await subject(room, {
-        position: 2,
-      }, 204)
+      await subject(
+        room,
+        {
+          appliances: ['dishwasher'],
+        },
+        204,
+      )
 
       await room.reload()
-      expect(room.position).toEqual(2)
+      expect(room.appliances).toEqual(['dishwasher'])
     })
 
     context('a Room created by another Place', () => {
       it('is not updated', async () => {
-        const room = await createRoom()
-        const originalPosition = room.position
+        const room = await createRoomKitchen()
+        const originalAppliances = room.appliances
 
-        await subject(room, {
-          position: 2,
-        }, 404)
+        await subject(
+          room,
+          {
+            appliances: ['dishwasher'],
+          },
+          404,
+        )
 
         await room.reload()
-        expect(room.position).toEqual(originalPosition)
+        expect(room.appliances).toEqual(originalAppliances)
       })
     })
   })
@@ -155,7 +172,7 @@ describe('V1/Host/Places/RoomsController', () => {
     }
 
     it('deletes the Room', async () => {
-      const room = await createRoom({ place })
+      const room = await createRoomKitchen({ place })
 
       await subject(room, 204)
 
@@ -164,7 +181,7 @@ describe('V1/Host/Places/RoomsController', () => {
 
     context('a Room created by another Place', () => {
       it('is not deleted', async () => {
-        const room = await createRoom()
+        const room = await createRoomKitchen()
 
         await subject(room, 404)
 

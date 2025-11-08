@@ -17,6 +17,8 @@ export default class Place extends ApplicationModel {
     return {
       default: 'PlaceSerializer',
       summary: 'PlaceSummarySerializer',
+      summaryForGuests: 'PlaceSummaryForGuestsSerializer',
+      forGuests: 'PlaceForGuestsSerializer',
     }
   }
 
@@ -34,7 +36,7 @@ export default class Place extends ApplicationModel {
   @deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
 
-  @deco.HasMany('Room')
+  @deco.HasMany('Room', { order: 'createdAt' })
   // make sure this imports from `import Room from '@models/Room.js'`
   // not from `import { Room } from 'socket.io-adapter'`
   public rooms: Room[]

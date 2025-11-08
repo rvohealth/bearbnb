@@ -37,7 +37,7 @@ export default class Place extends ApplicationModel {
   @deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
 
-  @deco.HasMany('Room', { order: 'createdAt', dependent: 'destroy' })
+  @deco.HasMany('Room', { order: 'position', dependent: 'destroy' })
   // make sure this imports from `import Room from '@models/Room.js'`
   // not from `import { Room } from 'socket.io-adapter'`
   public rooms: Room[]

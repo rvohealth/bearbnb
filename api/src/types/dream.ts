@@ -579,6 +579,7 @@ export const connectionTypeConfig = {
       'Room/Bedroom': 'rooms',
       'Room/Den': 'rooms',
       'Room/Kitchen': 'rooms',
+      'Room/LivingRoom': 'rooms',
       'Room': 'rooms',
       'User': 'users'
     },

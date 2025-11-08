@@ -27,4 +27,13 @@ describe('Host', () => {
       expect(localizedText.locale).toEqual('en-US')
     })
   })
+
+  it('has one currentLocalizedText', async () => {
+    let host = await createHost()
+    const esLocalizedText = await createLocalizedText({ localizable: host, locale: 'es-ES' })
+
+    host = await host.passthrough({ locale: 'es-ES' }).load('currentLocalizedText').execute()
+
+    expect(host.currentLocalizedText).toMatchDreamModel(esLocalizedText)
+  })
 })

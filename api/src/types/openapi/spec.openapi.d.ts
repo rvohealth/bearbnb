@@ -225,7 +225,7 @@ export interface paths {
                     content: {
                         "application/json": {
                             cursor: string | null;
-                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"])[];
+                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomKitchenSummary"])[];
                         };
                     };
                 };
@@ -255,6 +255,7 @@ export interface paths {
             requestBody?: {
                 content: {
                     "application/json": {
+                        appliances?: ("dishwasher" | "microwave" | "oven" | "stove")[];
                         /** @enum {string|null} */
                         bathOrShowerStyle?: "bath" | "bath_and_shower" | "none" | "shower" | null;
                         bedTypes?: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
@@ -269,7 +270,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomKitchen"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -316,7 +317,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomKitchen"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -370,6 +371,7 @@ export interface paths {
             requestBody?: {
                 content: {
                     "application/json": {
+                        appliances?: ("dishwasher" | "microwave" | "oven" | "stove")[];
                         /** @enum {string|null} */
                         bathOrShowerStyle?: "bath" | "bath_and_shower" | "none" | "shower" | null;
                         bedTypes?: ("bunk" | "cot" | "king" | "queen" | "sofabed" | "twin")[];
@@ -449,6 +451,20 @@ export interface components {
             type: "Bedroom";
         };
         RoomBedroomSummary: {
+            /** Format: bigint */
+            id: string | number | bigint;
+        };
+        RoomKitchen: {
+            appliances: ("dishwasher" | "microwave" | "oven" | "stove")[];
+            /** Format: date-time */
+            deletedAt: string | null;
+            /** Format: bigint */
+            id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "Kitchen";
+        };
+        RoomKitchenSummary: {
             /** Format: bigint */
             id: string | number | bigint;
         };

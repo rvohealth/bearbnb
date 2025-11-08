@@ -220,6 +220,7 @@ export interface components {
         PlaceSummary: {
             /** Format: bigint */
             id: string | number | bigint;
+            name: string;
         };
         ValidationErrors: {
             /** @enum {string} */

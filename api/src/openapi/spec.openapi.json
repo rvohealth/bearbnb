@@ -396,12 +396,16 @@
       "PlaceSummary": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "name"
         ],
         "properties": {
           "id": {
             "type": "string",
             "format": "bigint"
+          },
+          "name": {
+            "type": "string"
           }
         }
       },

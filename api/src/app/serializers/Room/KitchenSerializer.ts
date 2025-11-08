@@ -1,9 +1,8 @@
+import Kitchen from '@models/Room/Kitchen.js'
 import { RoomSerializer, RoomSummarySerializer } from '@serializers/RoomSerializer.js'
-import RoomKitchen from '@models/Room/Kitchen.js'
 
-export const RoomKitchenSummarySerializer = (roomKitchen: RoomKitchen) =>
-  RoomSummarySerializer(RoomKitchen, roomKitchen)
+export const RoomKitchenSummarySerializer = (roomKitchen: Kitchen) =>
+  RoomSummarySerializer(Kitchen, roomKitchen)
 
-export const RoomKitchenSerializer = (roomKitchen: RoomKitchen) =>
-  RoomSerializer(RoomKitchen, roomKitchen)
-    .attribute('appliances')
+export const RoomKitchenSerializer = (roomKitchen: Kitchen) =>
+  RoomSerializer(Kitchen, roomKitchen).attribute('appliances')

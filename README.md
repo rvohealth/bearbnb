@@ -5,7 +5,7 @@ An AirBnB clone for bears to demonstrate [Dream ORM](https://github.com/rvohealt
 A good way to follow along with building a new Psychic app is:
 
 1. Have PostgreSQL and Redis running (e.g. by `brew install postgres` `brew install redis` & following post-install instructions for each)
-2. Create a new Psychic app with `npx @rvoh/create-psychic bearbnb`.
+2. Create a new Psychic app with `npx @rvoh/create-psychic@alpha bearbnb`.
 3. Start with the third commit in this repo (`Generate User model`).
 4. Then follow along with the changes, commit by commit, making the changes in your project. The commits are broken down into generated code and hand coded features, and the commit message includes generator commands that were run. [This YouTube video](https://www.youtube.com/watch?v=dag9YVMXqGM) walks through the commits in this project, explaining each step. **NOTE: several steps in the video are no longer necessary since the generators now support array attributes and nested resources.**
 

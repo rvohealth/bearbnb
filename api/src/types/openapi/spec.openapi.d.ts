@@ -225,7 +225,7 @@ export interface paths {
                     content: {
                         "application/json": {
                             cursor: string | null;
-                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomKitchenSummary"])[];
+                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomDenSummary"] | components["schemas"]["RoomKitchenSummary"])[];
                         };
                     };
                 };
@@ -270,7 +270,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -317,7 +317,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -451,6 +451,19 @@ export interface components {
             type: "Bedroom";
         };
         RoomBedroomSummary: {
+            /** Format: bigint */
+            id: string | number | bigint;
+        };
+        RoomDen: {
+            /** Format: date-time */
+            deletedAt: string | null;
+            /** Format: bigint */
+            id: string | number | bigint;
+            position: number | null;
+            /** @enum {string} */
+            type: "Den";
+        };
+        RoomDenSummary: {
             /** Format: bigint */
             id: string | number | bigint;
         };

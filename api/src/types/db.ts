@@ -71,6 +71,13 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 export type Int8 = ColumnType<string, bigint | number | string, bigint | number | string>;
 export type Timestamp = ColumnType<DateTime | CalendarDate>
 
+export interface Guests {
+  createdAt: Timestamp;
+  id: Generated<Int8>;
+  updatedAt: Timestamp;
+  userId: Int8;
+}
+
 export interface Users {
   createdAt: Timestamp;
   email: string;
@@ -79,10 +86,12 @@ export interface Users {
 }
 
 export interface DB {
+  guests: Guests;
   users: Users;
 }
 
 
 export class DBClass {
+  guests: Guests
   users: Users
 }

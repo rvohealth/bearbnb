@@ -355,6 +355,9 @@
                           },
                           {
                             "$ref": "#/components/schemas/RoomKitchenSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomLivingRoomSummary"
                           }
                         ]
                       }
@@ -466,6 +469,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -538,6 +544,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -1021,6 +1030,52 @@
         }
       },
       "RoomKitchenSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          }
+        }
+      },
+      "RoomLivingRoom": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string",
+            "format": "bigint"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "LivingRoom"
+            ]
+          }
+        }
+      },
+      "RoomLivingRoomSummary": {
         "type": "object",
         "required": [
           "id"

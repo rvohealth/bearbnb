@@ -1,5 +1,5 @@
 import ApplicationModel from '@models/ApplicationModel.js'
-import { Decorators } from '@rvoh/dream'
+import { Decorators, DreamConst } from '@rvoh/dream'
 import { DreamColumn, DreamSerializers } from '@rvoh/dream/types'
 import Host from './Host.js'
 import HostPlace from './HostPlace.js'
@@ -46,4 +46,11 @@ export default class Place extends ApplicationModel {
   public async createDefaultLocalizedText(this: Place) {
     await this.createAssociation('localizedTexts', { locale: 'en-US', title: `My ${this.style}` })
   }
+
+  @deco.HasOne('LocalizedText', {
+    polymorphic: true,
+    on: 'localizableId',
+    and: { locale: DreamConst.passthrough },
+  })
+  public currentLocalizedText: LocalizedText
 }

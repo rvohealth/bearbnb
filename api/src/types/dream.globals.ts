@@ -1,3 +1,8 @@
 export const globalTypeConfig = {
-  serializers: ['GuestSerializer', 'GuestSummarySerializer'],
+  serializers: [
+      'GuestSerializer',
+      'GuestSummarySerializer',
+      'HostSerializer',
+      'HostSummarySerializer'
+    ],
 } as const

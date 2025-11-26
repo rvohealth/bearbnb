@@ -351,7 +351,13 @@
                             "$ref": "#/components/schemas/RoomBedroomSummary"
                           },
                           {
+                            "$ref": "#/components/schemas/RoomDenSummary"
+                          },
+                          {
                             "$ref": "#/components/schemas/RoomKitchenSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomLivingRoomSummary"
                           }
                         ]
                       }
@@ -459,7 +465,13 @@
                       "$ref": "#/components/schemas/RoomBedroom"
                     },
                     {
+                      "$ref": "#/components/schemas/RoomDen"
+                    },
+                    {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -528,7 +540,13 @@
                       "$ref": "#/components/schemas/RoomBedroom"
                     },
                     {
+                      "$ref": "#/components/schemas/RoomDen"
+                    },
+                    {
                       "$ref": "#/components/schemas/RoomKitchen"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomLivingRoom"
                     }
                   ]
                 }
@@ -887,6 +905,48 @@
           }
         }
       },
+      "RoomDen": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  Den"
+          }
+        }
+      },
+      "RoomDenSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
       "RoomKitchen": {
         "type": "object",
         "required": [
@@ -927,6 +987,48 @@
         }
       },
       "RoomKitchenSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomLivingRoom": {
+        "type": "object",
+        "required": [
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "The following values will be allowed:\n  LivingRoom"
+          }
+        }
+      },
+      "RoomLivingRoomSummary": {
         "type": "object",
         "required": [
           "id"

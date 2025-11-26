@@ -3,6 +3,7 @@ import { Decorators } from '@rvoh/dream'
 import { DreamColumn, DreamSerializers } from '@rvoh/dream/types'
 import Host from './Host.js'
 import HostPlace from './HostPlace.js'
+import Room from './Room.js'
 
 const deco = new Decorators<typeof Place>()
 
@@ -31,4 +32,9 @@ export default class Place extends ApplicationModel {
 
   @deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
+
+  @deco.HasMany('Room')
+  // make sure this imports from `import Room from '@models/Room.js'`
+  // not from `import { Room } from 'socket.io-adapter'`
+  public rooms: Room[]
 }

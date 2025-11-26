@@ -1,9 +1,10 @@
+import Host from '@models/Host.js'
 import Place from '@models/Place.js'
 import User from '@models/User.js'
-import Host from '@models/Host.js'
+import createHost from '@spec/factories/HostFactory.js'
+import createHostPlace from '@spec/factories/HostPlaceFactory.js'
 import createPlace from '@spec/factories/PlaceFactory.js'
 import createUser from '@spec/factories/UserFactory.js'
-import createHost from '@spec/factories/HostFactory.js'
 import { RequestBody, session, SpecRequestType } from '@spec/unit/helpers/authentication.js'
 
 describe('V1/Host/PlacesController', () => {
@@ -23,7 +24,8 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('returns the index of Places', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
       const { body } = await indexPlaces(200)
 
@@ -46,14 +48,18 @@ describe('V1/Host/PlacesController', () => {
   })
 
   describe('GET show', () => {
-    const showPlace = async <StatusCode extends 200 | 400 | 404>(place: Place, expectedStatus: StatusCode) => {
+    const showPlace = async <StatusCode extends 200 | 400 | 404>(
+      place: Place,
+      expectedStatus: StatusCode,
+    ) => {
       return request.get('/v1/host/places/{id}', expectedStatus, {
         id: place.id,
       })
     }
 
     it('returns the specified Place', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
       const { body } = await showPlace(place, 200)
 
@@ -79,19 +85,22 @@ describe('V1/Host/PlacesController', () => {
   describe('POST create', () => {
     const createPlace = async <StatusCode extends 201 | 400 | 404>(
       data: RequestBody<'post', '/v1/host/places'>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
       return request.post('/v1/host/places', expectedStatus, {
-        data
+        data,
       })
     }
 
     it('creates a Place for this Host', async () => {
-      const { body } = await createPlace({
-        name: 'The Place name',
-        style: 'cottage',
-        sleeps: 1,
-      }, 201)
+      const { body } = await createPlace(
+        {
+          name: 'The Place name',
+          style: 'cottage',
+          sleeps: 1,
+        },
+        201,
+      )
 
       const place = await host.associationQuery('places').firstOrFail()
       expect(place.name).toEqual('The Place name')
@@ -113,7 +122,7 @@ describe('V1/Host/PlacesController', () => {
     const updatePlace = async <StatusCode extends 204 | 400 | 404>(
       place: Place,
       data: RequestBody<'patch', '/v1/host/places/{id}'>,
-      expectedStatus: StatusCode
+      expectedStatus: StatusCode,
     ) => {
       return request.patch('/v1/host/places/{id}', expectedStatus, {
         id: place.id,
@@ -122,13 +131,18 @@ describe('V1/Host/PlacesController', () => {
     }
 
     it('updates the Place', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
-      await updatePlace(place, {
-        name: 'Updated Place name',
-        style: 'dump',
-        sleeps: 2,
-      }, 204)
+      await updatePlace(
+        place,
+        {
+          name: 'Updated Place name',
+          style: 'dump',
+          sleeps: 2,
+        },
+        204,
+      )
 
       await place.reload()
       expect(place.name).toEqual('Updated Place name')
@@ -143,11 +157,15 @@ describe('V1/Host/PlacesController', () => {
         const originalStyle = place.style
         const originalSleeps = place.sleeps
 
-        await updatePlace(place, {
-          name: 'Updated Place name',
-          style: 'dump',
-          sleeps: 2,
-        }, 404)
+        await updatePlace(
+          place,
+          {
+            name: 'Updated Place name',
+            style: 'dump',
+            sleeps: 2,
+          },
+          404,
+        )
 
         await place.reload()
         expect(place.name).toEqual(originalName)
@@ -158,14 +176,18 @@ describe('V1/Host/PlacesController', () => {
   })
 
   describe('DELETE destroy', () => {
-    const destroyPlace = async <StatusCode extends 204 | 400 | 404>(place: Place, expectedStatus: StatusCode) => {
+    const destroyPlace = async <StatusCode extends 204 | 400 | 404>(
+      place: Place,
+      expectedStatus: StatusCode,
+    ) => {
       return request.delete('/v1/host/places/{id}', expectedStatus, {
         id: place.id,
       })
     }
 
     it('deletes the Place', async () => {
-      const place = await createPlace({ host })
+      const place = await createPlace()
+      await createHostPlace({ host, place })
 
       await destroyPlace(place, 204)
 

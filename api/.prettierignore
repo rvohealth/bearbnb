@@ -1,0 +1,9 @@
+# Ignore generated files
+src/openapi/*
+src/types/*
+src/conf/routeTypes.ts
+
+.github/
+dist/
+.yarn/
+.yarnrc.yml

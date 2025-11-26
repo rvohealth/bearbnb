@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "dream-psychic-rag": {
+      "command": "npx",
+      "args": ["-y", "tsx", "/<absolute-path-to>/api/mcp-http-bridge.ts"],
+      "env": {
+        "RAG_API_KEY": "",
+        "RAG_API_ENDPOINT": "https://rag.psychicframework.com/query"
+      }
+    }
+  }
+}

@@ -1,9 +1,8 @@
+import Bedroom from '@models/Room/Bedroom.js'
 import { RoomSerializer, RoomSummarySerializer } from '@serializers/RoomSerializer.js'
-import RoomBedroom from '@models/Room/Bedroom.js'
 
-export const RoomBedroomSummarySerializer = (roomBedroom: RoomBedroom) =>
-  RoomSummarySerializer(RoomBedroom, roomBedroom)
+export const RoomBedroomSummarySerializer = (roomBedroom: Bedroom) =>
+  RoomSummarySerializer(Bedroom, roomBedroom)
 
-export const RoomBedroomSerializer = (roomBedroom: RoomBedroom) =>
-  RoomSerializer(RoomBedroom, roomBedroom)
-    .attribute('bedTypes')
+export const RoomBedroomSerializer = (roomBedroom: Bedroom) =>
+  RoomSerializer(Bedroom, roomBedroom).attribute('bedTypes')

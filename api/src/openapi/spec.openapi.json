@@ -349,6 +349,9 @@
                           },
                           {
                             "$ref": "#/components/schemas/RoomBedroomSummary"
+                          },
+                          {
+                            "$ref": "#/components/schemas/RoomKitchenSummary"
                           }
                         ]
                       }
@@ -393,6 +396,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "appliances": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "dishwasher",
+                        "microwave",
+                        "oven",
+                        "stove"
+                      ]
+                    }
+                  },
                   "bathOrShowerStyle": {
                     "type": [
                       "string",
@@ -442,6 +457,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomBedroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomKitchen"
                     }
                   ]
                 }
@@ -508,6 +526,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/RoomBedroom"
+                    },
+                    {
+                      "$ref": "#/components/schemas/RoomKitchen"
                     }
                   ]
                 }
@@ -549,6 +570,18 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "appliances": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "dishwasher",
+                        "microwave",
+                        "oven",
+                        "stove"
+                      ]
+                    }
+                  },
                   "bathOrShowerStyle": {
                     "type": [
                       "string",
@@ -869,6 +902,63 @@
         }
       },
       "RoomBedroomSummary": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomKitchen": {
+        "type": "object",
+        "required": [
+          "appliances",
+          "deletedAt",
+          "id",
+          "position",
+          "type"
+        ],
+        "properties": {
+          "appliances": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "dishwasher",
+                "microwave",
+                "oven",
+                "stove"
+              ]
+            }
+          },
+          "deletedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Kitchen"
+            ]
+          }
+        }
+      },
+      "RoomKitchenSummary": {
         "type": "object",
         "required": [
           "id"

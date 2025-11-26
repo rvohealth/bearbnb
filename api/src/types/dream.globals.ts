@@ -5,6 +5,10 @@ export const globalTypeConfig = {
       'HostSerializer',
       'HostSummarySerializer',
       'PlaceSerializer',
-      'PlaceSummarySerializer'
+      'PlaceSummarySerializer',
+      'Room/BathroomSerializer',
+      'Room/BathroomSummarySerializer',
+      'RoomSerializer',
+      'RoomSummarySerializer'
     ],
 } as const

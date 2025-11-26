@@ -190,6 +190,205 @@ export interface paths {
         };
         trace?: never;
     };
+    "/v1/host/places/{placeId}/rooms": {
+        parameters: {
+            query?: {
+                /** @description Scroll pagination cursor */
+                cursor?: string | null;
+            };
+            header?: never;
+            path: {
+                placeId: string;
+            };
+            cookie?: never;
+        };
+        /** @description Paginated index of Rooms */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description Scroll pagination cursor */
+                    cursor?: string | null;
+                };
+                header?: never;
+                path: {
+                    placeId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Success */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            cursor: string | null;
+                            results: components["schemas"]["RoomBathroomSummary"][];
+                        };
+                    };
+                };
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        /** @description Create a Room */
+        post: {
+            parameters: {
+                query?: {
+                    /** @description Scroll pagination cursor */
+                    cursor?: string | null;
+                };
+                header?: never;
+                path: {
+                    placeId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** @enum {string|null} */
+                        bathOrShowerStyle?: "bath" | "bath_and_shower" | "none" | "shower" | null;
+                        position?: number | null;
+                    };
+                };
+            };
+            responses: {
+                /** @description Created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["RoomBathroom"];
+                    };
+                };
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/host/places/{placeId}/rooms/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                placeId: string;
+                id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Fetch a Room */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    placeId: string;
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Success */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["RoomBathroom"];
+                    };
+                };
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        put?: never;
+        post?: never;
+        /** @description Destroy a Room */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    placeId: string;
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Success, no content */
+                204: components["responses"]["NoContent"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        options?: never;
+        head?: never;
+        /** @description Update a Room */
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    placeId: string;
+                    id: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** @enum {string|null} */
+                        bathOrShowerStyle?: "bath" | "bath_and_shower" | "none" | "shower" | null;
+                        position?: number | null;
+                    };
+                };
+            };
+            responses: {
+                /** @description Success, no content */
+                204: components["responses"]["NoContent"];
+                400: components["responses"]["BadRequest"];
+                401: components["responses"]["Unauthorized"];
+                403: components["responses"]["Forbidden"];
+                404: components["responses"]["NotFound"];
+                409: components["responses"]["Conflict"];
+                422: components["responses"]["ValidationErrors"];
+                500: components["responses"]["InternalServerError"];
+            };
+        };
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -219,6 +418,19 @@ export interface components {
         PlaceSummary: {
             id: string;
             name: string;
+        };
+        RoomBathroom: {
+            /** @enum {string|null} */
+            bathOrShowerStyle: "bath" | "bath_and_shower" | "none" | "shower" | null;
+            /** Format: date-time */
+            deletedAt: string | null;
+            id: string;
+            position: number | null;
+            /** @enum {string} */
+            type: "Bathroom";
+        };
+        RoomBathroomSummary: {
+            id: string;
         };
         ValidationErrors: {
             /** @enum {string} */

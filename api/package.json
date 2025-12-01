@@ -40,7 +40,7 @@
     "bullmq": "^5.49.1",
     "commander": "^12.1.0",
     "dotenv": "^16.4.7",
-    "express": "^5.1.0",
+    "express": "^5.2.0",
     "express-winston": "^4.2.0",
     "ioredis": "^5.4.1",
     "kysely": "^0.28.7",

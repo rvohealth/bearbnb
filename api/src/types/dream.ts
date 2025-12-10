@@ -60,6 +60,64 @@ import { type CalendarDate, type DateTime } from '@rvoh/dream'
 import {} from './db.js'
 
 export const schema = {
+  guests: {
+    serializerKeys: ['default', 'summary'],
+    scopes: {
+      default: [],
+      named: [],
+    },
+    nonJsonColumnNames: ['createdAt', 'id', 'updatedAt', 'userId'],
+    columns: {
+      createdAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      id: {
+        coercedType: {} as string,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'uuid',
+        allowNull: false,
+        isArray: false,
+      },
+      updatedAt: {
+        coercedType: {} as DateTime,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'timestamp without time zone',
+        allowNull: false,
+        isArray: false,
+      },
+      userId: {
+        coercedType: {} as string,
+        enumType: null,
+        enumArrayType: null,
+        enumValues: null,
+        dbType: 'uuid',
+        allowNull: false,
+        isArray: false,
+      },
+    },
+    virtualColumns: [],
+    associations: {
+      user: {
+        type: 'BelongsTo',
+        foreignKey: 'userId',
+        foreignKeyTypeColumn: null,
+        tables: ['users'],
+        optional: false,
+        requiredAndClauses: null,
+        passthroughAndClauses: null,
+      },
+    },
+  },
   users: {
     serializerKeys: [],
     scopes: {
@@ -106,7 +164,17 @@ export const schema = {
       },
     },
     virtualColumns: [],
-    associations: {},
+    associations: {
+      guest: {
+        type: 'HasOne',
+        foreignKey: 'userId',
+        foreignKeyTypeColumn: null,
+        tables: ['guests'],
+        optional: null,
+        requiredAndClauses: null,
+        passthroughAndClauses: null,
+      },
+    },
   },
 } as const
 
@@ -115,6 +183,7 @@ export const connectionTypeConfig = {
   allDefaultScopeNames: [],
   globalNames: {
     models: {
+      Guest: 'guests',
       User: 'users',
     },
   },

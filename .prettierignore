@@ -1,0 +1,12 @@
+# Ignore generated files
+AGENTS.md
+src/openapi/**/*.ts
+src/types/**/*.ts
+src/conf/routeTypes.ts
+
+.github/**/*
+dist/**/*
+.yarn/**/*
+.yarnrc.yml
+pnpm-lock.yaml
+package-lock.json

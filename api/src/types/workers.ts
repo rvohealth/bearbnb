@@ -1,5 +1,5 @@
 const psychicWorkerTypes = {
-  workstreamNames: [],
+  workstreamNames: ['NamedWorkstream'],
   queueGroupMap: {},
 } as const
 

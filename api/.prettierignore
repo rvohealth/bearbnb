@@ -9,3 +9,7 @@ dist/
 .yarn/
 .yarnrc.yml
 pnpm-lock.yaml
+
+# only adding so that diffs are clearer for demo app
+src/app/serializers/**/*.ts
+src/db/migrations/*.ts

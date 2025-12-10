@@ -57,5 +57,5 @@ us humans, he says:
 */
 
 export const globalTypeConfig = {
-  serializers: [],
+  serializers: ['GuestSerializer', 'GuestSummarySerializer'],
 } as const

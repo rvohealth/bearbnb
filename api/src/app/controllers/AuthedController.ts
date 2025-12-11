@@ -3,6 +3,7 @@ import ApplicationController from '@controllers/ApplicationController.js'
 import User from '@models/User.js'
 import { Encrypt } from '@rvoh/dream/utils'
 import { BeforeAction } from '@rvoh/psychic'
+import { supportedLocales } from '@src/utils/i18n.js'
 
 export default class AuthedController extends ApplicationController {
   protected currentUser: User
@@ -16,6 +17,19 @@ export default class AuthedController extends ApplicationController {
     if (!user) return this.unauthorized()
 
     this.currentUser = user
+  }
+
+  @BeforeAction()
+  public configureSerializers() {
+    this.serializerPassthrough({
+      locale: this.locale,
+    })
+  }
+
+  protected get locale() {
+    const locale = this.headers['content-language']
+    const locales = supportedLocales()
+    return locales.includes(locale as (typeof locales)[number]) ? locale : 'en-US'
   }
 
   protected authedUserId(): string | null {

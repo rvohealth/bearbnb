@@ -87,6 +87,21 @@ export const PlaceStylesEnumValues = [
   'treehouse',
 ] as const
 
+export type RoomTypesEnum =
+  | 'Bathroom'
+  | 'Bedroom'
+  | 'Den'
+  | 'Kitchen'
+  | 'LivingRoom'
+
+export const RoomTypesEnumValues = [
+  'Bathroom',
+  'Bedroom',
+  'Den',
+  'Kitchen',
+  'LivingRoom',
+] as const
+
 export type Timestamp = ColumnType<DateTime | CalendarDate>
 
 export interface Guests {
@@ -122,6 +137,16 @@ export interface Places {
   updatedAt: Timestamp
 }
 
+export interface Rooms {
+  createdAt: Timestamp
+  deletedAt: Timestamp | null
+  id: Generated<string>
+  placeId: string
+  position: number | null
+  type: RoomTypesEnum
+  updatedAt: Timestamp
+}
+
 export interface Users {
   createdAt: Timestamp
   email: string
@@ -134,6 +159,7 @@ export interface DB {
   host_places: HostPlaces
   hosts: Hosts
   places: Places
+  rooms: Rooms
   users: Users
 }
 
@@ -142,5 +168,6 @@ export class DBClass {
   host_places: HostPlaces
   hosts: Hosts
   places: Places
+  rooms: Rooms
   users: Users
 }

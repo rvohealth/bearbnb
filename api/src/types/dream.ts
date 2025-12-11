@@ -272,6 +272,15 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        foreignKeyTypeColumn: 'localizableType',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredAndClauses: null,
+        passthroughAndClauses: ['locale'],
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'hostId',
@@ -505,6 +514,15 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        foreignKeyTypeColumn: 'localizableType',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredAndClauses: null,
+        passthroughAndClauses: ['locale'],
+      },
       hostPlaces: {
         type: 'HasMany',
         foreignKey: 'placeId',
@@ -655,6 +673,15 @@ export const schema = {
     },
     virtualColumns: [],
     associations: {
+      currentLocalizedText: {
+        type: 'HasOne',
+        foreignKey: 'localizableId',
+        foreignKeyTypeColumn: 'localizableType',
+        tables: ['localized_texts'],
+        optional: null,
+        requiredAndClauses: null,
+        passthroughAndClauses: ['locale'],
+      },
       localizedTexts: {
         type: 'HasMany',
         foreignKey: 'localizableId',
@@ -745,7 +772,7 @@ export const schema = {
 } as const
 
 export const connectionTypeConfig = {
-  passthroughColumns: [],
+  passthroughColumns: ['locale'],
   allDefaultScopeNames: ['dream:STI'],
   globalNames: {
     models: {

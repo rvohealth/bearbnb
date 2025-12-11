@@ -1,7 +1,9 @@
-import { Decorators } from '@rvoh/dream'
-import { DreamColumn, DreamSerializers } from '@rvoh/dream/types'
 import ApplicationModel from '@models/ApplicationModel.js'
 import User from '@models/User.js'
+import { Decorators } from '@rvoh/dream'
+import { DreamColumn, DreamSerializers } from '@rvoh/dream/types'
+import HostPlace from './HostPlace.js'
+import Place from './Place.js'
 
 const deco = new Decorators<typeof Host>()
 
@@ -24,4 +26,10 @@ export default class Host extends ApplicationModel {
   @deco.BelongsTo('User', { on: 'userId' })
   public user: User
   public userId: DreamColumn<Host, 'userId'>
+
+  @deco.HasMany('HostPlace')
+  public hostPlaces: HostPlace[]
+
+  @deco.HasMany('Place', { through: 'hostPlaces' })
+  public places: Place[]
 }

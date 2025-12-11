@@ -21,7 +21,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .alterTable('rooms')
     .addCheckConstraint(
       'rooms_not_null_bath_or_shower_style',
-      sql`type != 'RoomBathroom' OR bath_or_shower_style IS NOT NULL`,
+      sql`type != 'Bathroom' OR bath_or_shower_style IS NOT NULL`,
     )
     .execute()
 }

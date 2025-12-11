@@ -1,5 +1,5 @@
 import ApplicationModel from '@models/ApplicationModel.js'
-import { Decorators, DreamConst } from '@rvoh/dream'
+import { Decorators, DreamConst, SoftDelete } from '@rvoh/dream'
 import { DreamColumn, DreamSerializers } from '@rvoh/dream/types'
 import Host from './Host.js'
 import HostPlace from './HostPlace.js'
@@ -8,6 +8,7 @@ import Room from './Room.js'
 
 const deco = new Decorators<typeof Place>()
 
+@SoftDelete()
 export default class Place extends ApplicationModel {
   public override get table() {
     return 'places' as const
@@ -36,7 +37,7 @@ export default class Place extends ApplicationModel {
   @deco.HasMany('Host', { through: 'hostPlaces' })
   public hosts: Host[]
 
-  @deco.HasMany('Room')
+  @deco.HasMany('Room', { dependent: 'destroy' })
   // make sure this imports from `import Room from '@models/Room.js'`
   // not from `import { Room } from 'socket.io-adapter'`
   public rooms: Room[]

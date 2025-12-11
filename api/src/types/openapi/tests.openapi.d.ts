@@ -225,7 +225,7 @@ export interface paths {
                     content: {
                         "application/json": {
                             cursor: string | null;
-                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomKitchenSummary"])[];
+                            results: (components["schemas"]["RoomBathroomSummary"] | components["schemas"]["RoomBedroomSummary"] | components["schemas"]["RoomDenSummary"] | components["schemas"]["RoomKitchenSummary"] | components["schemas"]["RoomLivingRoomSummary"])[];
                         };
                     };
                 };
@@ -270,7 +270,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"] | components["schemas"]["RoomLivingRoom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -317,7 +317,7 @@ export interface paths {
                         [name: string]: unknown;
                     };
                     content: {
-                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomKitchen"];
+                        "application/json": components["schemas"]["RoomBathroom"] | components["schemas"]["RoomBedroom"] | components["schemas"]["RoomDen"] | components["schemas"]["RoomKitchen"] | components["schemas"]["RoomLivingRoom"];
                     };
                 };
                 400: components["responses"]["BadRequest"];
@@ -448,6 +448,17 @@ export interface components {
         RoomBedroomSummary: {
             id: string;
         };
+        RoomDen: {
+            /** Format: date-time */
+            deletedAt: string | null;
+            id: string;
+            position: number | null;
+            /** @enum {string} */
+            type: "Den";
+        };
+        RoomDenSummary: {
+            id: string;
+        };
         RoomKitchen: {
             appliances: ("dishwasher" | "microwave" | "oven" | "stove")[];
             /** Format: date-time */
@@ -458,6 +469,17 @@ export interface components {
             type: "Kitchen";
         };
         RoomKitchenSummary: {
+            id: string;
+        };
+        RoomLivingRoom: {
+            /** Format: date-time */
+            deletedAt: string | null;
+            id: string;
+            position: number | null;
+            /** @enum {string} */
+            type: "LivingRoom";
+        };
+        RoomLivingRoomSummary: {
             id: string;
         };
         ValidationErrors: {

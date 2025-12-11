@@ -1,11 +1,12 @@
 import ApplicationModel from '@models/ApplicationModel.js'
 import Place from '@models/Place.js'
-import { Decorators, DreamConst } from '@rvoh/dream'
+import { Decorators, DreamConst, SoftDelete } from '@rvoh/dream'
 import { DreamColumn } from '@rvoh/dream/types'
 import LocalizedText from './LocalizedText.js'
 
 const deco = new Decorators<typeof Room>()
 
+@SoftDelete()
 export default class Room extends ApplicationModel {
   public override get table() {
     return 'rooms' as const

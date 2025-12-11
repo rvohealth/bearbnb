@@ -3,6 +3,7 @@ import User from '@models/User.js'
 import { Decorators } from '@rvoh/dream'
 import { DreamColumn, DreamSerializers } from '@rvoh/dream/types'
 import HostPlace from './HostPlace.js'
+import LocalizedText from './LocalizedText.js'
 import Place from './Place.js'
 
 const deco = new Decorators<typeof Host>()
@@ -32,4 +33,12 @@ export default class Host extends ApplicationModel {
 
   @deco.HasMany('Place', { through: 'hostPlaces' })
   public places: Place[]
+
+  @deco.HasMany('LocalizedText', { polymorphic: true, on: 'localizableId', dependent: 'destroy' })
+  public localizedTexts: LocalizedText[]
+
+  @deco.AfterCreate()
+  public async createDefaultLocalizedText(this: Host) {
+    await this.createAssociation('localizedTexts', { locale: 'en-US' })
+  }
 }

@@ -32,11 +32,11 @@
     "admin:fspec": "BROWSER=none NEXT_PUBLIC_PSYCHIC_ENV=test pnpm --dir=../admin next dev --port 3001"
   },
   "dependencies": {
-    "@bull-board/express": "^5.21.4",
-    "@rvoh/dream": "^2.2.1",
-    "@rvoh/psychic": "^2.3.2",
+    "@bull-board/express": "^5.23.0",
+    "@rvoh/dream": "^2.2.3",
+    "@rvoh/psychic": "^2.3.8",
     "@rvoh/psychic-websockets": "^2.0.1",
-    "@rvoh/psychic-workers": "^2.1.0",
+    "@rvoh/psychic-workers": "^2.2.0",
     "@socket.io/redis-adapter": "^8.3.0",
     "@socket.io/redis-emitter": "^5.1.0",
     "bullmq": "^5.49.1",

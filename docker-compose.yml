@@ -1,0 +1,165 @@
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+      target: "dev"
+    command: sh -c "pnpm install && pnpm psy db:migrate --skip-sync && pnpm psy db:seed && pnpm dev"
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: "${NODE_TLS_REJECT_UNAUTHORIZED:-0}"
+      NPM_CONFIG_STRICT_SSL: "false"
+      DB_HOST: db
+      WS_REDIS_HOST: redis
+      BG_JOBS_REDIS_HOST: redis
+      NODE_ENV: "${NODE_ENV:-development}"
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "7777:7777"
+    working_dir: /usr/src/app
+    volumes:
+      - ./api:/usr/src/app:cached
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 7777 || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 30s
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  ws:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+      target: "dev"
+    command: sh -c "pnpm ws"
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: "${NODE_TLS_REJECT_UNAUTHORIZED:-0}"
+      NPM_CONFIG_STRICT_SSL: "false"
+      DB_HOST: db
+      WS_REDIS_HOST: redis
+      BG_JOBS_REDIS_HOST: redis
+      NODE_ENV: "${NODE_ENV:-development}"
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "8888:8888"
+    working_dir: /usr/src/app
+    volumes:
+      - ./api:/usr/src/app:cached
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      db:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+      target: "dev"
+    command: sh -c "pnpm dev-worker"
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: "${NODE_TLS_REJECT_UNAUTHORIZED:-0}"
+      NPM_CONFIG_STRICT_SSL: "false"
+      GITHUB_OAUTH_TOKEN: "${GITHUB_OAUTH_TOKEN}"
+      BULLMQ_PRO_NPM_TOKEN: "${BULLMQ_PRO_NPM_TOKEN}"
+      DB_HOST: db
+      WS_REDIS_HOST: redis
+      BG_JOBS_REDIS_HOST: redis
+      NODE_ENV: "${NODE_ENV:-development}"
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    working_dir: /usr/src/app
+    volumes:
+      - ./api:/usr/src/app:cached
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      db:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+      target: "dev"
+    user: "0"
+    command: sh -c "pnpm install && pnpm dev"
+    environment:
+      NODE_ENV: "${NODE_ENV:-development}"
+      NODE_TLS_REJECT_UNAUTHORIZED: "${NODE_TLS_REJECT_UNAUTHORIZED:-0}"
+      NPM_CONFIG_STRICT_SSL: "false"
+    ports:
+      - "3000:3000"
+    working_dir: /usr/src/app
+    volumes:
+      - ./client:/usr/src/app:cached
+      # Isolate container node_modules so Linux arm64-musl native deps (e.g. rollup) are used, not host's
+      - client_node_modules:/usr/src/app/node_modules
+    networks:
+      - frontend
+    depends_on:
+      - api
+
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: howyadoin_development
+    user: postgres
+    ports:
+      - "7433:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.4.7-alpine
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis:/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  db:
+  redis:
+  client_node_modules:
+
+networks:
+  backend:
+  frontend:
